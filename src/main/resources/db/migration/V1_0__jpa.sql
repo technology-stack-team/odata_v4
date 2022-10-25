@@ -1,0 +1,69 @@
+SET schema "Trippin";
+
+CREATE SEQUENCE "TripId";
+
+CREATE TABLE "Person"(
+    "UserName" VARCHAR(250) NOT NULL,
+    "FirstName" VARCHAR(250) NOT NULL,
+    "LastName" VARCHAR(26),
+    "MiddleName" VARCHAR(250),
+    "Gender" SMALLINT,
+    "Age" INTEGER,
+     PRIMARY KEY ("UserName"));
+
+insert into "Person" values ('russellwhyte', 'Russell', 'Whyte', null, 0, null);
+insert into "Person" values ('scottketchum', 'Scott', 'Ketchum', null, 0, null);
+insert into "Person" values ('ronaldmundy', 'Ronald', 'Mundy', null, 0, null);
+insert into "Person" values ('javieralfred', 'Javier', 'Alfred', null, 0, null);
+insert into "Person" values ('willieashmore', 'Willie', 'Ashmore', null, 0, null);
+insert into "Person" values ('vincentcalabrese', 'Vincent', 'Calabrese', null, 0, null);
+insert into "Person" values ('clydeguess', 'Clyde', 'Guess', null, 0, null);
+insert into "Person" values ('keithpinckney', 'Keith', 'Pinckney', null, 0, null);
+insert into "Person" values ('marshallgaray', 'Marshall', 'Garay', null, 0, null);
+insert into "Person" values ('ryantheriault', 'Ryan', 'Theriault', null, 0, null);
+insert into "Person" values ('elainestewart', 'Elaine', 'Stewart', null, 0, null);
+insert into "Person" values ('salliesampson', 'Sallie', 'Sampson', null, 1, null);
+insert into "Person" values ('jonirosales', 'Joni', 'Rosales', null, 2, null);
+insert into "Person" values ('georginabarlow', 'Georgina', 'Barlow', null, 1, null);
+insert into "Person" values ('angelhuffman', 'Angel', 'Huffman', null, 1, null);
+insert into "Person" values ('laurelosborn', 'Laurel', 'Osborn', null, 1, null);
+insert into "Person" values ('sandyosborn', 'Sandy', 'Osborn', null, 1, null);
+insert into "Person" values ('ursulabright', 'Ursula', 'Bright', null, 1, null);
+insert into "Person" values ('genevievereeves', 'Genevieve', 'Reeves', null, 1, null);
+insert into "Person" values ('kristakemp', 'Krista', 'Kemp', null, 1, null);
+
+
+CREATE TABLE "Trip"(
+    "TripId" INTEGER NOT NULL,
+    "UserName" VARCHAR(250) NOT NULL,
+    "ShareId"  UUID NOT NULL,
+    "Name"  VARCHAR(250),
+    "Budget" FLOAT,
+    "Description" VARCHAR(2500),
+    "StartsAt" TIMESTAMP WITH TIME ZONE,
+    "EndsAt" TIMESTAMP WITH TIME ZONE,
+     PRIMARY KEY ("TripId"));
+
+insert into "Trip" values (0, 'russellwhyte', '9d9b2fa0-efbf-490e-a5e3-bac8f7d47354', 'Trip in US', 3000, 'Trip from San Francisco to New York City', '2014-01-01T00:00:00Z', '2014-01-04T00:00:00Z');
+insert into "Trip" values (1, 'russellwhyte', 'f94e9116-8bdd-4dac-ab61-08438d0d9a71', 'Trip in Beijing', 2000, 'Trip from Shanghai to Beijing', '2014-02-01T00:00:00Z', '2014-02-04T00:00:00Z');
+insert into "Trip" values (2, 'russellwhyte', '9ce142c3-5fd6-4a71-848e-5220ebf1e9f3', 'Honeymoon', 2650, 'Happy honeymoon trip', '2014-02-01T00:00:00Z', '2014-02-04T00:00:00Z');
+insert into "Trip" values (3, 'scottketchum', '9d9b2fa0-efbf-490e-a5e3-bac8f7d47354', 'Trip in US', 5000, 'Trip from San Francisco to New York City', '2014-01-01T00:00:00Z', '2014-01-04T00:00:00Z');
+insert into "Trip" values (4, 'scottketchum', 'f94e9116-8bdd-4dac-ab61-08438d0d9a71', 'Trip in Beijing', 11000, 'Trip from Shanghai to Beijing', '2014-02-01T00:00:00Z', '2014-02-04T00:00:00Z');
+insert into "Trip" values (5, 'ronaldmundy', 'dd6a09c0-e59b-4745-8612-f4499b676c47', 'Gradutaion trip', 6000, 'Gradutaion trip with friends', '2013-05-01T00:00:00Z', '2013-05-08T00:00:00Z');
+insert into "Trip" values (6, 'javieralfred', 'f94e9116-8bdd-4dac-ab61-08438d0d9a71', 'Trip in Beijing', 800, 'Trip from Shanghai to Beijing', '2014-02-01T00:00:00Z', '2014-02-04T00:00:00Z');
+insert into "Trip" values (7, 'willieashmore', '5ae142c3-5ad6-4a71-768e-5220ebf1e9f3', 'Business Trip', 3800.5, 'This is my first business trip', '2014-02-01T00:00:00Z', '2014-02-04T00:00:00Z');
+insert into "Trip" values (8, 'willieashmore', '9ce32ac3-5fd6-4a72-848e-2250ebf1e9f3', 'Trip in Europe', 2000, 'The trip is currently in plan.', '2014-02-01T00:00:00Z', '2014-02-04T00:00:00Z');
+insert into "Trip" values (9, 'vincentcalabrese', 'dd6a09c0-e59b-4745-8612-f4499b676c47', 'Gradutaion trip', 6000, 'Gradutaion trip with friends', '2013-05-01T00:00:00Z', '2013-05-08T00:00:00Z');
+insert into "Trip" values (11, 'keithpinckney', 'a88f675d-9199-4392-9656-b08e3b46df8a', 'Study trip', 1550.3, 'This is a 2 weeks study trip', '2014-01-01T00:00:00Z', '2014-01-14T00:00:00Z');
+insert into "Trip" values (12, 'marshallgaray', 'a88f675d-9199-4392-9656-b08e3b46df8a', 'Study trip', 1550.3, 'This is a 2 weeks study trip', '2014-01-01T00:00:00Z', '2014-01-14T00:00:00Z');
+insert into "Trip" values (13, 'ryantheriault', 'a88f675d-9199-4392-9656-b08e3b46df8a', 'Study trip', 1550.3, 'This is a 2 weeks study trip', '2014-01-01T00:00:00Z', '2014-01-14T00:00:00Z');
+insert into "Trip" values (14, 'elainestewart', 'a88f675d-9199-4392-9656-b08e3b46df8a', 'Study trip', 1550.3, 'This is a 2 weeks study trip', '2014-01-01T00:00:00Z', '2014-01-14T00:00:00Z');
+insert into "Trip" values (15, 'salliesampson', 'a88f675d-9199-4392-9656-b08e3b46df8a', 'Study trip', 600, 'This is a 2 weeks study trip', '2014-01-01T00:00:00Z', '2014-01-14T00:00:00Z');
+insert into "Trip" values (16, 'jonirosales', 'a88f675d-9199-4392-9656-b08e3b46df8a', 'Study trip', 2000, 'This is a 2 weeks study trip', '2014-01-01T00:00:00Z', '2014-01-14T00:00:00Z');
+insert into "Trip" values (17, 'georginabarlow', 'a88f675d-9199-4392-9656-b08e3b46df8a', 'Study trip', 1150.3, 'This is a 2 weeks study trip', '2014-01-01T00:00:00Z', '2014-01-14T00:00:00Z');
+insert into "Trip" values (18, 'angelhuffman', 'cb0b8acb-79cb-4127-8316-772bc4302824', 'DIY Trip', 1500.3, 'This is a DIY trip', '2011-02-11T00:00:00Z', '2011-02-14T00:00:00Z');
+insert into "Trip" values (19, 'laurelosborn', 'a88f675d-9199-4392-9656-b08e3b46df8a', 'Study trip', 1550.3, 'This is a 2 weeks study trip', '2014-01-01T00:00:00Z', '2014-01-14T00:00:00Z');
+insert into "Trip" values (20, 'sandyosborn', 'a88f675d-9199-4392-9656-b08e3b46df8a', 'Study trip', 1550.3, 'This is a 2 weeks study trip', '2014-01-01T00:00:00Z', '2014-01-14T00:00:00Z');
+insert into "Trip" values (21, 'ursulabright', 'a88f675d-9199-4392-9656-b08e3b46df8a', 'Study trip', 1550.3, 'This is a 2 weeks study trip', '2014-01-01T00:00:00Z', '2014-01-14T00:00:00Z');
+insert into "Trip" values (22, 'genevievereeves', 'a88f675d-9199-4392-9656-b08e3b46df8a', 'Study trip', 1550.3, 'This is a 2 weeks study trip', '2014-01-01T00:00:00Z', '2014-01-14T00:00:00Z');
+insert into "Trip" values (23, 'kristakemp', 'a88f675d-9199-4392-9656-b08e3b46df8a', 'Study trip', 1550.3, 'This is a 2 weeks study trip', '2014-01-01T00:00:00Z', '2014-01-14T00:00:00Z');

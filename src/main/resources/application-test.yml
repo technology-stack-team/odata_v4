@@ -1,0 +1,23 @@
+logging:
+  level:
+    org:
+      springframework: INFO
+odata:
+  jpa:
+    punit_name: Trippin
+    root_packages: com.example.trippin
+server:
+  port: 8080
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb;MODE=PostgreSQL
+    driverClassName: org.h2.Driver
+    username: sa
+    password: ''
+  flyway:
+    enabled: true
+    schemas:
+    -  Trippin
+  servlet:
+    multipart:
+      enabled: false
