@@ -1,16 +1,3 @@
-SET schema "Trippin";
-
-CREATE SEQUENCE "TripId";
-
-CREATE TABLE "Person"(
-    "UserName" VARCHAR(250) NOT NULL,
-    "FirstName" VARCHAR(250) NOT NULL,
-    "LastName" VARCHAR(26),
-    "MiddleName" VARCHAR(250),
-    "Gender" SMALLINT,
-    "Age" INTEGER,
-     PRIMARY KEY ("UserName"));
-
 insert into "Person" values ('russellwhyte', 'Russell', 'Whyte', null, 0, null);
 insert into "Person" values ('scottketchum', 'Scott', 'Ketchum', null, 0, null);
 insert into "Person" values ('ronaldmundy', 'Ronald', 'Mundy', null, 0, null);
@@ -31,18 +18,7 @@ insert into "Person" values ('sandyosborn', 'Sandy', 'Osborn', null, 1, null);
 insert into "Person" values ('ursulabright', 'Ursula', 'Bright', null, 1, null);
 insert into "Person" values ('genevievereeves', 'Genevieve', 'Reeves', null, 1, null);
 insert into "Person" values ('kristakemp', 'Krista', 'Kemp', null, 1, null);
-
-
-CREATE TABLE "Trip"(
-    "TripId" INTEGER NOT NULL,
-    "UserName" VARCHAR(250) NOT NULL,
-    "ShareId"  UUID NOT NULL,
-    "Name"  VARCHAR(250),
-    "Budget" FLOAT,
-    "Description" VARCHAR(2500),
-    "StartsAt" TIMESTAMP WITH TIME ZONE,
-    "EndsAt" TIMESTAMP WITH TIME ZONE,
-     PRIMARY KEY ("TripId"));
+insert into "Person" values ('rahuljain', 'rahul', 'jain', null, 1, null);
 
 insert into "Trip" values (0, 'russellwhyte', '9d9b2fa0-efbf-490e-a5e3-bac8f7d47354', 'Trip in US', 3000, 'Trip from San Francisco to New York City', '2014-01-01T00:00:00Z', '2014-01-04T00:00:00Z');
 insert into "Trip" values (1, 'russellwhyte', 'f94e9116-8bdd-4dac-ab61-08438d0d9a71', 'Trip in Beijing', 2000, 'Trip from Shanghai to Beijing', '2014-02-01T00:00:00Z', '2014-02-04T00:00:00Z');

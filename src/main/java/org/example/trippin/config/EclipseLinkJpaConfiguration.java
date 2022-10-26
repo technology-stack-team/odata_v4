@@ -1,12 +1,5 @@
 package org.example.trippin.config;
 
-import static org.eclipse.persistence.config.PersistenceUnitProperties.CACHE_SHARED_DEFAULT;
-import static org.eclipse.persistence.config.PersistenceUnitProperties.CONNECTION_POOL_MAX;
-import static org.eclipse.persistence.config.PersistenceUnitProperties.DDL_GENERATION;
-import static org.eclipse.persistence.config.PersistenceUnitProperties.LOGGING_LEVEL;
-import static org.eclipse.persistence.config.PersistenceUnitProperties.TRANSACTION_TYPE;
-import static org.eclipse.persistence.config.PersistenceUnitProperties.WEAVING;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,6 +19,13 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.AbstractJpaVendorAdapter;
 import org.springframework.orm.jpa.vendor.EclipseLinkJpaVendorAdapter;
 import org.springframework.transaction.jta.JtaTransactionManager;
+
+import static org.eclipse.persistence.config.PersistenceUnitProperties.CACHE_SHARED_DEFAULT;
+import static org.eclipse.persistence.config.PersistenceUnitProperties.CONNECTION_POOL_MAX;
+import static org.eclipse.persistence.config.PersistenceUnitProperties.DDL_GENERATION;
+import static org.eclipse.persistence.config.PersistenceUnitProperties.LOGGING_LEVEL;
+import static org.eclipse.persistence.config.PersistenceUnitProperties.TRANSACTION_TYPE;
+import static org.eclipse.persistence.config.PersistenceUnitProperties.WEAVING;
 
 @Configuration
 public class EclipseLinkJpaConfiguration extends JpaBaseConfiguration {

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+		http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <changeSet id="v1-03-01" author="rahuljain">
+       <sql>
+           insert into ${schemaName}.Person values ('russellwhyte', 'Russell', 'Whyte', null, 0, null);
+       </sql>
+        <sql>
+            insert into ${schemaName}.Trip values (0, 'russellwhyte', '9d9b2fa0-efbf-490e-a5e3-bac8f7d47354', 'Trip in US', 3000, 'Trip from San Francisco to New York City', '2014-01-01T00:00:00Z', '2014-01-04T00:00:00Z');
+        </sql>
+    </changeSet>
+</databaseChangeLog>

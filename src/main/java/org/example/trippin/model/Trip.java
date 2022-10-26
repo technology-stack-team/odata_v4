@@ -7,34 +7,34 @@ import java.time.ZonedDateTime;
 import java.util.UUID;
 
 @Entity(name = "Trip")
-@Table(schema = "\"Trippin\"", name = "\"Trip\"")
+@Table(schema = "Trippin", name = "Trip")
 public class Trip {
   @Id
-  @Column(name = "\"TripId\"")
+  @Column(name = "TripId")
   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "TripId")
-  @SequenceGenerator(name = "TripId", sequenceName = "\"Trippin\".\"TripId\"", allocationSize = 1)
+  @SequenceGenerator(name = "TripId", sequenceName = "Trippin.TripId", allocationSize = 1)
   private Integer tripId;
 
   @EdmIgnore
-  @Column(name = "\"UserName\"")
+  @Column(name = "UserName")
   private String userName;
 
-  @Column(name = "\"ShareId\"")
+  @Column(name = "ShareId")
   private UUID shareId;
 
-  @Column(name = "\"Name\"")
+  @Column(name = "Name")
   private String name;
 
-  @Column(name = "\"Budget\"")
+  @Column(name = "Budget")
   private Float budget;
 
-  @Column(name = "\"Description\"")
+  @Column(name = "Description")
   private String description;
 
-  @Column(name = "\"StartsAt\"")
+  @Column(name = "StartsAt")
   private ZonedDateTime startsAt;
 
-  @Column(name = "\"EndsAt\"")
+  @Column(name = "EndsAt")
   private ZonedDateTime endsAt;
 
   public Integer getTripId() {
