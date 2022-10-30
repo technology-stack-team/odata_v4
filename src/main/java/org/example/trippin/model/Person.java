@@ -3,8 +3,10 @@ package org.example.trippin.model;
 import lombok.Data;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.*;
@@ -38,6 +40,11 @@ public class Person {
   private PersonGender Gender;
   @Column(name = "Age")
   private Short age;
+  @Column(name = "Emails")
+  @ElementCollection(fetch = FetchType.LAZY)
+  @CollectionTable(schema = "Trippin", name = "PersonEmail",
+          joinColumns = @JoinColumn(name = "UserName"))
+  private List<String> emails = new ArrayList<>();
   @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
   @JoinColumn(name = "UserName", insertable = false, updatable = false)
   private Collection<Trip> trips;

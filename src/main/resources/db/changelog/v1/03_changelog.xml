@@ -6,12 +6,19 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
 		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
 		http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
-    <changeSet id="v1-03-01" author="rahuljain">
-       <sql>
-           insert into ${schemaName}.Person values ('russellwhyte', 'Russell', 'Whyte', null, 124.54125, '2014-01-01', null,   0, 25);
-       </sql>
-        <sql>
-            insert into ${schemaName}.Trip values (0, 'russellwhyte', '9d9b2fa0-efbf-490e-a5e3-bac8f7d47354', 'Trip in US', 3000, 'Trip from San Francisco to New York City', '2014-01-01T00:00:00Z', '2014-01-04T00:00:00Z');
-        </sql>
+    <changeSet id="v1-03-01" author="rahul-jain">
+        <createTable schemaName="${schemaName}"  tableName="PersonEmail">
+            <column name="UserName" type="VARCHAR(250)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Emails" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="v1-03-02" author="rahuljain">
+        <addForeignKeyConstraint baseTableSchemaName="Trippin" baseTableName="PersonEmail" baseColumnNames="UserName" constraintName="Person_PersonEmail_fk" referencedTableName="Person"
+                                 referencedColumnNames="UserName" referencedTableSchemaName="Trippin"/>
     </changeSet>
 </databaseChangeLog>
+
