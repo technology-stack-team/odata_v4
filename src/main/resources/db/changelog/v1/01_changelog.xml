@@ -16,7 +16,10 @@
             </column>
             <column name="LastName" type="VARCHAR(26)"/>
             <column name="MiddleName" type="VARCHAR(250)"/>
-            <column name="Gender" type="SMALLINT"/>
+            <column name="Income" type="DECIMAL"/>
+            <column name="DateOfBirth" type="DATE"/>
+            <column name="Photo" type="BINARY"/>
+            <column name="Gender" type="INTEGER"/>
             <column name="Age" type="INTEGER"/>
         </createTable>
     </changeSet>

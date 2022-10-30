@@ -1,12 +1,17 @@
 package org.example.trippin.model;
 
+import lombok.Data;
+
+import java.math.BigDecimal;
 import java.util.Collection;
+import java.util.Date;
 import java.util.Objects;
 
 import javax.persistence.*;
 
 @Entity(name = "Person")
 @Table(schema = "Trippin", name = "Person")
+@Data
 public class Person {
 
   @Id
@@ -21,6 +26,16 @@ public class Person {
 
   @Column(name = "MiddleName")
   private String middleName;
+  @Column(name = "Income",  precision = 30, scale = 5)
+  private BigDecimal income;
+  @Column(name = "DateOfBirth")
+  @Temporal(value = TemporalType.DATE)
+  private Date dateOfBirth;
+  @Column(name = "Photo", length = 64000)
+  private byte[] photo;
+  @Column(name = "Gender")
+  @Enumerated(value = EnumType.ORDINAL)
+  private PersonGender Gender;
   @Column(name = "Age")
   private Short age;
   @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)

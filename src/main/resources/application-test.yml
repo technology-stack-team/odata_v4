@@ -5,19 +5,18 @@ logging:
 odata:
   jpa:
     punit_name: Trippin
-    root_packages: com.example.trippin
+    root_packages: org.example.trippin
 server:
   port: 8080
 spring:
   datasource:
-    url: jdbc:h2:mem:testdb;MODE=PostgreSQL
+    url: jdbc:h2:mem:db;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;MODE=PostgreSQL;INIT=CREATE SCHEMA IF NOT EXISTS Trippin;
     driverClassName: org.h2.Driver
     username: sa
     password: ''
-  flyway:
+  liquibase:
+    change-log: classpath:db/liquibase_changelog.xml
     enabled: true
-    schemas:
-    -  Trippin
   servlet:
     multipart:
       enabled: false

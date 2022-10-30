@@ -31,6 +31,8 @@ import static org.eclipse.persistence.config.PersistenceUnitProperties.WEAVING;
 public class EclipseLinkJpaConfiguration extends JpaBaseConfiguration {
   @Value("${odata.jpa.punit_name}")
   private String punit;
+  @Value("${odata.jpa.root_packages}")
+  private String rootPackage;
   
   protected EclipseLinkJpaConfiguration(DataSource dataSource, JpaProperties properties,
       ObjectProvider<JtaTransactionManager> jtaTransactionManager) {
@@ -65,7 +67,7 @@ public class EclipseLinkJpaConfiguration extends JpaBaseConfiguration {
 
     return builder
         .dataSource(ds)
-        .packages(Person.class)
+            .packages(rootPackage)
         .properties(getVendorProperties())
         .jta(false)
         .build();
