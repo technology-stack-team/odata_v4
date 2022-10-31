@@ -45,10 +45,21 @@ public class Person {
   @CollectionTable(schema = "Trippin", name = "PersonEmail",
           joinColumns = @JoinColumn(name = "UserName"))
   private List<String> emails = new ArrayList<>();
+
   @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
   @JoinColumn(name = "UserName", insertable = false, updatable = false)
   private Collection<Trip> trips;
 
+  @Column(name = "AddressInfo")
+  @ElementCollection(fetch = FetchType.LAZY)
+  @CollectionTable(schema = "Trippin", name = "PersonAddressInfo",
+          joinColumns = @JoinColumn(name = "UserName"))
+  private List<Location> addressInfo = new ArrayList<>();
+
+  @Embedded
+  @Column(name = "HomeAddress")
+  @AttributeOverrides(value = {@AttributeOverride(name = "address", column = @Column(name = "HomeLocationAddress")), @AttributeOverride(name = "code", column = @Column(name = "HomeLocationCode"))})
+  private Location homeAddress;
   public String getUserName() {
     return userName;
   }

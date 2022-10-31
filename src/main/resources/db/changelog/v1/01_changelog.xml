@@ -21,6 +21,16 @@
             <column name="Photo" type="BINARY"/>
             <column name="Gender" type="INTEGER"/>
             <column name="Age" type="INTEGER"/>
+            <column name="HomeLocationAddress" type="VARCHAR(500)"/>
+            <column name="HomeLocationCode" type="INTEGER"/>
+            <column name="LocationCityName" type="VARCHAR(250)"/>
+            <column name="LocationCityCountryRegion" type="VARCHAR(100)"/>
+            <column name="LocationCityRegion" type="VARCHAR(200)"/>
         </createTable>
+    </changeSet>
+    <changeSet id="v1-01-02" author="rahul-jain">
+        <sql>
+            insert into ${schemaName}.Person values ('russellwhyte', 'Russell', 'Whyte', null, 124.54125, '2014-01-01', null,   0, 25, 'Marathali bangalore 520100', 520100, 'Bengaluru', 'India', 'Karnatka');
+        </sql>
     </changeSet>
 </databaseChangeLog>

@@ -6,7 +6,7 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
 		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
 		http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
-    <changeSet id="v1-01-02" author="rahul-jain">
+    <changeSet id="v1-02-01" author="rahul-jain">
     <createTable  schemaName="${schemaName}" tableName="Trip">
         <column name="TripId" type="INTEGER" autoIncrement="true">
             <constraints primaryKey="true" nullable="false"/>
@@ -23,5 +23,10 @@
         <column name="StartsAt" type="TIMESTAMP WITH TIME ZONE"/>
         <column name="EndsAt" type="TIMESTAMP WITH TIME ZONE"/>
     </createTable>
+    </changeSet>
+    <changeSet id="v1-02-02" author="rahul-jain">
+        <sql>
+            insert into ${schemaName}.Trip values (0, 'russellwhyte', '9d9b2fa0-efbf-490e-a5e3-bac8f7d47354', 'Trip in US', 3000, 'Trip from San Francisco to New York City', '2014-01-01T00:00:00Z', '2014-01-04T00:00:00Z');
+        </sql>
     </changeSet>
 </databaseChangeLog>
