@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.sql.DataSource;
 
+import org.eclipse.persistence.internal.sessions.factories.model.log.LoggingOptionsConfig;
 import org.eclipse.persistence.logging.SessionLog;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,6 +58,8 @@ public class EclipseLinkJpaConfiguration extends JpaBaseConfiguration {
     // You can also tweak your application performance by configuring your database connection pool.
     // https://www.eclipse.org/eclipselink/documentation/2.7/jpa/extensions/persistenceproperties_ref.htm#connectionpool
     jpaProperties.put(CONNECTION_POOL_MAX, 50);
+    jpaProperties.put(LOGGING_LEVEL, "FINE");
+    jpaProperties.put("eclipselink.logging.level.sql", "FINE");
     return jpaProperties;
   }
   

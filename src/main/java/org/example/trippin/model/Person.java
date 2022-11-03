@@ -1,6 +1,13 @@
 package org.example.trippin.model;
 
+import com.sap.olingo.jpa.metadata.core.edm.annotation.EdmIgnore;
+import com.sun.xml.internal.ws.binding.FeatureListUtil;
 import lombok.Data;
+import org.eclipse.persistence.annotations.TypeConverter;
+import org.example.trippin.converter.FeaturesConverter;
+import org.example.trippin.converter.LocationConverter;
+import org.example.trippin.enums.Feature;
+import org.example.trippin.enums.PersonGender;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -35,7 +42,7 @@ public class Person {
   private Date dateOfBirth;
   @Column(name = "Photo", length = 64000)
   private byte[] photo;
-  @Column(name = "Gender")
+  @Column(name = "Gender", nullable = false)
   @Enumerated(value = EnumType.ORDINAL)
   private PersonGender Gender;
   @Column(name = "Age")
@@ -50,16 +57,46 @@ public class Person {
   @JoinColumn(name = "UserName", insertable = false, updatable = false)
   private Collection<Trip> trips;
 
-  @Column(name = "AddressInfo")
-  @ElementCollection(fetch = FetchType.LAZY)
-  @CollectionTable(schema = "Trippin", name = "PersonAddressInfo",
-          joinColumns = @JoinColumn(name = "UserName"))
-  private List<Location> addressInfo = new ArrayList<>();
+//  @Column(name = "AddressInfo")
+//  @ElementCollection(fetch = FetchType.LAZY)
+//  @CollectionTable(schema = "Trippin", name = "PersonAddressInfo",
+//          joinColumns = @JoinColumn(name = "UserName"))
+//  @Convert(converter = LocationConverter.class)
+//  private List<Location> addressInfo = new ArrayList<>();
 
   @Embedded
   @Column(name = "HomeAddress")
   @AttributeOverrides(value = {@AttributeOverride(name = "address", column = @Column(name = "HomeLocationAddress")), @AttributeOverride(name = "code", column = @Column(name = "HomeLocationCode"))})
   private Location homeAddress;
+
+  @Column(name = "FavoriteFeature", nullable = false)
+  @Enumerated(value = EnumType.ORDINAL)
+  private Feature favouriteFeature;
+
+  @Column(name = "Features")
+  @ElementCollection(fetch = FetchType.LAZY)
+  @CollectionTable(schema = "Trippin", name = "PersonFeature",
+          joinColumns = @JoinColumn(name = "UserName"))
+  @Convert(converter = FeaturesConverter.class)
+  List<Feature> features = new ArrayList<>();
+
+  @JoinColumn(name = "BestFriend", insertable = false, updatable = false)
+  @ManyToOne(fetch = FetchType.LAZY)
+  private Person bestFriend;
+
+
+
+  @ManyToMany
+  @JoinTable(
+          name="PersonFriend",
+          joinColumns = @JoinColumn( name="UserName"),
+          inverseJoinColumns = @JoinColumn( name="Friend"), schema = "Trippin")
+  private Collection<Person> friends;
+
+  @Column(name = "BestFriend")
+  @EdmIgnore
+  private String Friend;
+
   public String getUserName() {
     return userName;
   }

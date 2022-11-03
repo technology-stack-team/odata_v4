@@ -8,6 +8,7 @@ import javax.persistence.*;
 @Entity(name = "PersonAddressInfo")
 @Table(schema = "Trippin", name = "PersonAddressInfo")
 @Data
+@EdmIgnore
 public class PersonAddressInfo {
     @Id
     @Column(name = "UserName")
