@@ -38,10 +38,10 @@
             insert into ${schemaName}.Person values ('russellwhyte', 'Russell', 'Whyte', null, 124.54125, '2014-01-01', null,   0, 25, 'Marathali bangalore 520100', 520100, 'Bengaluru', 'India', 'Karnatka', 2, 'russellwhytefriend', null);
         </sql>
         <sql>
-            insert into ${schemaName}.Person values ('russellwhytefriend', 'Russell', 'Whyte', null, 124.54125, '2014-01-01', null,   0, 25, 'Marathali bangalore 520100', 520100, 'Bengaluru', 'India', 'Karnatka', 2, null, 'russellwhyte');
+            insert into ${schemaName}.Person values ('russellwhytefriend', 'Russell', 'Whyte', null, 124.54125, '2014-01-01', null,   0, 25,'Marathali bangalore 520100', 520100, 'Bengaluru', 'India', 'Karnatka', 2, null, 'russellwhyte');
         </sql>
         <sql>
-            insert into ${schemaName}.Person values ('russellwhytefriend2', 'Russell', 'Whyte', null, 124.54125, '2014-01-01', null,   0, 25, 'Marathali bangalore 520100', 520100, 'Bengaluru', 'India', 'Karnatka', 2, null, 'russellwhyte,russellwhytefriend');
+            insert into ${schemaName}.Person values ('russellwhytefriend2', 'Russell', 'Whyte', null, 124.54125, '2014-01-01', null,   0, 25,'Marathali bangalore 520100', 520100, 'Bengaluru', 'India', 'Karnatka', 2, null, 'russellwhyte,russellwhytefriend');
         </sql>
     </changeSet>
 </databaseChangeLog>

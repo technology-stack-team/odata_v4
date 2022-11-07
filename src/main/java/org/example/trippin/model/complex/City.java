@@ -1,10 +1,7 @@
-package org.example.trippin.model;
+package org.example.trippin.model.complex;
 
-import liquibase.datatype.DataTypeInfo;
 import lombok.Data;
 
-import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 

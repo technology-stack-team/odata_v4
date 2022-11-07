@@ -1,13 +1,11 @@
 package org.example.trippin.model;
 
 import com.sap.olingo.jpa.metadata.core.edm.annotation.EdmIgnore;
-import com.sun.xml.internal.ws.binding.FeatureListUtil;
 import lombok.Data;
-import org.eclipse.persistence.annotations.TypeConverter;
 import org.example.trippin.converter.FeaturesConverter;
-import org.example.trippin.converter.LocationConverter;
 import org.example.trippin.enums.Feature;
 import org.example.trippin.enums.PersonGender;
+import org.example.trippin.model.complex.Location;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -57,12 +55,10 @@ public class Person {
   @JoinColumn(name = "UserName", insertable = false, updatable = false)
   private Collection<Trip> trips;
 
-//  @Column(name = "AddressInfo")
-//  @ElementCollection(fetch = FetchType.LAZY)
-//  @CollectionTable(schema = "Trippin", name = "PersonAddressInfo",
-//          joinColumns = @JoinColumn(name = "UserName"))
-//  @Convert(converter = LocationConverter.class)
-//  private List<Location> addressInfo = new ArrayList<>();
+  @ElementCollection(fetch = FetchType.LAZY)
+  @CollectionTable(schema = "Trippin", name = "PersonAddressInfo",
+          joinColumns = @JoinColumn(name = "UserName"))
+  private List<Location> addressInfo;
 
   @Embedded
   @Column(name = "HomeAddress")
@@ -81,12 +77,12 @@ public class Person {
   List<Feature> features = new ArrayList<>();
 
   @JoinColumn(name = "BestFriend", insertable = false, updatable = false)
-  @ManyToOne(fetch = FetchType.LAZY)
+  @ManyToOne(fetch = FetchType.LAZY, cascade = {})
   private Person bestFriend;
 
 
 
-  @ManyToMany
+  @ManyToMany(fetch = FetchType.LAZY, cascade = {})
   @JoinTable(
           name="PersonFriend",
           joinColumns = @JoinColumn( name="UserName"),

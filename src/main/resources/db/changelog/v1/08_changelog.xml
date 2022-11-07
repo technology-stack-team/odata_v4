@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+		http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <changeSet id="v1-08-01" author="rahuljain">
+        <createTable schemaName="${schemaName}"  tableName="Event">
+            <column name="EventId" type="INTEGER"/>
+            <column name="Address" type="VARCHAR(500)"/>
+            <column name="Code" type="INTEGER"/>
+            <column name="LocationCityName" type="VARCHAR(250)"/>
+            <column name="LocationCityCountryRegion" type="VARCHAR(100)"/>
+            <column name="LocationCityRegion" type="VARCHAR(200)"/>
+            <column name="BuildingInfo" type="VARCHAR(250)"/>
+            <column name="Description"  type="VARCHAR(250)"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="v1-08-02" author="rahul-jain">
+        <sql>
+            insert into ${schemaName}.Event values ( 1 ,'Marathali bangalore 520100', 520100, 'Bengaluru', 'India', 'Karnatka', 'nice building', 'HI this is subtype of complex type');
+        </sql>
+    </changeSet>
+</databaseChangeLog>
