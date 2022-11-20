@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+		http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <changeSet id="v2-01-01" author="rahuljain">
+        <createTable tableName="Event" schemaName="Trippin">
+            <column name="PlanItemId" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DTYPE" type="VARCHAR(250)"/>
+            <column name="ConfirmationCode" type="VARCHAR(250)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="StartsAt" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="EndsAt" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Duration" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="v1-09-02" author="rahul-jain">
+        <sql>
+            insert into ${schemaName}.PlanItem values ( 1 ,'4hs7cw', '2014-01-01 12:45:00', '2014-02-01 12:50:00', <!--'P2DT3H4M'--> 183840);
+        </sql>
+    </changeSet>
+</databaseChangeLog>

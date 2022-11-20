@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+		http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <changeSet id="v1-08-01" author="rahuljain">
+        <createTable tableName="BasePlanItem" schemaName="${schemaName}">
+            <column name="PlanItemId" type="INTEGER">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="DTYPE" type="VARCHAR(31)"/>
+            <column name="ConfirmationCode" type="VARCHAR(250)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="StartsAt" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="EndsAt" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Duration" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Address" type="VARCHAR(500)"/>
+            <column name="Code" type="INTEGER"/>
+            <column name="LocationCityName" type="VARCHAR(250)"/>
+            <column name="LocationCityCountryRegion" type="VARCHAR(100)"/>
+            <column name="LocationCityRegion" type="VARCHAR(200)"/>
+            <column name="BuildingInfo" type="VARCHAR(250)"/>
+            <column name="Description"  type="VARCHAR(250)"/>
+        </createTable>
+    </changeSet>
+<!--    <changeSet id="v1-08-02" author="rahul-jain">-->
+<!--        <sql>-->
+<!--            insert into" ${schemaName}"."BasePlanItem" values ( 1, 'Event' ,'4hs7cw', '2014-01-01 12:45:00', '2014-02-01 12:50:00', &lt;!&ndash;'P2DT3H4M'&ndash;&gt; 183840, 'Marathali bangalore 520100', 520100, 'Bengaluru', 'India', 'Karnatka', 'nice building', 'HI this is subtype of complex type');-->
+<!--        </sql>-->
+<!--    </changeSet>-->
+</databaseChangeLog>

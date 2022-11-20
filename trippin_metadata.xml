@@ -15,7 +15,6 @@
 				<Property Name="Income" Type="Edm.Decimal" />
 				<Property Name="DateOfBirth" Type="Edm.Date" />
 				<Property Name="Photo" Type="Edm.Binary" />
-				
                 <Property Name="MiddleName" Type="Edm.String" />
                 <Property Name="Gender" Type="Trippin.PersonGender" Nullable="false" />
                 <Property Name="Age" Type="Edm.Int64" />
