@@ -19,5 +19,3 @@ spring:
   servlet:
     multipart:
       enabled: false
-  h2:
-    console.enabled: true

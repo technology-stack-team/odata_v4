@@ -26,3 +26,6 @@ eclipselink:
     auto:
       create:
         delete: true
+
+h2:
+  console.enabled: true
