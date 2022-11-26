@@ -23,7 +23,7 @@
             <column name="Age" type="INTEGER"/>
             <column name="Address" type="VARCHAR(500)"/>
             <column name="Code" type="INTEGER"/>
-            <column name="Name" type="VARCHAR(250)"/>
+            <column name="LocationName" type="VARCHAR(250)"/>
             <column name="CountryRegion" type="VARCHAR(100)"/>
             <column name="Region" type="VARCHAR(200)"/>
             <column name="FavoriteFeature" type="SMALLINT">

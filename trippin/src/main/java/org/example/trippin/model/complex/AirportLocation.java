@@ -7,7 +7,10 @@ import javax.persistence.Embeddable;
 
 @Embeddable
 @Data
-public class AirportLocation {
+public class AirportLocation extends Location {
+    public AirportLocation() {
+        super();
+    }
     @Column(name = "\"Loc\"")
     private String Loc;
 }

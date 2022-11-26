@@ -26,9 +26,9 @@
             </column>
             <column name="Address" type="VARCHAR(500)"/>
             <column name="Code" type="INTEGER"/>
-            <column name="LocationCityName" type="VARCHAR(250)"/>
-            <column name="LocationCityCountryRegion" type="VARCHAR(100)"/>
-            <column name="LocationCityRegion" type="VARCHAR(200)"/>
+            <column name="LocationName" type="VARCHAR(250)"/>
+            <column name="CountryRegion" type="VARCHAR(100)"/>
+            <column name="Region" type="VARCHAR(200)"/>
             <column name="BuildingInfo" type="VARCHAR(250)"/>
             <column name="Description"  type="VARCHAR(250)"/>
         </createTable>

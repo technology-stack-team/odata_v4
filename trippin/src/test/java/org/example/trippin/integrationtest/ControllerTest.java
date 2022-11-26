@@ -1,4 +1,4 @@
-package com.example.trippin.integrationtest;
+package org.example.trippin.integrationtest;
 import static io.restassured.module.mockmvc.RestAssuredMockMvc.given;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.jupiter.api.Assertions.*;

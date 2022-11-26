@@ -8,7 +8,7 @@ import javax.persistence.Embeddable;
 @Embeddable
 @Data
 public class City {
-    @Column(name = "\"Name\"")
+    @Column(name = "\"LocationName\"")
     private String name;
     @Column(name = "\"CountryRegion\"")
     private String countryRegion;

@@ -21,7 +21,8 @@ public class Airport {
     @Column(name = "\"IataCode\"")
     private String iataCode;
     @Embedded
-    private AirportLocation location;
+    @Column(name =  "\"Location\"")
+    private AirportLocation airportLocation;
     @Column(name = "\"latitude\"")
     private Double latitude;
     @Column(name = "\"longitude\"")

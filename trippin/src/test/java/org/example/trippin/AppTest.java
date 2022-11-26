@@ -1,4 +1,4 @@
-package com.example.trippin;
+package org.example.trippin;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
