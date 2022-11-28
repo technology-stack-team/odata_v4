@@ -10,6 +10,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Parameter;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -277,7 +278,11 @@ abstract class IntermediateProperty extends IntermediateModelElement implements 
     if (!isLob() && !(getConverter() == null && isEnum())) {
       final CsdlMapping mapping = new CsdlMapping();
       mapping.setInternalName(this.getExternalName());
-      mapping.setMappedJavaClass(dbType);
+      if(dbType.isAssignableFrom(Duration.class)) {
+         mapping.setMappedJavaClass(Long.class);
+      } else {
+        mapping.setMappedJavaClass(dbType);
+      }
       return mapping;
     }
     return null;

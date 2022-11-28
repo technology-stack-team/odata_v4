@@ -21,4 +21,7 @@ public class Location {
 
     @Column(name = "\"Code\"")
     private Integer code;
+
+//    @Column(name = "\"STATUS_TYPE\"", length = 1, insertable = false, updatable = false, nullable = false)
+//    private String STATUS_TYPE;
 }

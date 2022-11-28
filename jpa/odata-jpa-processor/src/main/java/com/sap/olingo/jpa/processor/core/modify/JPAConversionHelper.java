@@ -9,6 +9,7 @@ import static org.apache.olingo.commons.api.http.HttpStatusCode.BAD_REQUEST;
 import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -322,7 +323,10 @@ public class JPAConversionHelper {
     } else if (attribute.isEnum()) {
       jpaAttribute = findEnumConstantsByOrdinal(attribute.getType().getEnumConstants(), value);
     } else {
-      jpaAttribute = value;
+      if(attribute.getType().equals(Duration.class))
+          jpaAttribute = Duration.ofSeconds((Long) value);
+      else
+        jpaAttribute = value;
     }
     return jpaAttribute;
   }

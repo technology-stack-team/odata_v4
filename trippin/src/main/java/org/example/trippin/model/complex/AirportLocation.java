@@ -12,5 +12,5 @@ public class AirportLocation extends Location {
         super();
     }
     @Column(name = "\"Loc\"")
-    private String Loc;
+    private String loc;
 }
