@@ -22,6 +22,8 @@
         <column name="Description" type="VARCHAR(2500)"/>
         <column name="StartsAt" type="TIMESTAMP"/>
         <column name="EndsAt" type="TIMESTAMP"/>
+        <column name="StartTime" type="TIME"/>
+        <column name="EndTime" type="TIME"/>
     </createTable>
     </changeSet>
     <changeSet id="v1-02-02" author="rahul-jain">
