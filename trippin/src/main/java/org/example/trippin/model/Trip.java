@@ -2,6 +2,7 @@ package org.example.trippin.model;
 
 import lombok.Data;
 
+import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
@@ -11,6 +12,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -66,4 +69,10 @@ public class Trip {
   @Temporal(TemporalType.TIME)
   private Date endTime;
 
+  @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST})
+  @JoinTable(
+          name="\"TripPlanItem\"",
+          joinColumns = @JoinColumn( name="\"TripId\""),
+          inverseJoinColumns = @JoinColumn( name="\"PlanItemId\""), schema = "\"Trippin\"")
+  private List<PlanItem> planItems = new ArrayList<>();
 }

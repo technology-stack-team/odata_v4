@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+		http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+        <changeSet id="v2-02-01" author="rahul-jain">
+            <createTable tableName="TripPlanItem" schemaName="${schemaName}">
+                <column name="Id" type="SERIAL" autoIncrement="true">
+                    <constraints primaryKey="true" nullable="false"/>
+                </column>
+                <column name="TripId" type="INTEGER"/>
+                <column name="PlanItemId" type="INTEGER"/>
+            </createTable>
+        </changeSet>
+        <changeSet id="v2-02-02" author="rahul-jain">
+            <addForeignKeyConstraint baseTableSchemaName="${schemaName}" baseTableName="TripPlanItem" baseColumnNames="TripId" constraintName="Trip_TripPlanItem_fk" referencedTableName="Trip"
+                                     referencedColumnNames="TripId" referencedTableSchemaName="${schemaName}"/>
+        </changeSet>
+        <changeSet id="v2-02-03" author="rahul-jain">
+            <addForeignKeyConstraint baseTableSchemaName="${schemaName}" baseTableName="TripPlanItem" baseColumnNames="PlanItemId" constraintName="Trip_PlanItem_fk" referencedTableName="BasePlanItem"
+                                     referencedColumnNames="PlanItemId" referencedTableSchemaName="${schemaName}"/>
+        </changeSet>
+</databaseChangeLog>
