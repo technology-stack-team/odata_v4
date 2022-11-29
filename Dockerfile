@@ -3,7 +3,7 @@ WORKDIR /app
 COPY pom.xml pom.xml
 COPY jpa jpa
 COPY trippin trippin
-RUN mvn  package -DnoTest=true
+RUN mvn clean package -DnoTest=true
 
 FROM openjdk:8-jre-alpine
 WORKDIR /app
