@@ -323,7 +323,7 @@ public class JPAConversionHelper {
     } else if (attribute.isEnum()) {
       jpaAttribute = findEnumConstantsByOrdinal(attribute.getType().getEnumConstants(), value);
     } else {
-      if(attribute.getType().equals(Duration.class))
+      if(attribute != null && attribute.getType() != null && attribute.getType().equals(Duration.class))
           jpaAttribute = Duration.ofSeconds((Long) value);
       else
         jpaAttribute = value;

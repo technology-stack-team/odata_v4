@@ -21,15 +21,28 @@
             <column name="Photo" type="BINARY"/>
             <column name="Gender" type="INTEGER"/>
             <column name="Age" type="INTEGER"/>
-            <column name="Address" type="VARCHAR(500)"/>
-            <column name="Code" type="INTEGER"/>
-            <column name="LocationName" type="VARCHAR(250)"/>
-            <column name="CountryRegion" type="VARCHAR(100)"/>
-            <column name="Region" type="VARCHAR(200)"/>
+
+            <column name="HomeAddress_Address" type="VARCHAR(500)"/>
+            <column name="HomeAddress_Code" type="INTEGER"/>
+            <column name="HomeAddress_CityName" type="VARCHAR(250)"/>
+            <column name="HomeAddress_CityCountryRegion" type="VARCHAR(100)"/>
+            <column name="HomeAddress_CityRegion" type="VARCHAR(200)"/>
+
+            <column name="BossOffice_Address" type="VARCHAR(500)"/>
+            <column name="BossOffice_Code" type="INTEGER"/>
+            <column name="BossOffice_CityName" type="VARCHAR(250)"/>
+            <column name="BossOffice_CityCountryRegion" type="VARCHAR(100)"/>
+            <column name="BossOffice_CityRegion" type="VARCHAR(200)"/>
+
             <column name="FavoriteFeature" type="SMALLINT">
                 <constraints nullable="false"/>
             </column>
             <column name="Friend" type="VARCHAR(250)"/>
+            <column name="DType" type="VARCHAR(31)"/>
+            <column name="Cost" type="BIGINT">
+            </column>
+            <column name="Budget" type="BIGINT">
+            </column>
         </createTable>
     </changeSet>
 <!--    <changeSet id="v1-01-02" author="rahul-jain">-->
