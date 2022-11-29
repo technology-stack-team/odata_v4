@@ -14,33 +14,35 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
 import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.Convert;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.ElementCollection;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity(name = "Person")
-@Table(schema = "\"Trippin\"", name = "\"Person\"")
 @Data
-public class Person {
-  @Id
-  @Column(name = "\"UserName\"")
-  private String userName;
+@DiscriminatorValue(value = "1")
+public class Person extends AbstractPerson {
+  public Person () {
+    super();
+    dType = "1";
+  }
 
   @Column(name = "\"FirstName\"", nullable = false)
   private String firstName;
@@ -116,6 +118,13 @@ public class Person {
 
   @Embedded
   @Column(name = "\"HomeAddress\"")
+  @AttributeOverrides({
+          @AttributeOverride(name = "city.name", column = @Column(name = "\"HomeAddress_CityName\"")),
+          @AttributeOverride(name = "city.region", column = @Column(name = "\"HomeAddress_CityRegion\"")),
+          @AttributeOverride(name = "city.countryRegion", column = @Column(name = "\"HomeAddress_CityCountryRegion\"")),
+          @AttributeOverride(name = "address", column = @Column(name = "\"HomeAddress_Address\"")),
+          @AttributeOverride(name = "code", column = @Column(name = "\"HomeAddress_Code\""))
+  })
   private Location homeAddress;
 
   @Column(name = "\"FavoriteFeature\"", nullable = false)

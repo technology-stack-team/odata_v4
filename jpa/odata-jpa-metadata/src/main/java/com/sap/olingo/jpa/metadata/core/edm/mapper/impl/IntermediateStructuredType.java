@@ -597,12 +597,13 @@ abstract class IntermediateStructuredType<T> extends IntermediateModelElement im
       final AttributeOverrides overwriteList = a.getAnnotation(AttributeOverrides.class);
       if (overwriteList != null) {
         for (final AttributeOverride overwrite : overwriteList.value()) {
-          if (overwrite.name().equals(jpaPath.getLeaf().getInternalName()))
+          if (overwrite.name().equals(jpaPath.getLeaf().getInternalName()) || overwrite.name().toLowerCase().equals(jpaPath.getAlias().replaceAll("/", ".").toLowerCase()))
             return overwrite.column().name();
         }
       } else {
         final AttributeOverride overwrite = a.getAnnotation(AttributeOverride.class);
-        if (overwrite != null && overwrite.name().equals(jpaPath.getLeaf().getInternalName())) {
+        if (overwrite != null && (overwrite.name().equals(jpaPath.getLeaf().getInternalName()) ||
+                overwrite.name().toLowerCase().equals(jpaPath.getAlias().replaceAll("/", ".").toLowerCase()))) {
           return overwrite.column().name();
         }
       }
