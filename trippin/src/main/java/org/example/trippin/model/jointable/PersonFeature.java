@@ -3,6 +3,7 @@ package org.example.trippin.model.jointable;
 import com.sap.olingo.jpa.metadata.core.edm.annotation.EdmIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.example.trippin.converter.FeaturesConverter;
 import org.example.trippin.enums.Feature;
 
 import javax.persistence.*;
@@ -23,5 +24,6 @@ public class PersonFeature {
 
     @Column(name = "\"Features\"")
     @Enumerated(value = EnumType.ORDINAL)
+    @Convert(converter = FeaturesConverter.class)
     private Feature feature;
 }

@@ -4,6 +4,7 @@ import static org.springframework.web.context.WebApplicationContext.SCOPE_REQUES
 
 import javax.persistence.EntityManagerFactory;
 
+import com.sap.olingo.jpa.processor.core.database.JPA_POSTSQL_DatabaseProcessor;
 import org.apache.olingo.commons.api.ex.ODataException;
 import org.apache.olingo.server.api.debug.DefaultDebugSupport;
 import org.example.trippin.nameBuilder.APINameBuilder;
@@ -33,6 +34,7 @@ public class ProcessorConfiguration {
         .setEntityManagerFactory(emf)
         .setTypePackage(rootPackages)
             .setEdmNameBuilder(new APINameBuilder(punit))
+            .setDatabaseProcessor(new JPA_POSTSQL_DatabaseProcessor())
         .setRequestMappingPath("TripPinRESTierService")
         .build();
   }

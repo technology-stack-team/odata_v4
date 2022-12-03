@@ -81,7 +81,8 @@ public abstract class JPAAbstractDatabaseProcessor implements JPAODataDatabasePr
     } catch (final ODataJPAModelException e) {
       throw new ODataJPAProcessorException(e, INTERNAL_SERVER_ERROR);
     }
-    parameterList.deleteCharAt(0);
+    if(parameterList.length() >  0)
+      parameterList.deleteCharAt(0);
     return queryString.replace(PARAMETER_PLACEHOLDER, parameterList.toString());
   }
 

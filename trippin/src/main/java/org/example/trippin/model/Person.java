@@ -1,8 +1,11 @@
 package org.example.trippin.model;
 
 
+import com.sap.olingo.jpa.metadata.core.edm.annotation.EdmFunction;
+import com.sap.olingo.jpa.metadata.core.edm.annotation.EdmParameter;
 import lombok.Data;
 import org.example.trippin.converter.FeaturesConverter;
+import org.example.trippin.converter.GenderConverter;
 import org.example.trippin.enums.Feature;
 import org.example.trippin.enums.PersonGender;
 import org.example.trippin.model.complex.Location;
@@ -38,6 +41,19 @@ import javax.persistence.TemporalType;
 @Entity(name = "Person")
 @Data
 @DiscriminatorValue(value = "1")
+@EdmFunction(
+        name = "GetPersonWithMostFriends",
+        functionName = "\"Trippin\".\"personWithMostFriends\"",
+        isBound = false,
+        hasFunctionImport = true,
+        returnType = @EdmFunction.ReturnType(isCollection = false, type = Person.class)
+       /* parameter = {
+                @EdmParameter(name = "CodePublisher", parameterName = "\"Publisher\"",
+                        type = String.class, maxLength = 10),
+                @EdmParameter(name = "CodeID", parameterName = "\"ID\"", type = String.class, maxLength = 10),
+                @EdmParameter(name = "DivisionCode", parameterName = "\"Division\"", type = String.class,
+                        maxLength = 10) }*/)
+
 public class Person extends AbstractPerson {
   public Person () {
     super();
@@ -61,6 +77,7 @@ public class Person extends AbstractPerson {
   private byte[] photo;
   @Column(name = "\"Gender\"", nullable = false)
   @Enumerated(value = EnumType.ORDINAL)
+  @Convert(converter = GenderConverter.class)
   private PersonGender gender;
   @Column(name = "\"Age\"")
   private Short age;
@@ -129,7 +146,7 @@ public class Person extends AbstractPerson {
 
   @Column(name = "\"FavoriteFeature\"", nullable = false)
   @Enumerated(value = EnumType.ORDINAL)
-  //@Convert(converter = FeaturesConverter.class)
+  @Convert(converter = FeaturesConverter.class)
   private Feature favoriteFeature;
 
   @Column(name = "\"Features\"")
