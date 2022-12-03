@@ -1,0 +1,80 @@
+{
+  "Income": 126.54125,
+  "AddressInfo": [
+    {
+      "Address": "Marathalibangalore520100",
+      "Code": 520100,
+      "City": {
+        "CountryRegion": "India",
+        "Name": "Bengaluru",
+        "Region": "Karnatka"
+      }
+    }
+  ],
+  "LastName": "Whyte",
+  "Gender": "Male",
+  "Photo": null,
+  "DateOfBirth": "2014-05-01",
+  "UserName": "lewisblack1",
+  "Emails": [
+    "russell.whyte2@gmail.com"
+  ],
+  "Features": [
+    "Feature2",
+    "Feature3"
+  ],
+  "FirstName": "Russell",
+  "FavoriteFeature": "Feature3",
+  "MiddleName": null,
+  "Age": 25,
+  "HomeAddress": {
+    "Address": "Marathalibangalore520100",
+    "Code": 520100,
+    "City": {
+      "CountryRegion": "India",
+      "Name": "Bengaluru",
+      "Region": "Karnatka"
+    }
+  },
+  "Friends": [
+    {
+      "Income": 126.54125,
+      "AddressInfo": [
+        {
+          "Address": "Marathalibangalore520100",
+          "Code": 520100,
+          "City": {
+            "CountryRegion": "India",
+            "Name": "Bengaluru",
+            "Region": "Karnatka"
+          }
+        }
+      ],
+      "LastName": "Whyte",
+      "Gender": "Male",
+      "Photo": null,
+      "DateOfBirth": "2014-05-01",
+      "UserName": "lewisblack2",
+      "Emails": [
+        "russell.whyte2@gmail.com"
+      ],
+      "Features": [
+        "Feature2",
+        "Feature3"
+      ],
+      "FirstName": "Russell",
+      "FavoriteFeature": "Feature3",
+      "MiddleName": null,
+      "Age": 25,
+      "HomeAddress": {
+        "Address": "Marathalibangalore520100",
+        "Code": 520100,
+        "City": {
+          "CountryRegion": "India",
+          "Name": "Bengaluru",
+          "Region": "Karnatka"
+        }
+      }
+    }
+  ]
+}

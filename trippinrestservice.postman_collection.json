@@ -1,0 +1,1533 @@
+{
+	"info": {
+		"_postman_id": "1a33718f-0e82-4bb3-b13c-2b4aec9504d2",
+		"name": "trippinrestservice",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "7529375"
+	},
+	"item": [
+		{
+			"name": "Person",
+			"item": [
+				{
+					"name": "Get Request",
+					"item": [
+						{
+							"name": "GET EntitySet",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/{{servletname}}/Persons",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"{{servletname}}",
+										"Persons"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "PersonByUserName",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/{{servletname}}/Persons('russellwhyte')",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"{{servletname}}",
+										"Persons('russellwhyte')"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET value of FirstName field of a particular entity of person entity set",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/{{servletname}}/Persons('russellwhyte')/FirstName",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"{{servletname}}",
+										"Persons('russellwhyte')",
+										"FirstName"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET value of embedded city region of a person",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/{{servletname}}/Persons('russellwhyte')/HomeAddress/City",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"{{servletname}}",
+										"Persons('russellwhyte')",
+										"HomeAddress",
+										"City"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Requesting Complex property HomeAddress",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/{{servletname}}/Persons('russellwhyte')/HomeAddress",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"{{servletname}}",
+										"Persons('russellwhyte')",
+										"HomeAddress"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Requesting Collection of complex property addressInfo",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/{{servletname}}/Persons('russellwhyte')/AddressInfo",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"{{servletname}}",
+										"Persons('russellwhyte')",
+										"AddressInfo"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET personAddress by userName",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/{{servletname}}/PersonAddressInfos?$filter= UserName eq 'russellwhyte'",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"{{servletname}}",
+										"PersonAddressInfos"
+									],
+									"query": [
+										{
+											"key": "$filter",
+											"value": " UserName eq 'russellwhyte'"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get a Person Friends, theirIds",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/{{servletname}}/PersonFriends?$filter=Friend eq 'russellwhyte'\n",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"{{servletname}}",
+										"PersonFriends"
+									],
+									"query": [
+										{
+											"key": "$filter",
+											"value": "Friend eq 'russellwhyte'\n"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Person Features By UserName",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/{{servletname}}/PersonFeatures?$filter=UserName eq 'russellwhyte8'",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"{{servletname}}",
+										"PersonFeatures"
+									],
+									"query": [
+										{
+											"key": "$filter",
+											"value": "UserName eq 'russellwhyte8'"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET person Email By userName",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/{{servletname}}/PersonEmails?$filter=UserName eq 'russellwhyte8'",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"{{servletname}}",
+										"PersonEmails"
+									],
+									"query": [
+										{
+											"key": "$filter",
+											"value": "UserName eq 'russellwhyte8'"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Post Request",
+					"item": [
+						{
+							"name": "POST Request",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"UserName\":\"lewisblack\",\r\n    \"FirstName\":\"Lewis\",\r\n    \"LastName\":\"Black\",\r\n    \"Income\" : 1234.543,\r\n    \"DateOfBirth\": \"2014-01-01\",\r\n    \"Gender\" : \"Male\",\r\n    \"Emails\":[\r\n        \"lewisblack@example.com\"\r\n    ],\r\n    \"Age\" : 56,\r\n    \"AddressInfo\": [\r\n    {\r\n      \"Address\": \"187 Suffolk Ln.\",\r\n      \"City\": {\r\n        \"Name\": \"Boise\",\r\n        \"CountryRegion\": \"United States\",\r\n        \"Region\": \"ID\"\r\n      }\r\n    }\r\n    ],\r\n    \"FavoriteFeature\" : \"Feature1\",\r\n    \"Features\" : [\r\n        \"Feature1\", \"Feature2\", \"Feature3\"\r\n    ],\r\n    \"HomeAddress\" : {\r\n        \r\n      \"Address\": \"187 Suffolk Ln.\",\r\n      \"City\": {\r\n        \"Name\": \"Boise\",\r\n        \"CountryRegion\": \"United States\",\r\n        \"Region\": \"ID\"\r\n      },\r\n      \"Code\" : 123\r\n    },\r\n    \"Friend\" : \"russellwhyte\"\r\n     \r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/{{servletname}}/Persons",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"{{servletname}}",
+										"Persons"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Deep post request with Trips",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n   \"Income\": 126.54125,\r\n    \"AddressInfo\": [\r\n        {\r\n            \"Address\": \"Marathali bangalore 520100\",\r\n            \"Code\": 520100,\r\n            \"City\": {\r\n                \"CountryRegion\": \"India\",\r\n                \"Name\": \"Bengaluru\",\r\n                \"Region\": \"Karnatka\"\r\n            }\r\n        }\r\n    ],\r\n    \"LastName\": \"Whyte\",\r\n    \"Gender\": \"Male\",\r\n    \"Photo\": null,\r\n    \"DateOfBirth\": \"2014-05-01\",\r\n    \"UserName\": \"russellwhyte4\",\r\n    \"Emails\": [\r\n        \"russell.whyte2@gmail.com\"\r\n    ],\r\n    \"Features\": [\r\n        \"Feature2\",\r\n        \"Feature3\"\r\n    ],\r\n    \"FirstName\": \"Russell\",\r\n    \"FavoriteFeature\": \"Feature3\",\r\n    \"Friend\": \"russellwhytefriend\",\r\n    \"MiddleName\": null,\r\n    \"Age\": 25,\r\n    \"HomeAddress\": {\r\n        \"Address\": \"Marathali bangalore 520100\",\r\n        \"Code\": 520100,\r\n        \"City\": {\r\n            \"CountryRegion\": \"India\",\r\n            \"Name\": \"Bengaluru\",\r\n            \"Region\": \"Karnatka\"\r\n        }\r\n    },\r\n    \"Trips\": [\r\n        {\r\n            \"Name\": \"Trip in FRANCE\",\r\n            \"StartsAt\": \"2014-01-01T07:15:00Z\",\r\n            \"Description\": \"Trip from Paris to New York City\",\r\n            \"UserName\" : \"russellwhyte4\",\r\n            \"TripId\": 6,\r\n            \"EndsAt\": \"2014-02-01T07:15:00Z\",\r\n            \"Budget\": null\r\n        },\r\n        {\r\n            \"Name\": \"Trip in US\",\r\n            \"StartsAt\": \"2014-01-01T07:15:00Z\",\r\n            \"Description\": \"Trip from San Francisco to New York City\",\r\n            \"TripId\": 7,\r\n            \"UserName\" : \"russellwhyte4\",\r\n            \"EndsAt\": \"2014-02-01T07:15:00Z\",\r\n            \"Budget\": null\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/{{servletname}}/Persons",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"{{servletname}}",
+										"Persons"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Deep post request with Friends",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n   \"Income\": 126.54125,\r\n    \"AddressInfo\": [\r\n        {\r\n            \"Address\": \"Marathali bangalore 520100\",\r\n            \"Code\": 520100,\r\n            \"City\": {\r\n                \"CountryRegion\": \"India\",\r\n                \"Name\": \"Bengaluru\",\r\n                \"Region\": \"Karnatka\"\r\n            }\r\n        }\r\n    ],\r\n    \"LastName\": \"Whyte\",\r\n    \"Gender\": \"Male\",\r\n    \"Photo\": null,\r\n    \"DateOfBirth\": \"2014-05-01\",\r\n    \"UserName\": \"russellwhyte6\",\r\n    \"Emails\": [\r\n        \"russell.whyte2@gmail.com\"\r\n    ],\r\n    \"Features\": [\r\n        \"Feature2\",\r\n        \"Feature3\"\r\n    ],\r\n    \"FirstName\": \"Russell\",\r\n    \"FavoriteFeature\": \"Feature3\",\r\n    \"Friend\": \"russellwhytefriend\",\r\n    \"MiddleName\": null,\r\n    \"Age\": 25,\r\n    \"HomeAddress\": {\r\n        \"Address\": \"Marathali bangalore 520100\",\r\n        \"Code\": 520100,\r\n        \"City\": {\r\n            \"CountryRegion\": \"India\",\r\n            \"Name\": \"Bengaluru\",\r\n            \"Region\": \"Karnatka\"\r\n        }\r\n    },\r\n    \"Friends\" : [\r\n        {\r\n   \"Income\": 126.54125,\r\n    \"AddressInfo\": [\r\n        {\r\n            \"Address\": \"Marathali bangalore 520100\",\r\n            \"Code\": 520100,\r\n            \"City\": {\r\n                \"CountryRegion\": \"India\",\r\n                \"Name\": \"Bengaluru\",\r\n                \"Region\": \"Karnatka\"\r\n            }\r\n        }\r\n    ],\r\n    \"LastName\": \"Whyte\",\r\n    \"Gender\": \"Male\",\r\n    \"Photo\": null,\r\n    \"DateOfBirth\": \"2014-05-01\",\r\n    \"UserName\": \"russellwhyte8\",\r\n    \"Emails\": [\r\n        \"russell.whyte2@gmail.com\"\r\n    ],\r\n    \"Features\": [\r\n        \"Feature2\",\r\n        \"Feature3\"\r\n    ],\r\n    \"FirstName\": \"Russell\",\r\n    \"FavoriteFeature\": \"Feature3\",\r\n    \"Friend\": \"russellwhytefriend\",\r\n    \"MiddleName\": null,\r\n    \"Age\": 25,\r\n    \"HomeAddress\": {\r\n        \"Address\": \"Marathali bangalore 520100\",\r\n        \"Code\": 520100,\r\n        \"City\": {\r\n            \"CountryRegion\": \"India\",\r\n            \"Name\": \"Bengaluru\",\r\n            \"Region\": \"Karnatka\"\r\n        }\r\n    }\r\n}\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/{{servletname}}/Persons",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"{{servletname}}",
+										"Persons"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add a new address in addressInfo",
+							"request": {
+								"method": "GET",
+								"header": []
+							},
+							"response": []
+						},
+						{
+							"name": "Add a new Friend",
+							"request": {
+								"method": "GET",
+								"header": []
+							},
+							"response": []
+						},
+						{
+							"name": "Add a new Feature to Person Features",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"UserName\" : \"russellwhyte2\", \"Feature\" : \"Feature1\"}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/{{servletname}}/PersonFeatures",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"{{servletname}}",
+										"PersonFeatures"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add a new Email to person email list",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"UserName\" : \"russellwhyte2\", \"EmailId\" : \"goly.jain@gmail.com\"}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/{{servletname}}/PersonEmails",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"{{servletname}}",
+										"PersonEmails"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Navigation  Request",
+					"item": [
+						{
+							"name": "Navigation BestFriend",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/{{servletname}}/Persons('russellwhyte')/BestFriend",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"{{servletname}}",
+										"Persons('russellwhyte')",
+										"BestFriend"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Navigation Trips",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/{{servletname}}/Persons('russellwhyte')/Trips",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"{{servletname}}",
+										"Persons('russellwhyte')",
+										"Trips"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Self Collection Navigation",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/{{servletname}}/Persons('russellwhyte')/Friends",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"{{servletname}}",
+										"Persons('russellwhyte')",
+										"Friends"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "System Query Options",
+					"item": [
+						{
+							"name": "GET raw value of enum gender",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/{{servletname}}/Persons('russellwhyte')/Gender/$value",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"{{servletname}}",
+										"Persons('russellwhyte')",
+										"Gender",
+										"$value"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET raw value of FirstName property",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/{{servletname}}/Persons('russellwhyte')/FirstName/$value",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"{{servletname}}",
+										"Persons('russellwhyte')",
+										"FirstName",
+										"$value"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET $filter option on a primitive field",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/{{servletname}}/Persons?$filter=FirstName eq 'Russell'\n",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"{{servletname}}",
+										"Persons"
+									],
+									"query": [
+										{
+											"key": "$filter",
+											"value": "FirstName eq 'Russell'\n"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET $filter option on a primitive field  with contains",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/{{servletname}}/Persons?$filter=FirstName eq 'Russell'\n",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"{{servletname}}",
+										"Persons"
+									],
+									"query": [
+										{
+											"key": "$filter",
+											"value": "FirstName eq 'Russell'\n"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get $filter option on complex type",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/{{servletname}}/Persons?$filter=contains(HomeAddress/Address, 'Marathali bangalore 520100')\n",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"{{servletname}}",
+										"Persons"
+									],
+									"query": [
+										{
+											"key": "$filter",
+											"value": "contains(HomeAddress/Address, 'Marathali bangalore 520100')\n"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get $filter option on enum",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/{{servletname}}/Persons?$filter=Gender eq Trippin.PersonGender'Male'",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"{{servletname}}",
+										"Persons"
+									],
+									"query": [
+										{
+											"key": "$filter",
+											"value": "Gender eq Trippin.PersonGender'Male'"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET $select to select specefic properties of an entity set",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/{{servletname}}/Persons?$select=FirstName,LastName,UserName,AddressInfo\n",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"{{servletname}}",
+										"Persons"
+									],
+									"query": [
+										{
+											"key": "$select",
+											"value": "FirstName,LastName,UserName,AddressInfo\n"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET #orderBy option on Date field entity set",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/{{servletname}}/Persons?$orderby=DateOfBirth desc\n",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"{{servletname}}",
+										"Persons"
+									],
+									"query": [
+										{
+											"key": "$orderby",
+											"value": "DateOfBirth desc\n"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET $orderby decimal field",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/{{servletname}}/Persons?$orderby=Income desc",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"{{servletname}}",
+										"Persons"
+									],
+									"query": [
+										{
+											"key": "$orderby",
+											"value": "Income desc"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET $top option on entityset",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/{{servletname}}/Persons?$top=2",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"{{servletname}}",
+										"Persons"
+									],
+									"query": [
+										{
+											"key": "$top",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET $skip option on entityset",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/{{servletname}}/Persons?$skip=2\n",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"{{servletname}}",
+										"Persons"
+									],
+									"query": [
+										{
+											"key": "$skip",
+											"value": "2\n"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get $count option on entityset",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/{{servletname}}/Persons/$count",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"{{servletname}}",
+										"Persons",
+										"$count"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get $expand option on person navigation property trips",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/{{servletname}}/Persons('russellwhyte')?$expand=Trips",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"{{servletname}}",
+										"Persons('russellwhyte')"
+									],
+									"query": [
+										{
+											"key": "$expand",
+											"value": "Trips"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "nested filter expand with top and select, skip",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/{{servletname}}/Persons('russellwhyte')?$expand=Trips($top=1)\n",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"{{servletname}}",
+										"Persons('russellwhyte')"
+									],
+									"query": [
+										{
+											"key": "$expand",
+											"value": "Trips($top=1)\n"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get nested expand with select",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/{{servletname}}/Persons('russellwhyte')?$expand=Trips($select=TripId,Name)\n\n",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"{{servletname}}",
+										"Persons('russellwhyte')"
+									],
+									"query": [
+										{
+											"key": "$expand",
+											"value": "Trips($select=TripId,Name)\n\n"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET nested filter expand with $filter",
+							"request": {
+								"method": "GET",
+								"header": []
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Delete Request",
+					"item": [
+						{
+							"name": "delete entity by id",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/{{servletname}}/Persons('russellwhyte')",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"{{servletname}}",
+										"Persons('russellwhyte')"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete entry from addressInfo for a user",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/{{servletname}}/PersonAddressInfos(1)",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"{{servletname}}",
+										"PersonAddressInfos(1)"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete a personFriend by Id",
+							"request": {
+								"method": "GET",
+								"header": []
+							},
+							"response": []
+						},
+						{
+							"name": "DELETE a feature from list of person features",
+							"request": {
+								"method": "GET",
+								"header": []
+							},
+							"response": []
+						},
+						{
+							"name": "Delete a email from person email list",
+							"request": {
+								"method": "GET",
+								"header": []
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "PATCH Request",
+					"item": [
+						{
+							"name": "Patch Request of entity",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"FirstName\": \"russellbhai\",\r\n    \"LastName\" : \"whyte\",\r\n    \"HomeAddress\": {\r\n        \"Code\": 5201023\r\n    }\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/{{servletname}}/Persons('russellwhyte7')",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"{{servletname}}",
+										"Persons('russellwhyte7')"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update bestFriend patch request navigation",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"Friend\" : \"russellwhytefriend2\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/{{servletname}}/Persons('russellwhyte')",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"{{servletname}}",
+										"Persons('russellwhyte')"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update addressInfo of  a particular user",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"Code\" : 420}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/{{servletname}}/PersonAddressInfos(0)",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"{{servletname}}",
+										"PersonAddressInfos(0)"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update Person Feature",
+							"request": {
+								"method": "GET",
+								"header": []
+							},
+							"response": []
+						},
+						{
+							"name": "Update a person Email",
+							"request": {
+								"method": "GET",
+								"header": []
+							},
+							"response": []
+						},
+						{
+							"name": "New Request",
+							"request": {
+								"method": "GET",
+								"header": []
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Trip",
+			"item": [
+				{
+					"name": "GET Request",
+					"item": [
+						{
+							"name": "Get trip data",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/{{servletname}}/Trips",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"{{servletname}}",
+										"Trips"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get trip by id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/{{servletname}}/Trips(1)",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"{{servletname}}",
+										"Trips(1)"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Post Request",
+					"item": [
+						{
+							"name": "inserting a trip object",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"Name\": \"Trip in US\",\r\n    \"StartsAt\": \"2014-01-01T07:15:00Z\",\r\n    \"Description\": \"Trip from San Francisco to New York City\",\r\n    \"UserName\": \"russellwhyte2\",\r\n    \"EndsAt\": \"2014-02-01T07:15:00Z\",\r\n    \"Budget\": 123.45,\r\n    \"StartTime\" : \"11:12:34\",\r\n    \"EndTime\" : \"12:34:24\",\r\n    \"Tags\" : [\"florida\", \"canada\"]\r\n\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/{{servletname}}/Trips",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"{{servletname}}",
+										"Trips"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Deep insert Post",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"Name\": \"Trip in US\",\r\n    \"StartsAt\": \"2014-01-01T07:15:00Z\",\r\n    \"Description\": \"Trip from San Francisco to New York City\",\r\n    \"UserName\": \"russellwhyte2\",\r\n    \"EndsAt\": \"2014-02-01T07:15:00Z\",\r\n    \"Budget\": 123.45,\r\n    \"StartTime\": \"11:12:34\",\r\n    \"EndTime\": \"12:34:24\",\r\n    \"Tags\": [\r\n        \"florida\",\r\n        \"canada\"\r\n    ],\r\n    \"PlanItems\": [\r\n        {\r\n            \"ConfirmationCode\": \"201\",\r\n            \"StartsAt\": \"2014-01-01T12:45:00\",\r\n            \"EndsAt\": \"2014-02-01T12:50:00\",\r\n            \"Duration\": \"PT10S\"\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/{{servletname}}/Trips",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"{{servletname}}",
+										"Trips"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/{{servletname}}/Trips(1)",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{servletname}}",
+								"Trips(1)"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Airport",
+			"item": [
+				{
+					"name": "Post Request",
+					"item": [
+						{
+							"name": "Create a new entity",
+							"request": {
+								"method": "GET",
+								"header": []
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Get entityset",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "PlanItem",
+			"item": [
+				{
+					"name": "POST request",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"ConfirmationCode\" : \"201\", \"StartsAt\" : \"2014-01-01T12:45:00\", \"EndsAt\" : \"2014-02-01T12:50:00\", \"Duration\" : \"PT10S\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/{{servletname}}/PlanItems",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{servletname}}",
+								"PlanItems"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Request",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/{{servletname}}/Events",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{servletname}}",
+								"Events"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Event",
+			"item": [
+				{
+					"name": "Post Re",
+					"item": [
+						{
+							"name": "Post a entity",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"ConfirmationCode\": \"201\",\r\n    \"StartsAt\": \"2014-01-01T12:45:00\",\r\n    \"EndsAt\": \"2014-02-01T12:50:00\",\r\n    \"Duration\": \"PT10S\",\r\n    \"EventLocation\": {\r\n        \"Code\": 2012,\r\n        \"Address\": \"csnasnoianf\",\r\n        \"City\": {\r\n            \"CountryRegion\": \"argentina\",\r\n            \"Name\": \"china\",\r\n            \"Region\": \"africa\"\r\n        },\r\n        \"BuildingInfo\": \"wallstreet\"\r\n    },\r\n    \"Description\": \"all good\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/{{servletname}}/Events",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"{{servletname}}",
+										"Events"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Get Request",
+					"item": [
+						{
+							"name": "Get a entity",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/{{servletname}}/Events",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"{{servletname}}",
+										"Events"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "PublicTransportation",
+			"item": [
+				{
+					"name": "POST Request",
+					"item": [
+						{
+							"name": "post a entity",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"ConfirmationCode\" : \"201\", \"StartsAt\" : \"2014-01-01T12:45:00\", \"EndsAt\" : \"2014-02-01T12:50:00\", \"Duration\" : \"PT10S\", \"SeatNo\" : \"3\"}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/{{servletname}}/PublicTransportations",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"{{servletname}}",
+										"PublicTransportations"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Get Request",
+					"item": [
+						{
+							"name": "get a entity",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/{{servletname}}/PublicTransportations",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"{{servletname}}",
+										"PublicTransportations"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Airline",
+			"item": [
+				{
+					"name": "Post Request",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"AirlineCode\" : \"1\" , \"Name\" : \"Bangalore Airline\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/{{servletname}}/Airlines",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{servletname}}",
+								"Airlines"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get entityset",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Flight",
+			"item": [
+				{
+					"name": "post a flight",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Get a entity",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Employee",
+			"item": [
+				{
+					"name": "Post Request",
+					"item": [
+						{
+							"name": "post a employee",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"Income\": 126.54125,\r\n    \"AddressInfo\": [\r\n        {\r\n            \"Address\": \"Marathali bangalore 520100\",\r\n            \"Code\": 520100,\r\n            \"City\": {\r\n                \"CountryRegion\": \"India\",\r\n                \"Name\": \"Bengaluru\",\r\n                \"Region\": \"Karnatka\"\r\n            }\r\n        }\r\n    ],\r\n    \"LastName\": \"Whyte\",\r\n    \"Gender\": \"Male\",\r\n    \"Photo\": null,\r\n    \"DateOfBirth\": \"2014-05-01\",\r\n    \"UserName\": \"employee1\",\r\n    \"Emails\": [\r\n        \"russell.whyte2@gmail.com\"\r\n    ],\r\n    \"Features\": [\r\n        \"Feature2\",\r\n        \"Feature3\"\r\n    ],\r\n    \"FirstName\": \"Russell\",\r\n    \"FavoriteFeature\": \"Feature3\",\r\n    \"Friend\": \"russellwhyte\",\r\n    \"MiddleName\": null,\r\n    \"Age\": 25,\r\n    \"HomeAddress\": {\r\n        \"Address\": \"Marathali bangalore 520100\",\r\n        \"Code\": 520100,\r\n        \"City\": {\r\n            \"CountryRegion\": \"India\",\r\n            \"Name\": \"Bengaluru\",\r\n            \"Region\": \"Karnatka\"\r\n        }\r\n    },\r\n    \"Cost\": 12345,\r\n    \"Peers\": [\r\n        {\r\n            \"Income\": 126.54125,\r\n            \"AddressInfo\": [\r\n                {\r\n                    \"Address\": \"Marathali bangalore 520100\",\r\n                    \"Code\": 520100,\r\n                    \"City\": {\r\n                        \"CountryRegion\": \"India\",\r\n                        \"Name\": \"Bengaluru\",\r\n                        \"Region\": \"Karnatka\"\r\n                    }\r\n                }\r\n            ],\r\n            \"LastName\": \"Whyte\",\r\n            \"Gender\": \"Male\",\r\n            \"Photo\": null,\r\n            \"DateOfBirth\": \"2014-05-01\",\r\n            \"UserName\": \"rahuljain\",\r\n            \"Emails\": [\r\n                \"russell.whyte2@gmail.com\"\r\n            ],\r\n            \"Features\": [\r\n                \"Feature2\",\r\n                \"Feature3\"\r\n            ],\r\n            \"FirstName\": \"Russell\",\r\n            \"FavoriteFeature\": \"Feature3\",\r\n            \"Friend\": \"russellwhyte\",\r\n            \"MiddleName\": null,\r\n            \"Age\": 25,\r\n            \"HomeAddress\": {\r\n                \"Address\": \"Marathali bangalore 520100\",\r\n                \"Code\": 520100,\r\n                \"City\": {\r\n                    \"CountryRegion\": \"India\",\r\n                    \"Name\": \"Bengaluru\",\r\n                    \"Region\": \"Karnatka\"\r\n                }\r\n            }\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/{{servletname}}/Employees",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"{{servletname}}",
+										"Employees"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Get Request",
+					"item": [
+						{
+							"name": "Get entityset",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/{{servletname}}/Employee",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"{{servletname}}",
+										"Employee"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Manager",
+			"item": [
+				{
+					"name": "Post Request",
+					"item": [
+						{
+							"name": "Post an Entity",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"Income\": 126.54125,\r\n    \"AddressInfo\": [\r\n        {\r\n            \"Address\": \"Marathali bangalore 520100\",\r\n            \"Code\": 520100,\r\n            \"City\": {\r\n                \"CountryRegion\": \"India\",\r\n                \"Name\": \"Bengaluru\",\r\n                \"Region\": \"Karnatka\"\r\n            }\r\n        }\r\n    ],\r\n    \"LastName\": \"Whyte\",\r\n    \"Gender\": \"Male\",\r\n    \"Photo\": null,\r\n    \"DateOfBirth\": \"2014-05-01\",\r\n    \"UserName\": \"manager1\",\r\n    \"Emails\": [\r\n        \"russell.whyte2@gmail.com\"\r\n    ],\r\n    \"Features\": [\r\n        \"Feature2\",\r\n        \"Feature3\"\r\n    ],\r\n    \"FirstName\": \"Russell\",\r\n    \"FavoriteFeature\": \"Feature3\",\r\n    \"Friend\": \"russellwhyte\",\r\n    \"MiddleName\": null,\r\n    \"Age\": 25,\r\n    \"HomeAddress\": {\r\n        \"Address\": \"Marathali bangalore 520100\",\r\n        \"Code\": 520100,\r\n        \"City\": {\r\n            \"CountryRegion\": \"India\",\r\n            \"Name\": \"Bengaluru\",\r\n            \"Region\": \"Karnatka\"\r\n        }\r\n    },\r\n    \"Budget\": 12345,\r\n    \"BossOffice\": {\r\n        \"Address\": \"Marathali bangalore 520100\",\r\n        \"Code\": 520100,\r\n        \"City\": {\r\n            \"CountryRegion\": \"India\",\r\n            \"Name\": \"Bengaluru\",\r\n            \"Region\": \"Karnatka\"\r\n        }\r\n    },\r\n    \"DirectReports\": [\r\n        {\r\n            \"Income\": 126.54125,\r\n            \"AddressInfo\": [\r\n                {\r\n                    \"Address\": \"Marathali bangalore 520100\",\r\n                    \"Code\": 520100,\r\n                    \"City\": {\r\n                        \"CountryRegion\": \"India\",\r\n                        \"Name\": \"Bengaluru\",\r\n                        \"Region\": \"Karnatka\"\r\n                    }\r\n                }\r\n            ],\r\n            \"LastName\": \"Whyte\",\r\n            \"Gender\": \"Male\",\r\n            \"Photo\": null,\r\n            \"DateOfBirth\": \"2014-05-01\",\r\n            \"UserName\": \"employee2\",\r\n            \"Emails\": [\r\n                \"russell.whyte2@gmail.com\"\r\n            ],\r\n            \"Features\": [\r\n                \"Feature2\",\r\n                \"Feature3\"\r\n            ],\r\n            \"FirstName\": \"Russell\",\r\n            \"FavoriteFeature\": \"Feature3\",\r\n            \"Friend\": \"russellwhyte\",\r\n            \"MiddleName\": null,\r\n            \"Age\": 25,\r\n            \"HomeAddress\": {\r\n                \"Address\": \"Marathali bangalore 520100\",\r\n                \"Code\": 520100,\r\n                \"City\": {\r\n                    \"CountryRegion\": \"India\",\r\n                    \"Name\": \"Bengaluru\",\r\n                    \"Region\": \"Karnatka\"\r\n                }\r\n            }\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/{{servletname}}/Managers",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"{{servletname}}",
+										"Managers"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Get Request",
+					"item": [
+						{
+							"name": "Get entity set",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/{{servletname}}/Managers",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"{{servletname}}",
+										"Managers"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "functions",
+			"item": [
+				{
+					"name": "function GetPersonWithMostFriends()",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "function GetNearestAirport",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "metadata request",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/{{servletname}}/$metadata",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"{{servletname}}",
+						"$metadata"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
