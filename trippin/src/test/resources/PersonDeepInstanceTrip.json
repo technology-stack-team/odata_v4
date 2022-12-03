@@ -1,0 +1,59 @@
+{
+  "Income": 126.54125,
+  "AddressInfo": [
+    {
+      "Address": "Marathalibangalore520100",
+      "Code": 520100,
+      "City": {
+        "CountryRegion": "India",
+        "Name": "Bengaluru",
+        "Region": "Karnatka"
+      }
+    }
+  ],
+  "LastName": "Whyte",
+  "Gender": "Male",
+  "Photo": null,
+  "DateOfBirth": "2014-05-01",
+  "UserName": "lewisblack1",
+  "Emails": [
+    "russell.whyte2@gmail.com"
+  ],
+  "Features": [
+    "Feature2",
+    "Feature3"
+  ],
+  "FirstName": "Russell",
+  "FavoriteFeature": "Feature3",
+  "MiddleName": null,
+  "Age": 25,
+  "HomeAddress": {
+    "Address": "Marathalibangalore520100",
+    "Code": 520100,
+    "City": {
+      "CountryRegion": "India",
+      "Name": "Bengaluru",
+      "Region": "Karnatka"
+    }
+  },
+  "Trips": [
+    {
+      "Name": "TripinFRANCE",
+      "StartsAt": "2014-01-01T07:15:00Z",
+      "Description": "TripfromParistoNewYorkCity",
+      "TripId": 3,
+      "UserName": "lewisblack1",
+      "EndsAt": "2014-02-01T07:15:00Z",
+      "Budget": null
+    },
+    {
+      "Name": "TripinUS",
+      "StartsAt": "2014-01-01T07:15:00Z",
+      "Description": "TripfromSanFranciscotoNewYorkCity",
+      "TripId": 4,
+      "UserName": "lewisblack1",
+      "EndsAt": "2014-02-01T07:15:00Z",
+      "Budget": null
+    }
+  ]
+}

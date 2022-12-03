@@ -1,0 +1,37 @@
+{
+  "UserName": "danzoblack1",
+  "FirstName": "Danzo",
+  "LastName": "Black",
+  "Income": 1234.543,
+  "DateOfBirth": "2016-01-01",
+  "Gender": "Male",
+  "Emails": [
+    "lewisblack@example.com"
+  ],
+  "Age": 56,
+  "AddressInfo": [
+    {
+      "Address": "187SuffolkLn.",
+      "City": {
+        "Name": "Boise",
+        "CountryRegion": "UnitedStates",
+        "Region": "ID"
+      }
+    }
+  ],
+  "FavoriteFeature": "Feature1",
+  "Features": [
+    "Feature1",
+    "Feature2",
+    "Feature3"
+  ],
+  "HomeAddress": {
+    "Address": "187SuffolkLn.",
+    "City": {
+      "Name": "Boise",
+      "CountryRegion": "UnitedStates",
+      "Region": "ID"
+    },
+    "Code": 123
+  }
+}

@@ -9,7 +9,7 @@ logging:
 odata:
   jpa:
     punit_name: Trippin
-    root_packages: org.example.trippin
+    root_packages: com.refapps.trippin
 server:
   port: 8080
 spring:
