@@ -2,7 +2,12 @@ package com.refapps.trippin.model;
 
 import lombok.Data;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.Table;
 
 @Entity(name = "AbstractPerson")
 @Table(name = "\"Person\"", schema =  "\"Trippin\"")
