@@ -26,9 +26,4 @@
 
         </createTable>
     </changeSet>
-<!--    <changeSet id="v1-07-02" author="rahul-jain">-->
-<!--        <sql>-->
-<!--            insert into "${schemaName}"."Airport" values ( 'KSFO' , 'INDIGO', 'KSFR',  '{ "x": 11.235, "y" : 23.242, "z" : 36.353}', 11.234,45.354, false);-->
-<!--        </sql>-->
-<!--    </changeSet>-->
 </databaseChangeLog>

@@ -23,10 +23,5 @@
         <addForeignKeyConstraint baseTableSchemaName="${schemaName}" baseTableName="PersonEmail" baseColumnNames="UserName" constraintName="Person_PersonEmail_fk" referencedTableName="Person"
                                  referencedColumnNames="UserName" referencedTableSchemaName="${schemaName}"/>
     </changeSet>
-<!--    <changeSet id="v1-03-03" author="rahul-jain">-->
-<!--        <sql>-->
-<!--            insert into "${schemaName}"."PersonEmail" values ( 'russellwhyte' , 'russell.whyte2@gmail.com');-->
-<!--        </sql>-->
-<!--    </changeSet>-->
 </databaseChangeLog>
 

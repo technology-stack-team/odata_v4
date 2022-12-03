@@ -45,15 +45,4 @@
             </column>
         </createTable>
     </changeSet>
-<!--    <changeSet id="v1-01-02" author="rahul-jain">-->
-<!--        <sql>-->
-<!--            insert into ${schemaName}.Person values ('russellwhyte', 'Russell', 'Whyte', null, 126.54125, '2014-05-01', null,   0, 25, 'Marathali bangalore 520100', 520100, 'Bengaluru', 'India', 'Karnatka', 2, 'russellwhytefriend');-->
-<!--        </sql>-->
-<!--        <sql>-->
-<!--            insert into ${schemaName}.Person values ('russellwhytefriend', 'Russell', 'Whyte', null, 125.54125, '2015-01-01', null,   0, 24,'Marathali bangalore 520100', 520100, 'Bengaluru', 'India', 'Karnatka', 2, 'russellwhyte');-->
-<!--        </sql>-->
-<!--        <sql>-->
-<!--            insert into ${schemaName}.Person values ('russellwhytefriend2', 'Russell', 'Whyte', null, 125.50125, '2014-01-02', null,   0, 50,'Marathali bangalore 520100', 520100, 'Bengaluru', 'India', 'Karnatka', 2, null);-->
-<!--        </sql>-->
-<!--    </changeSet>-->
 </databaseChangeLog>

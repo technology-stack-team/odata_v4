@@ -26,13 +26,5 @@
     <changeSet id="v1-05-03" author="rahul-jain">
         <addUniqueConstraint tableName="PersonFeature" columnNames="UserName,Features" schemaName="${schemaName}"/>
     </changeSet>
-<!--    <changeSet id="v1-05-03" author="rahul-jain">-->
-<!--        <sql>-->
-<!--            insert into "${schemaName}"."PersonFeature" values ( 'russellwhyte' , 1);-->
-<!--        </sql>-->
-<!--&lt;!&ndash;        <sql>&ndash;&gt;-->
-<!--&lt;!&ndash;            insert into ${schemaName}.PersonFeature values ( 'russellwhyte' , 2);&ndash;&gt;-->
-<!--&lt;!&ndash;        </sql>&ndash;&gt;-->
-<!--    </changeSet>-->
 </databaseChangeLog>
 

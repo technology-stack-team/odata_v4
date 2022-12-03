@@ -33,19 +33,5 @@
             <column name="Friend"></column>
         </createIndex>
     </changeSet>
-<!--    <changeSet id="v1-06-04" author="rahul-jain">-->
-<!--        <sql>-->
-<!--            insert into "${schemaName}"."PersonFriend" values ( 'russellwhyte' , 'russellwhytefriend');-->
-<!--        </sql>-->
-<!--        <sql>-->
-<!--            insert into ${schemaName}.PersonFriend values ( 'russellwhyte' , 'russellwhytefriend2');-->
-<!--        </sql>-->
-<!--        <sql>-->
-<!--            insert into ${schemaName}.PersonFriend values ( 'russellwhytefriend' , 'russellwhyte');-->
-<!--        </sql>-->
-<!--        <sql>-->
-<!--            insert into ${schemaName}.PersonFriend values ( 'russellwhytefriend2' , 'russellwhyte');-->
-<!--        </sql>-->
-<!--    </changeSet>-->
 </databaseChangeLog>
 

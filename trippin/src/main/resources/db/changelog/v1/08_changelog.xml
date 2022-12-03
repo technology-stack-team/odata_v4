@@ -36,7 +36,6 @@
             <column name="FlightAirline" type="VARCHAR(250)"/>
             <column name="FlightFrom" type="VARCHAR(250)"/>
             <column name="FlightTo" type="VARCHAR(250)"/>
-<!--            <column name="STATUS_TYPE" type="VARCHAR(50)"/>-->
         </createTable>
     </changeSet>
     <changeSet id="v1-08-02" author="rahul-jain">
@@ -51,9 +50,4 @@
         <addForeignKeyConstraint baseTableName="BasePlanItem" baseColumnNames="FlightFrom" baseTableSchemaName="${schemaName}" constraintName="Flight_Airport_From_fk" referencedTableName="Airport"
                                  referencedColumnNames="IcaoCode" referencedTableSchemaName="${schemaName}"/>
     </changeSet>
-<!--    <changeSet id="v1-08-02" author="rahul-jain">-->
-<!--        <sql>-->
-<!--            insert into" ${schemaName}"."BasePlanItem" values ( 1, 'Event' ,'4hs7cw', '2014-01-01 12:45:00', '2014-02-01 12:50:00', &lt;!&ndash;'P2DT3H4M'&ndash;&gt; 183840, 'Marathali bangalore 520100', 520100, 'Bengaluru', 'India', 'Karnatka', 'nice building', 'HI this is subtype of complex type');-->
-<!--        </sql>-->
-<!--    </changeSet>-->
 </databaseChangeLog>

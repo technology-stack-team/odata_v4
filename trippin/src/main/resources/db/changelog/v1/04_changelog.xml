@@ -10,7 +10,6 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
     <createTable schemaName="${schemaName}"  tableName="PersonAddressInfo">
         <column name="Id" type="SERIAL" autoIncrement="true">
             <constraints  primaryKey="true" primaryKeyName="PersonAddressInfo_pk"/>
-<!--            <constraints primaryKey="true" nullable="false"/>-->
         </column>
         <column name="UserName" type="VARCHAR(250)">
             <constraints nullable="false"/>
@@ -26,9 +25,4 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
         <addForeignKeyConstraint baseTableSchemaName="${schemaName}" baseTableName="PersonAddressInfo" baseColumnNames="UserName" constraintName="Person_PersonAddressInfo_fk" referencedTableName="Person"
                                  referencedColumnNames="UserName" referencedTableSchemaName="${schemaName}"/>
     </changeSet>
-<!--    <changeSet id="v1-04-02" author="rahul-jain">-->
-<!--        <sql>-->
-<!--            insert into "${schemaName}"."PersonAddressInfo" values ( 'russellwhyte' , 'Marathali bangalore 520100', 520100, 'Bengaluru', 'India', 'Karnatka');-->
-<!--        </sql>-->
-<!--    </changeSet>-->
 </databaseChangeLog>

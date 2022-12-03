@@ -30,12 +30,4 @@
         <addForeignKeyConstraint baseTableSchemaName="${schemaName}" baseTableName="Trip" baseColumnNames="UserName" constraintName="Person_Trip_fk" referencedTableName="Person"
                                  referencedColumnNames="UserName" referencedTableSchemaName="${schemaName}"/>
     </changeSet>
-<!--    <changeSet id="v1-02-02" author="rahul-jain">-->
-<!--        <sql>-->
-<!--            insert into "${schemaName}"."Trip"("UserName",&lt;!&ndash;ShareId,&ndash;&gt;"Name","Budget","Description","StartsAt","EndsAt") values ('russellwhyte', &lt;!&ndash;'0000000a-0019-3000-806c-bea5b65658cf',&ndash;&gt; 'Trip in US', 3000, 'Trip from San Francisco to New York City', '2014-01-01 12:45:00', '2014-02-01 12:45:00');-->
-<!--        </sql>-->
-<!--        <sql>-->
-<!--            insert into ${schemaName}.Trip(UserName,&lt;!&ndash;ShareId,&ndash;&gt;Name,Budget,Description,StartsAt,EndsAt) values ('russellwhyte', &lt;!&ndash;'0000000a-0019-3000-806c-bea5b65658cf',&ndash;&gt; 'Trip in FRANCE', 3000, 'Trip from Paris to New York City', '2014-01-01 12:45:00', '2014-02-01 12:45:00');-->
-<!--        </sql>-->
-<!--    </changeSet>-->
 </databaseChangeLog>
