@@ -515,6 +515,30 @@
 							"response": []
 						},
 						{
+							"name": "GET $filter option on a primitive field  with contains",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/{{servletname}}/Persons?$filter=FirstName eq 'Russell'\n",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"{{servletname}}",
+										"Persons"
+									],
+									"query": [
+										{
+											"key": "$filter",
+											"value": "FirstName eq 'Russell'\n"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
 							"name": "Get $filter option on complex type",
 							"request": {
 								"method": "GET",
@@ -953,6 +977,14 @@
 								"header": []
 							},
 							"response": []
+						},
+						{
+							"name": "New Request",
+							"request": {
+								"method": "GET",
+								"header": []
+							},
+							"response": []
 						}
 					]
 				}
@@ -1008,12 +1040,474 @@
 						{
 							"name": "inserting a trip object",
 							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"Name\": \"Trip in US\",\r\n    \"StartsAt\": \"2014-01-01T07:15:00Z\",\r\n    \"Description\": \"Trip from San Francisco to New York City\",\r\n    \"UserName\": \"russellwhyte2\",\r\n    \"EndsAt\": \"2014-02-01T07:15:00Z\",\r\n    \"Budget\": 123.45,\r\n    \"StartTime\" : \"11:12:34\",\r\n    \"EndTime\" : \"12:34:24\",\r\n    \"Tags\" : [\"florida\", \"canada\"]\r\n\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/{{servletname}}/Trips",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"{{servletname}}",
+										"Trips"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Deep insert Post",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"Name\": \"Trip in US\",\r\n    \"StartsAt\": \"2014-01-01T07:15:00Z\",\r\n    \"Description\": \"Trip from San Francisco to New York City\",\r\n    \"UserName\": \"russellwhyte2\",\r\n    \"EndsAt\": \"2014-02-01T07:15:00Z\",\r\n    \"Budget\": 123.45,\r\n    \"StartTime\": \"11:12:34\",\r\n    \"EndTime\": \"12:34:24\",\r\n    \"Tags\": [\r\n        \"florida\",\r\n        \"canada\"\r\n    ],\r\n    \"PlanItems\": [\r\n        {\r\n            \"ConfirmationCode\": \"201\",\r\n            \"StartsAt\": \"2014-01-01T12:45:00\",\r\n            \"EndsAt\": \"2014-02-01T12:50:00\",\r\n            \"Duration\": \"PT10S\"\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/{{servletname}}/Trips",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"{{servletname}}",
+										"Trips"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/{{servletname}}/Trips(1)",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{servletname}}",
+								"Trips(1)"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Airport",
+			"item": [
+				{
+					"name": "Post Request",
+					"item": [
+						{
+							"name": "Create a new entity",
+							"request": {
 								"method": "GET",
 								"header": []
 							},
 							"response": []
 						}
 					]
+				},
+				{
+					"name": "Get entityset",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "PlanItem",
+			"item": [
+				{
+					"name": "POST request",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"ConfirmationCode\" : \"201\", \"StartsAt\" : \"2014-01-01T12:45:00\", \"EndsAt\" : \"2014-02-01T12:50:00\", \"Duration\" : \"PT10S\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/{{servletname}}/PlanItems",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{servletname}}",
+								"PlanItems"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Request",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/{{servletname}}/Events",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{servletname}}",
+								"Events"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Event",
+			"item": [
+				{
+					"name": "Post Re",
+					"item": [
+						{
+							"name": "Post a entity",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"ConfirmationCode\": \"201\",\r\n    \"StartsAt\": \"2014-01-01T12:45:00\",\r\n    \"EndsAt\": \"2014-02-01T12:50:00\",\r\n    \"Duration\": \"PT10S\",\r\n    \"EventLocation\": {\r\n        \"Code\": 2012,\r\n        \"Address\": \"csnasnoianf\",\r\n        \"City\": {\r\n            \"CountryRegion\": \"argentina\",\r\n            \"Name\": \"china\",\r\n            \"Region\": \"africa\"\r\n        },\r\n        \"BuildingInfo\": \"wallstreet\"\r\n    },\r\n    \"Description\": \"all good\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/{{servletname}}/Events",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"{{servletname}}",
+										"Events"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Get Request",
+					"item": [
+						{
+							"name": "Get a entity",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/{{servletname}}/Events",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"{{servletname}}",
+										"Events"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "PublicTransportation",
+			"item": [
+				{
+					"name": "POST Request",
+					"item": [
+						{
+							"name": "post a entity",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"ConfirmationCode\" : \"201\", \"StartsAt\" : \"2014-01-01T12:45:00\", \"EndsAt\" : \"2014-02-01T12:50:00\", \"Duration\" : \"PT10S\", \"SeatNo\" : \"3\"}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/{{servletname}}/PublicTransportations",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"{{servletname}}",
+										"PublicTransportations"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Get Request",
+					"item": [
+						{
+							"name": "get a entity",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/{{servletname}}/PublicTransportations",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"{{servletname}}",
+										"PublicTransportations"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Airline",
+			"item": [
+				{
+					"name": "Post Request",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"AirlineCode\" : \"1\" , \"Name\" : \"Bangalore Airline\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/{{servletname}}/Airlines",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{servletname}}",
+								"Airlines"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get entityset",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Flight",
+			"item": [
+				{
+					"name": "post a flight",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Get a entity",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Employee",
+			"item": [
+				{
+					"name": "Post Request",
+					"item": [
+						{
+							"name": "post a employee",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"Income\": 126.54125,\r\n    \"AddressInfo\": [\r\n        {\r\n            \"Address\": \"Marathali bangalore 520100\",\r\n            \"Code\": 520100,\r\n            \"City\": {\r\n                \"CountryRegion\": \"India\",\r\n                \"Name\": \"Bengaluru\",\r\n                \"Region\": \"Karnatka\"\r\n            }\r\n        }\r\n    ],\r\n    \"LastName\": \"Whyte\",\r\n    \"Gender\": \"Male\",\r\n    \"Photo\": null,\r\n    \"DateOfBirth\": \"2014-05-01\",\r\n    \"UserName\": \"employee1\",\r\n    \"Emails\": [\r\n        \"russell.whyte2@gmail.com\"\r\n    ],\r\n    \"Features\": [\r\n        \"Feature2\",\r\n        \"Feature3\"\r\n    ],\r\n    \"FirstName\": \"Russell\",\r\n    \"FavoriteFeature\": \"Feature3\",\r\n    \"Friend\": \"russellwhyte\",\r\n    \"MiddleName\": null,\r\n    \"Age\": 25,\r\n    \"HomeAddress\": {\r\n        \"Address\": \"Marathali bangalore 520100\",\r\n        \"Code\": 520100,\r\n        \"City\": {\r\n            \"CountryRegion\": \"India\",\r\n            \"Name\": \"Bengaluru\",\r\n            \"Region\": \"Karnatka\"\r\n        }\r\n    },\r\n    \"Cost\": 12345,\r\n    \"Peers\": [\r\n        {\r\n            \"Income\": 126.54125,\r\n            \"AddressInfo\": [\r\n                {\r\n                    \"Address\": \"Marathali bangalore 520100\",\r\n                    \"Code\": 520100,\r\n                    \"City\": {\r\n                        \"CountryRegion\": \"India\",\r\n                        \"Name\": \"Bengaluru\",\r\n                        \"Region\": \"Karnatka\"\r\n                    }\r\n                }\r\n            ],\r\n            \"LastName\": \"Whyte\",\r\n            \"Gender\": \"Male\",\r\n            \"Photo\": null,\r\n            \"DateOfBirth\": \"2014-05-01\",\r\n            \"UserName\": \"rahuljain\",\r\n            \"Emails\": [\r\n                \"russell.whyte2@gmail.com\"\r\n            ],\r\n            \"Features\": [\r\n                \"Feature2\",\r\n                \"Feature3\"\r\n            ],\r\n            \"FirstName\": \"Russell\",\r\n            \"FavoriteFeature\": \"Feature3\",\r\n            \"Friend\": \"russellwhyte\",\r\n            \"MiddleName\": null,\r\n            \"Age\": 25,\r\n            \"HomeAddress\": {\r\n                \"Address\": \"Marathali bangalore 520100\",\r\n                \"Code\": 520100,\r\n                \"City\": {\r\n                    \"CountryRegion\": \"India\",\r\n                    \"Name\": \"Bengaluru\",\r\n                    \"Region\": \"Karnatka\"\r\n                }\r\n            }\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/{{servletname}}/Employees",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"{{servletname}}",
+										"Employees"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Get Request",
+					"item": [
+						{
+							"name": "Get entityset",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/{{servletname}}/Employee",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"{{servletname}}",
+										"Employee"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Manager",
+			"item": [
+				{
+					"name": "Post Request",
+					"item": [
+						{
+							"name": "Post an Entity",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"Income\": 126.54125,\r\n    \"AddressInfo\": [\r\n        {\r\n            \"Address\": \"Marathali bangalore 520100\",\r\n            \"Code\": 520100,\r\n            \"City\": {\r\n                \"CountryRegion\": \"India\",\r\n                \"Name\": \"Bengaluru\",\r\n                \"Region\": \"Karnatka\"\r\n            }\r\n        }\r\n    ],\r\n    \"LastName\": \"Whyte\",\r\n    \"Gender\": \"Male\",\r\n    \"Photo\": null,\r\n    \"DateOfBirth\": \"2014-05-01\",\r\n    \"UserName\": \"manager1\",\r\n    \"Emails\": [\r\n        \"russell.whyte2@gmail.com\"\r\n    ],\r\n    \"Features\": [\r\n        \"Feature2\",\r\n        \"Feature3\"\r\n    ],\r\n    \"FirstName\": \"Russell\",\r\n    \"FavoriteFeature\": \"Feature3\",\r\n    \"Friend\": \"russellwhyte\",\r\n    \"MiddleName\": null,\r\n    \"Age\": 25,\r\n    \"HomeAddress\": {\r\n        \"Address\": \"Marathali bangalore 520100\",\r\n        \"Code\": 520100,\r\n        \"City\": {\r\n            \"CountryRegion\": \"India\",\r\n            \"Name\": \"Bengaluru\",\r\n            \"Region\": \"Karnatka\"\r\n        }\r\n    },\r\n    \"Budget\": 12345,\r\n    \"BossOffice\": {\r\n        \"Address\": \"Marathali bangalore 520100\",\r\n        \"Code\": 520100,\r\n        \"City\": {\r\n            \"CountryRegion\": \"India\",\r\n            \"Name\": \"Bengaluru\",\r\n            \"Region\": \"Karnatka\"\r\n        }\r\n    },\r\n    \"DirectReports\": [\r\n        {\r\n            \"Income\": 126.54125,\r\n            \"AddressInfo\": [\r\n                {\r\n                    \"Address\": \"Marathali bangalore 520100\",\r\n                    \"Code\": 520100,\r\n                    \"City\": {\r\n                        \"CountryRegion\": \"India\",\r\n                        \"Name\": \"Bengaluru\",\r\n                        \"Region\": \"Karnatka\"\r\n                    }\r\n                }\r\n            ],\r\n            \"LastName\": \"Whyte\",\r\n            \"Gender\": \"Male\",\r\n            \"Photo\": null,\r\n            \"DateOfBirth\": \"2014-05-01\",\r\n            \"UserName\": \"employee2\",\r\n            \"Emails\": [\r\n                \"russell.whyte2@gmail.com\"\r\n            ],\r\n            \"Features\": [\r\n                \"Feature2\",\r\n                \"Feature3\"\r\n            ],\r\n            \"FirstName\": \"Russell\",\r\n            \"FavoriteFeature\": \"Feature3\",\r\n            \"Friend\": \"russellwhyte\",\r\n            \"MiddleName\": null,\r\n            \"Age\": 25,\r\n            \"HomeAddress\": {\r\n                \"Address\": \"Marathali bangalore 520100\",\r\n                \"Code\": 520100,\r\n                \"City\": {\r\n                    \"CountryRegion\": \"India\",\r\n                    \"Name\": \"Bengaluru\",\r\n                    \"Region\": \"Karnatka\"\r\n                }\r\n            }\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/{{servletname}}/Managers",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"{{servletname}}",
+										"Managers"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Get Request",
+					"item": [
+						{
+							"name": "Get entity set",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/{{servletname}}/Managers",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"{{servletname}}",
+										"Managers"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "functions",
+			"item": [
+				{
+					"name": "function GetPersonWithMostFriends()",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "function GetNearestAirport",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
 				}
 			]
 		},

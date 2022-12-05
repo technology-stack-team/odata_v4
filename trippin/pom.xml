@@ -3,7 +3,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.example</groupId>
+	<groupId>com.refapps</groupId>
 	<artifactId>trippin</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<properties>
@@ -13,7 +13,7 @@
 	</properties>
 	<parent>
 		<groupId>org.replicia</groupId>
-		<artifactId>odata-spring</artifactId>
+		<artifactId>odata-v4-spring</artifactId>
 		<version>1.0.9-SNAPSHOT</version>
 	</parent>
 	<url>https://github.com/SAP/olingo-jpa-processor-v4</url>
@@ -140,20 +140,20 @@
 			</plugin>
 		</plugins>
 	</build>
-	<profiles>
-		<profile>
-			<id>dev</id>
-			<build>
-			<filters>
-				<filter>src/main/filters/dev/db.properties</filter>
-			</filters>
-			<resources>
-				<resource>
-					<directory>src/main/resources</directory>
-					<filtering>true</filtering>
-				</resource>
-			</resources>
-			</build>
-		</profile>
-	</profiles>
+<!--	<profiles>-->
+<!--		<profile>-->
+<!--			<id>dev</id>-->
+<!--			<build>-->
+<!--			<filters>-->
+<!--				<filter>src/main/filters/dev/db.properties</filter>-->
+<!--			</filters>-->
+<!--			<resources>-->
+<!--				<resource>-->
+<!--					<directory>src/main/resources</directory>-->
+<!--					<filtering>true</filtering>-->
+<!--				</resource>-->
+<!--			</resources>-->
+<!--			</build>-->
+<!--		</profile>-->
+<!--	</profiles>-->
 </project>

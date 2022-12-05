@@ -14,3 +14,10 @@ docker-compose stop app
 Step to shutdown the application
 docker-compose down app
 ################
+
+
+To run Testcases:
+mvn verify
+
+To compile
+mvn clean install -DnoTest=true

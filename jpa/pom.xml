@@ -11,7 +11,7 @@
     <url>https://github.com/SAP/olingo-jpa-processor-v4</url>
     <parent>
         <groupId>org.replicia</groupId>
-        <artifactId>odata-spring</artifactId>
+        <artifactId>odata-v4-spring</artifactId>
         <version>1.0.9-SNAPSHOT</version>
     </parent>
     <profiles>
