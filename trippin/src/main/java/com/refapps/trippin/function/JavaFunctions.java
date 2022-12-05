@@ -10,9 +10,6 @@ import com.refapps.trippin.repository.AirportRepository;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.EntityManager;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 @Component
@@ -49,11 +46,11 @@ public class JavaFunctions implements ODataFunction {
         return (latitude - lat) + (longitude - lon);
     }
 
-    @EdmFunction(name = "GetPersonTrips", isBound = false, returnType = @EdmFunction.ReturnType(isCollection = true, type = Trip.class), hasFunctionImport = true)
-    public List<Trip> getPersonTrips(
-            @EdmParameter(name = "person") final Person person) {
-        return person.getTrips();
-    }
+//    @EdmFunction(name = "GetPersonTrips", isBound = false, returnType = @EdmFunction.ReturnType(isCollection = true, type = Trip.class), hasFunctionImport = true)
+//    public List<Trip> getPersonTrips(
+//            @EdmParameter(name = "person") final Person person) {
+//        return person.getTrips();
+//    }
 
 
 }
