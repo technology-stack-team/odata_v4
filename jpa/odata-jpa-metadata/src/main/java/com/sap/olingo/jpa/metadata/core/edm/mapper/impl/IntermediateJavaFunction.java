@@ -127,8 +127,7 @@ class IntermediateJavaFunction extends IntermediateFunction implements JPAJavaFu
   protected CsdlReturnType determineEdmResultType(final ReturnType definedReturnType) throws ODataJPAModelException {
     final CsdlReturnType edmResultType = new CsdlReturnType();
     final Class<?> declaredReturnType = javaFunction.getReturnType();
-
-    if (IntermediateOperationHelper.isCollection(declaredReturnType)) {
+    if (IntermediateOperationHelper.isCollection(declaredReturnType) || definedReturnType.isCollection()) {
       if (definedReturnType.type() == Object.class)
         // Type parameter expected for %1$s
         throw new ODataJPAModelException(MessageKeys.FUNC_RETURN_TYPE_EXP, javaFunction.getName());
@@ -180,11 +179,13 @@ class IntermediateJavaFunction extends IntermediateFunction implements JPAJavaFu
     final EdmPrimitiveTypeKind edmType = JPATypeConverter.convertToEdmSimpleType(type);
     if (edmType != null)
       return edmType.getFullQualifiedName();
-    else {
-      final IntermediateEnumerationType enumType = schema.getEnumerationType(type);
-      if (enumType != null) {
-        return enumType.getExternalFQN();
-      } else
+    else if(schema.getEnumerationType(type) != null) {
+      return schema.getEnumerationType(type).getExternalFQN();
+    } else {
+      final IntermediateStructuredType<?> entityType = schema.getEntityType(type);
+      if(entityType != null)
+        return entityType.getExternalFQN();
+      else
         throw new ODataJPAModelException(ODataJPAModelException.MessageKeys.FUNC_PARAM_ONLY_PRIMITIVE, javaFunction
             .getDeclaringClass().getName(), javaFunction.getName(), definedParameter.name());
     }
