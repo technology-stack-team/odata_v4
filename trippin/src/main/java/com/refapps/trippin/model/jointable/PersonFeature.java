@@ -1,9 +1,18 @@
 package com.refapps.trippin.model.jointable;
 
+import com.refapps.trippin.converter.FeaturesConverter;
 import lombok.Data;
 import com.refapps.trippin.enums.Feature;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Convert;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity(name = "PersonFeature")
 @Table(schema = "\"Trippin\"", name = "\"PersonFeature\"")
@@ -21,5 +30,6 @@ public class PersonFeature {
 
     @Column(name = "\"Features\"")
     @Enumerated(value = EnumType.ORDINAL)
+    @Convert(converter = FeaturesConverter.class)
     private Feature feature;
 }

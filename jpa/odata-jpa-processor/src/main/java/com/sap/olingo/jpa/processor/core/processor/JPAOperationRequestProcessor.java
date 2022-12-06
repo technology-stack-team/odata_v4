@@ -109,8 +109,13 @@ abstract class JPAOperationRequestProcessor extends JPAAbstractRequestProcessor 
       resultList.addAll((Collection<?>) result);
     else if (result == null)
       return null;
-    else
-      resultList.add(result);
+    else {
+      if(!(result instanceof List)) {
+        resultList.add(result);
+      } else {
+        resultList.add(((List<?>) result).get(0));
+      }
+    }
     try {
       return new JPAEntityResultConverter(createUriHelper, sd, resultList, returnType).getResult();
     } catch (SerializerException | ODataJPAModelException | URISyntaxException e) {

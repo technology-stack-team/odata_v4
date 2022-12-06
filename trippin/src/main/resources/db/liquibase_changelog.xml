@@ -46,6 +46,10 @@
             </column>
         </createTable>
     </changeSet>
+    <changeSet id="v1-01-02" author="rahul-jain">
+        <addForeignKeyConstraint baseTableName="Person" baseTableSchemaName="${schemaName}" baseColumnNames="Friend" constraintName="BestFriend_fk" referencedTableName="Person"
+                                 referencedColumnNames="UserName" referencedTableSchemaName="${schemaName}"/>
+    </changeSet>
     <changeSet id="v1-02-01" author="rahul-jain">
         <createTable  schemaName="${schemaName}" tableName="Trip">
             <column name="TripId" type="SERIAL" autoIncrement="true">
@@ -254,5 +258,14 @@
     <changeSet id="v2-02-03" author="rahul-jain">
         <addForeignKeyConstraint baseTableSchemaName="${schemaName}" baseTableName="TripPlanItem" baseColumnNames="PlanItemId" constraintName="Trip_PlanItem_fk" referencedTableName="BasePlanItem"
                                  referencedColumnNames="PlanItemId" referencedTableSchemaName="${schemaName}"/>
+    </changeSet>
+    <changeSet id="v2-03-01" author="rahul-jain">
+        <createProcedure catalogName="PERSON_WITH_MOST_FRIENDS"
+                         dbms="postgresql"
+                         encoding="utf8"
+                         path="db/functions.sql"
+                         procedureName="PERSON_WITH_MOST_FRIENDS"
+                         relativeToChangelogFile="true"
+                         schemaName="${schemaName}"></createProcedure>
     </changeSet>
 </databaseChangeLog>

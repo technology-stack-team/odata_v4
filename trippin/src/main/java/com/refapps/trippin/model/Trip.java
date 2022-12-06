@@ -28,7 +28,6 @@ public class Trip {
   @Id
   @Column(name = "\"TripId\"")
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-//  @SequenceGenerator(name = "\"TripId\"", sequenceName = "Trippin.TripId", allocationSize = 1)
   private Integer tripId;
 
   @Column(name = "\"UserName\"")

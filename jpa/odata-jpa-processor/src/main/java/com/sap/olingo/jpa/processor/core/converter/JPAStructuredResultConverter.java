@@ -146,7 +146,12 @@ public abstract class JPAStructuredResultConverter {
         collection.add(values);
       }
     } else if (odataValue != null) {
-      collection.addAll(odataValue);
+      if(attribute.getConverter() != null) {
+        final AttributeConverter attributeConverter = attribute.getConverter();
+        odataValue.stream().forEach((v) -> { collection.add(attributeConverter.convertToDatabaseColumn(v));});
+      } else {
+        collection.addAll(odataValue);
+      }
     }
     properties.add(new Property(
         attribute.getExternalFQN().getFullQualifiedNameAsString(),

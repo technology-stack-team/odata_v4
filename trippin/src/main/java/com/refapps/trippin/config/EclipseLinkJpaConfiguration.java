@@ -60,7 +60,7 @@ public class EclipseLinkJpaConfiguration extends JpaBaseConfiguration {
     return jpaProperties;
   }
   
-  @Bean
+  @Bean("entityManagerFactory")
   public LocalContainerEntityManagerFactoryBean customerEntityManagerFactory(
       final EntityManagerFactoryBuilder builder, @Autowired final DataSource ds) {
 
