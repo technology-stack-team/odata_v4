@@ -4,12 +4,15 @@ import static com.sap.olingo.jpa.processor.core.exception.ODataJPAProcessorExcep
 import static com.sap.olingo.jpa.processor.core.exception.ODataJPAProcessorException.MessageKeys.FUNCTION_UNKNOWN;
 
 import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Parameter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Id;
 
 import org.apache.olingo.commons.api.data.Annotatable;
 import org.apache.olingo.commons.api.edm.EdmFunction;
@@ -40,6 +43,8 @@ import com.sap.olingo.jpa.processor.core.api.JPAODataDatabaseProcessor;
 import com.sap.olingo.jpa.processor.core.api.JPAODataRequestContextAccess;
 import com.sap.olingo.jpa.processor.core.exception.ODataJPADBAdaptorException;
 import com.sap.olingo.jpa.processor.core.exception.ODataJPAProcessorException;
+import org.apache.olingo.server.api.uri.queryoption.AliasQueryOption;
+import org.apache.olingo.server.core.uri.UriInfoImpl;
 
 /**
  * Functions as User Defined Functions, Native Query, as Criteria Builder does not provide the option to used UDFs in
@@ -63,13 +68,16 @@ public final class JPAFunctionRequestProcessor extends JPAOperationRequestProces
 
     final UriResourceFunction uriResourceFunction =
         (UriResourceFunction) uriInfo.getUriResourceParts().get(uriInfo.getUriResourceParts().size() - 1);
+    AliasQueryOption aliasQueryOption = null;
+    if(((UriInfoImpl) uriInfo).getAliases() != null && ((UriInfoImpl) uriInfo).getAliases().size() > 0)
+     aliasQueryOption = ((UriInfoImpl) uriInfo).getAliases().get(((UriInfoImpl) uriInfo).getAliases().size()-1);
     final JPAFunction jpaFunction = sd.getFunction(uriResourceFunction.getFunction());
     if (jpaFunction == null)
       throw new ODataJPAProcessorException(FUNCTION_UNKNOWN, HttpStatusCode.BAD_REQUEST, uriResourceFunction
           .getFunction().getName());
     Object result = null;
     if (jpaFunction.getFunctionType() == EdmFunctionType.JavaClass) {
-      result = processJavaFunction(uriResourceFunction, (JPAJavaFunction) jpaFunction, em);
+      result = processJavaFunction(uriResourceFunction, (JPAJavaFunction) jpaFunction, em, aliasQueryOption);
 
     } else if (jpaFunction.getFunctionType() == EdmFunctionType.UserDefinedFunction) {
       result = processJavaUDF(uriInfo.getUriResourceParts(), (JPADataBaseFunction) jpaFunction);
@@ -107,11 +115,11 @@ public final class JPAFunctionRequestProcessor extends JPAOperationRequestProces
   }
 
   private Object processJavaFunction(final UriResourceFunction uriResourceFunction, final JPAJavaFunction jpaFunction,
-      final EntityManager em) throws ODataApplicationException {
+                                     final EntityManager em, final AliasQueryOption aliasQueryOption) throws ODataApplicationException {
 
     try {
       final Object instance = createInstance(em, jpaFunction);
-      final List<Object> parameter = fillParameter(uriResourceFunction, jpaFunction);
+      final List<Object> parameter = fillParameter(uriResourceFunction, jpaFunction, aliasQueryOption);
 
       return jpaFunction.getMethod().invoke(instance, parameter.toArray());
     } catch (InstantiationException | IllegalAccessException | IllegalArgumentException | ODataJPAModelException e) {
@@ -136,7 +144,7 @@ public final class JPAFunctionRequestProcessor extends JPAOperationRequestProces
       return c.newInstance();
   }
 
-  private List<Object> fillParameter(final UriResourceFunction uriResourceFunction, final JPAJavaFunction jpaFunction)
+  private List<Object> fillParameter(final UriResourceFunction uriResourceFunction, final JPAJavaFunction jpaFunction, final AliasQueryOption aliasQueryOption)
       throws ODataJPAModelException, ODataApplicationException {
 
     final Parameter[] methodParameter = jpaFunction.getMethod().getParameters();
@@ -145,7 +153,34 @@ public final class JPAFunctionRequestProcessor extends JPAOperationRequestProces
       for (final UriParameter providedParameter : uriResourceFunction.getParameters()) {
         final JPAParameter jpaParameter = jpaFunction.getParameter(declaredParameter.getName());
         if (jpaParameter.getName().equals(providedParameter.getName())) {
-          parameter.add(getValue(uriResourceFunction.getFunction(), jpaParameter, providedParameter.getText()));
+          if(providedParameter.getText() == null && aliasQueryOption != null && aliasQueryOption.getName().equals(providedParameter.getAlias())) {
+              String id = aliasQueryOption.getText();
+              Object idField = null;
+              ArrayList<Field> fieldsList = new ArrayList<>();
+              Class type = declaredParameter.getType();
+              while(!type.isAssignableFrom(Object.class)) {
+                fieldsList.addAll(Arrays.asList(type.getDeclaredFields()));
+                type = type.getSuperclass();
+              }
+              if(fieldsList != null) {
+                for(Field field : fieldsList)
+                  if(field.getAnnotation(Id.class) != null) {
+                    if(field.getType().isAssignableFrom(Integer.class))
+                        idField = new Integer(id);
+                    else if(field.getType().isAssignableFrom(Long.class))
+                        idField = new Long(id);
+                    else if(field.getType().isAssignableFrom(String.class))
+                       idField = id;
+                    else if(field.getType().isAssignableFrom(Short.class))
+                      idField = new Short(id);
+                  }
+              }
+              if(idField == null)
+                throw new ODataJPAModelException(ODataJPAModelException.MessageKeys.TYPE_NOT_SUPPORTED);
+              Object instance = em.find(declaredParameter.getType(), idField);
+              parameter.add(instance);
+          } else
+            parameter.add(getValue(uriResourceFunction.getFunction(), jpaParameter, providedParameter.getText()));
           break;
         }
       }

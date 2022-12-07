@@ -1186,6 +1186,14 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Post Request",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
 				}
 			]
 		},
@@ -1506,6 +1514,62 @@
 					"request": {
 						"method": "GET",
 						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "function GetPersonTrips",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "function GetPersonAllTripItems",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/{{servletname}}/GetPersonAllTripItems(Person=@x,TripNameSearchText='US')?@x=russellwhyte8",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{servletname}}",
+								"GetPersonAllTripItems(Person=@x,TripNameSearchText='US')"
+							],
+							"query": [
+								{
+									"key": "@x",
+									"value": "russellwhyte8"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "function GetTripPlanItems",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/{{servletname}}/GetTripItems(Trip=@x)?@x=1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{servletname}}",
+								"GetTripItems(Trip=@x)"
+							],
+							"query": [
+								{
+									"key": "@x",
+									"value": "1"
+								}
+							]
+						}
 					},
 					"response": []
 				}
