@@ -6,7 +6,7 @@ This is a base spring boot project containing sap jpa processor v4 support. This
 
 ##############
 Step to run this application
-docker-compose up
+docker-compose up -d
 
 Step to stop the application
 docker-compose stop app

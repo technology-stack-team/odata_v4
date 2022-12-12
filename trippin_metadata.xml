@@ -26,7 +26,7 @@
                 
 				<NavigationProperty Name="Friends" Type="Collection(Trippin.Person)" />
                 <NavigationProperty Name="BestFriend" Type="Trippin.Person" />
-                <NavigationProperty Name="Trips" Type="Collection(Trippin.Trip)" />
+                <NavigationProperty Name="Trips" Type="Collection(Trippin.Trip)" Partner="Travellers"/>
 				
             </EntityType>
             <EntityType Name="Airline">
@@ -83,6 +83,7 @@
 				<Property Name="StartTime" Type="Edm.TimeOfDay" Nullable="true" />
 				<Property Name="EndTime" Type="Edm.TimeOfDay" Nullable="true" />
 				
+				<NavigationProperty Name="Travellers" Type="Collection(Trippin.Person)" Partner="Trips"/>
                 <NavigationProperty Name="PlanItems" Type="Collection(Trippin.PlanItem)" />
             </EntityType>
             <EntityType Name="PlanItem">
