@@ -1,10 +1,5 @@
 package com.sap.olingo.jpa.processor.core.api.example;
 
-import static com.sap.olingo.jpa.processor.core.api.example.JPAExampleModifyException.MessageKeys.ENTITY_ALREADY_EXISTS;
-import static com.sap.olingo.jpa.processor.core.api.example.JPAExampleModifyException.MessageKeys.ENTITY_NOT_FOUND;
-import static com.sap.olingo.jpa.processor.core.api.example.JPAExampleModifyException.MessageKeys.MODIFY_NOT_ALLOWED;
-import static com.sap.olingo.jpa.processor.core.api.example.JPAExampleModifyException.MessageKeys.WILDCARD_RANGE_NOT_SUPPORTED;
-
 import java.lang.reflect.AnnotatedElement;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -45,6 +40,8 @@ import com.sap.olingo.jpa.processor.core.modify.JPAUpdateResult;
 import com.sap.olingo.jpa.processor.core.processor.JPAModifyUtil;
 import com.sap.olingo.jpa.processor.core.processor.JPARequestEntity;
 import com.sap.olingo.jpa.processor.core.processor.JPARequestLink;
+
+import static com.sap.olingo.jpa.processor.core.api.example.JPAExampleModifyException.MessageKeys.*;
 
 /**
  * Example implementation at a CUD handler. The main purpose is rapid prototyping.<p/>
@@ -99,6 +96,7 @@ public class JPAExampleCUDRequestHandler extends JPAAbstractCUDRequestHandler {
     final Object instance = em.find(requestEntity.getEntityType().getTypeClass(),
         requestEntity.getModifyUtil().createPrimaryKey(requestEntity.getEntityType(), requestEntity.getKeys(),
             requestEntity.getEntityType()));
+    validateETag(requestEntity, instance);
     if (instance != null)
       em.remove(instance);
   }
@@ -111,12 +109,29 @@ public class JPAExampleCUDRequestHandler extends JPAAbstractCUDRequestHandler {
       final Object instance = em.find(requestEntity.getEntityType().getTypeClass(), requestEntity.getModifyUtil()
           .createPrimaryKey(requestEntity.getEntityType(), requestEntity.getKeys(), requestEntity.getEntityType()));
       if (instance == null) throw new JPAExampleModifyException(ENTITY_NOT_FOUND, HttpStatusCode.NOT_FOUND);
+      validateETag(requestEntity, instance);
       requestEntity.getModifyUtil().setAttributesDeep(requestEntity.getData(), instance, requestEntity.getEntityType());
       updateLinks(requestEntity, em, instance);
       setAuditInformation(instance, requestEntity.getClaims(), false);
       return new JPAUpdateResult(false, instance);
     }
     return super.updateEntity(requestEntity, em, method);
+  }
+
+  private static void validateETag(JPARequestEntity requestEntity, Object instance) throws JPAExampleModifyException {
+    try {
+      if(requestEntity.getAllHeader() != null &&
+          requestEntity.getAllHeader().containsKey("if-match") &&
+          requestEntity.getAllHeader().get("if-match") != null &&
+          !requestEntity.getAllHeader().get("if-match").isEmpty() &&
+          instance!= null &&
+          instance.getClass().getMethod("getETag") != null &&
+          !requestEntity.getAllHeader().get("if-match").get(0).equals(instance.getClass().getMethod("getETag").invoke(instance).toString())) {
+        throw new JPAExampleModifyException(ENTITY_NOT_FOUND_WITH_ETAG, HttpStatusCode.NOT_FOUND);
+      }
+    } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
+      throw new JPAExampleModifyException(ENTITY_NOT_FOUND_WITH_ETAG, HttpStatusCode.NOT_FOUND);
+    }
   }
 
   @Override

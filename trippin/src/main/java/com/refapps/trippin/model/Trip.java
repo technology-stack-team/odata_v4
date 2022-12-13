@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -29,9 +30,6 @@ public class Trip {
   @Column(name = "\"TripId\"")
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer tripId;
-
-  @Column(name = "\"UserName\"")
-  private String userName;
 
 //  @Column(name = "ShareId")
 //  @Convert(converter = UUIDToByteConverter.class)
@@ -74,4 +72,11 @@ public class Trip {
           joinColumns = @JoinColumn( name="\"TripId\""),
           inverseJoinColumns = @JoinColumn( name="\"PlanItemId\""), schema = "\"Trippin\"")
   private List<PlanItem> planItems = new ArrayList<>();
+
+  @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.MERGE})
+  @JoinTable(
+          name="\"PersonTrip\"",
+          joinColumns = @JoinColumn( name="\"TripId\""),
+          inverseJoinColumns = @JoinColumn( name="\"UserName\""), schema = "\"Trippin\"")
+  private List<Person> travellers = new ArrayList<>();
 }

@@ -9,7 +9,7 @@ import javax.persistence.Entity;
 public class PlanItem extends BasePlanItem{
     public PlanItem() {
         super();
-        dType = "1";
+        type = "1";
     }
 
 }

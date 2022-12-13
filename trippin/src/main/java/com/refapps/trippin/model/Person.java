@@ -87,7 +87,10 @@ public class Person extends AbstractPerson {
   private List<String> emails = new ArrayList<>();
 
   @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.MERGE})
-  @JoinColumn(name = "\"UserName\"", insertable = false, updatable = false)
+  @JoinTable(
+          name="\"PersonTrip\"",
+          joinColumns = @JoinColumn( name="\"UserName\""),
+          inverseJoinColumns = @JoinColumn(name = "\"TripId\""),schema = "\"Trippin\"")
   private List<Trip> trips = new ArrayList<>();
 
   @Override

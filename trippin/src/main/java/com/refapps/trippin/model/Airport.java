@@ -8,6 +8,7 @@ import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Version;
 
 @Entity(name = "Airport")
 @Table(name = "\"Airport\"",  schema =  "\"Trippin\"")
@@ -16,6 +17,11 @@ public class Airport {
     @Id
     @Column(name = "\"IcaoCode\"", nullable = false)
     private String icaoCode;
+
+    @Version
+    @Column(name = "\"ETag\"", nullable = false)
+    protected long eTag;
+
     @Column(name = "\"Name\"")
     private String name;
     @Column(name = "\"IataCode\"")

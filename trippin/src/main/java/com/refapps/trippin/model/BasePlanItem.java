@@ -21,7 +21,7 @@ import java.util.Date;
 @Table(name = "\"BasePlanItem\"", schema =  "\"Trippin\"")
 @Data
 @Inheritance
-@DiscriminatorColumn(name = "\"DType\"")
+@DiscriminatorColumn(name = "\"Type\"")
 public abstract class BasePlanItem {
     public BasePlanItem() {}
 
@@ -41,7 +41,7 @@ public abstract class BasePlanItem {
     @Column(name = "\"Duration\"", nullable = false)
     private Duration duration;
 
-    @Column(name = "\"DType\"", length = 1, insertable = false, updatable = false, nullable = false)
-    protected String dType;
+    @Column(name = "\"Type\"", length = 1, insertable = false, updatable = false, nullable = false)
+    protected String type;
 
 }

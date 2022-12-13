@@ -13,7 +13,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,11 +36,11 @@ public class Manager extends Person{
     private Location bossOffice;
 
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST})
+    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.MERGE})
     @JoinTable(
-            name="\"PersonFriend\"",
+            name="\"ManagerDirectReport\"",
             joinColumns = @JoinColumn( name="\"UserName\""),
-            inverseJoinColumns = @JoinColumn( name="\"Friend\""), schema = "\"Trippin\"")
+            inverseJoinColumns = @JoinColumn( name="\"DirectReport\""), schema = "\"Trippin\"")
     private List<Person> directReports = new ArrayList<>();
 
 }

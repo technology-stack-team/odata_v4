@@ -114,17 +114,19 @@ public class JPAActionRequestProcessor extends JPAOperationRequestProcessor {
       final JPAConversionHelper helper = new JPAConversionHelper();
       final JPAModifyUtil util = new JPAModifyUtil();
       final Constructor<?> c = parameter.getType().getConstructor();
-      final Map<String, Object> jpaAttributes = helper.convertUriKeys(odata, sd.getEntity(entitySet.getEntityType()),
-          entitySet.getKeyPredicates());
+//      final Map<String, Object> jpaAttributes = helper.convertUriKeys(odata, sd.getEntity(entitySet.getEntityType()),
+//          entitySet.getKeyPredicates());
       if (c != null) {
-        final Object param = c.newInstance();
-        util.setAttributesDeep(jpaAttributes, param, sd.getEntity(entitySet.getEntityType()));
+        String primaryKey =  entitySet.getKeyPredicates().get(0).getText();
+        primaryKey = primaryKey.replaceAll("'", "");
+        final Object param = em.find(parameter.getType(), primaryKey);
+//        util.setAttributesDeep(jpaAttributes, param, sd.getEntity(entitySet.getEntityType()));
         return param;
       }
-    } catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException
+    } catch (NoSuchMethodException | SecurityException
         | IllegalArgumentException e) {
       throw new ODataJPAProcessorException(e, HttpStatusCode.INTERNAL_SERVER_ERROR);
-    } catch (final InvocationTargetException e) {
+    } catch (final Exception e) {
       final Throwable cause = e.getCause();
       if (cause instanceof ODataApplicationException) {
         throw (ODataApplicationException) cause;

@@ -50,14 +50,56 @@
         <addForeignKeyConstraint baseTableName="Person" baseTableSchemaName="${schemaName}" baseColumnNames="Friend" constraintName="BestFriend_fk" referencedTableName="Person"
                                  referencedColumnNames="UserName" referencedTableSchemaName="${schemaName}"/>
     </changeSet>
-    <changeSet id="v1-02-01" author="rahul-jain">
-        <createTable  schemaName="${schemaName}" tableName="Trip">
-            <column name="TripId" type="SERIAL" autoIncrement="true">
+    <changeSet id="v1-01-03" author="rahul-jain">
+        <createTable tableName="EmployeePeer" schemaName="${schemaName}">
+            <column name="Id" type="SERIAL" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="UserName" type="VARCHAR(250)">
                 <constraints nullable="false"/>
             </column>
+            <column name="Peer" type="VARCHAR(250)">
+                <constraints nullable="false" checkConstraint="UserName != Peer"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="v1-01-04" author="rahul-jain">
+        <addForeignKeyConstraint baseTableSchemaName="${schemaName}" baseTableName="EmployeePeer" baseColumnNames="UserName" constraintName="EmployeePeer_Manager_fk" referencedTableName="Person"
+                                 referencedColumnNames="UserName" referencedTableSchemaName="${schemaName}"/>
+    </changeSet>
+    <changeSet id="v1-01-05" author="rahul-jain">
+        <addForeignKeyConstraint baseTableSchemaName="${schemaName}" baseTableName="EmployeePeer" baseColumnNames="Peer" constraintName="EmployeePeer_Person_fk" referencedTableName="Person"
+                                 referencedColumnNames="UserName" referencedTableSchemaName="${schemaName}"/>
+    </changeSet>
+    <changeSet id="v1-01-06" author="rahul-jain">
+        <createTable tableName="ManagerDirectReport" schemaName="${schemaName}">
+            <column name="Id" type="SERIAL" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="UserName" type="VARCHAR(250)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DirectReport" type="VARCHAR(250)">
+                <constraints nullable="false" checkConstraint="UserName != Peer"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="v1-01-07" author="rahul-jain">
+        <addForeignKeyConstraint baseTableSchemaName="${schemaName}" baseTableName="ManagerDirectReport" baseColumnNames="UserName" constraintName="ManagerDirectReport_Manager_fk" referencedTableName="Person"
+                                 referencedColumnNames="UserName" referencedTableSchemaName="${schemaName}"/>
+    </changeSet>
+    <changeSet id="v1-01-08" author="rahul-jain">
+        <addForeignKeyConstraint baseTableSchemaName="${schemaName}" baseTableName="ManagerDirectReport" baseColumnNames="DirectReport" constraintName="ManagerDirectReport_Person_fk" referencedTableName="Person"
+                                 referencedColumnNames="UserName" referencedTableSchemaName="${schemaName}"/>
+    </changeSet>
+    <changeSet id="v1-02-01" author="rahul-jain">
+        <createTable  schemaName="${schemaName}" tableName="Trip">
+            <column name="TripId" type="SERIAL" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+<!--            <column name="UserName" type="VARCHAR(250)">-->
+<!--                <constraints nullable="false"/>-->
+<!--            </column>-->
             <!--        <column name="ShareId" type="VARCHAR(100)" >-->
             <!--            <constraints nullable="false"/>-->
             <!--        </column>-->
@@ -71,9 +113,30 @@
         </createTable>
     </changeSet>
     <changeSet id="v1-02-02" author="rahul-jain">
-        <addForeignKeyConstraint baseTableSchemaName="${schemaName}" baseTableName="Trip" baseColumnNames="UserName" constraintName="Person_Trip_fk" referencedTableName="Person"
+        <createTable schemaName="${schemaName}"  tableName="PersonTrip">
+            <column name="Id" type="SERIAL" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="UserName" type="VARCHAR(250)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="TripId" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="v1-02-03" author="rahul-jain">
+        <addForeignKeyConstraint baseTableSchemaName="${schemaName}" baseTableName="PersonTrip" baseColumnNames="UserName" constraintName="Person_PersonTrip_fk" referencedTableName="Person"
                                  referencedColumnNames="UserName" referencedTableSchemaName="${schemaName}"/>
     </changeSet>
+    <changeSet id="v1-02-04" author="rahul-jain">
+        <addForeignKeyConstraint baseTableSchemaName="${schemaName}" baseTableName="PersonTrip" baseColumnNames="TripId" constraintName="Trip_PersonTrip_fk" referencedTableName="Trip"
+                                 referencedColumnNames="TripId" referencedTableSchemaName="${schemaName}"/>
+    </changeSet>
+    <changeSet id="v1-02-05" author="rahul-jain">
+       <addUniqueConstraint tableName="PersonTrip" schemaName="${schemaName}" columnNames="UserName,TripId" />
+    </changeSet>
+
     <changeSet id="v1-03-01" author="rahul-jain">
         <createTable schemaName="${schemaName}"  tableName="PersonEmail">
             <column name="Id" type="SERIAL" autoIncrement="true">
@@ -162,6 +225,9 @@
             <column name="IcaoCode" type="VARCHAR(250)">
                 <constraints primaryKey="true" nullable="false" primaryKeyName="airport_icao_pk"/>
             </column>
+            <column name="ETag" type="BIGINT">
+                <constraints  nullable="false"/>
+            </column>
             <column name="Name" type="VARCHAR(250)"/>
             <column name="IataCode" type="VARCHAR(250)"/>
             <column name="Loc" type="VARCHAR(250)"/>
@@ -190,7 +256,7 @@
             <column name="PlanItemId" type="SERIAL" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="DType" type="VARCHAR(31)"/>
+            <column name="Type" type="VARCHAR(2)"/>
             <column name="ConfirmationCode" type="VARCHAR(250)">
                 <constraints nullable="false"/>
             </column>
