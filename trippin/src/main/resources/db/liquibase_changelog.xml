@@ -334,4 +334,18 @@
                          relativeToChangelogFile="true"
                          schemaName="${schemaName}"></createProcedure>
     </changeSet>
+    <changeSet id="v2-04-01" author="rahul-jain">
+        <createTable tableName="CompositeKeyEntity" schemaName="${schemaName}">
+            <column name="Code" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CodeID" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DivisonCode" type="VARCHAR(30)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addPrimaryKey tableName="CompositeKeyEntity" columnNames="Code,CodeID,DivisonCode" schemaName="${schemaName}"/>
+    </changeSet>
 </databaseChangeLog>

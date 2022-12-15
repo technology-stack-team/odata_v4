@@ -1987,6 +1987,45 @@
 			]
 		},
 		{
+			"name": "CompositeKeyEntity",
+			"item": [
+				{
+					"name": "post a entity",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Get EntitySet",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Get Entity By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/{{servletname}}/CompositeKeyEntities(Code='xxx',CodeID=123,DivisonCode='12456')",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{servletname}}",
+								"CompositeKeyEntities(Code='xxx',CodeID=123,DivisonCode='12456')"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "metadata request",
 			"request": {
 				"method": "GET",
