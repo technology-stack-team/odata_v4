@@ -382,6 +382,14 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "Map Trips to a person",
+							"request": {
+								"method": "GET",
+								"header": []
+							},
+							"response": []
 						}
 					]
 				},
@@ -1094,6 +1102,30 @@
 					]
 				},
 				{
+					"name": "navigation",
+					"item": [
+						{
+							"name": "traveller navigation",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/{{servletname}}/Trips(1)/Travellers",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"{{servletname}}",
+										"Trips(1)",
+										"Travellers"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
 					"name": "New Request",
 					"request": {
 						"method": "DELETE",
@@ -1122,8 +1154,94 @@
 						{
 							"name": "Create a new entity",
 							"request": {
-								"method": "GET",
-								"header": []
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"IcaoCode\" : \"123456\",\r\n \"Name\" : \"shivaji terminal\",\r\n \"IataCode\" : \"123456\",\r\n \"Latitude\" : 12.6432,\r\n \"Longitude\" : 124.522,\r\n \"IsInsideCity\" : false,\r\n \"AirportLocation\" : {\r\n    \"Loc\" : \"bengaluru\",\r\n    \"Address\": \"Marathali bangalore 520100\",\r\n        \"Code\": 520100,\r\n        \"City\": {\r\n            \"CountryRegion\": \"India\",\r\n            \"Name\": \"Bengaluru\",\r\n            \"Region\": \"Karnatka\"\r\n        }\r\n }\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/{{servletname}}/Airports",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"{{servletname}}",
+										"Airports"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "patch request",
+					"item": [
+						{
+							"name": "patch request",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "If-Match",
+										"value": "5",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"IataCode\" : \"12345\"}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/{{servletname}}/Airports('123456')",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"{{servletname}}",
+										"Airports('123456')"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "delete request",
+					"item": [
+						{
+							"name": "New Request",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "If-Match",
+										"value": "4",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/{{servletname}}/Airports('123456')",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"{{servletname}}",
+										"Airports('123456')"
+									]
+								}
 							},
 							"response": []
 						}
@@ -1175,13 +1293,19 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/{{servletname}}/Events",
+							"raw": "{{host}}/{{servletname}}/PlanItems?$format=application/json;odata.metadata=full",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"{{servletname}}",
-								"Events"
+								"PlanItems"
+							],
+							"query": [
+								{
+									"key": "$format",
+									"value": "application/json;odata.metadata=full"
+								}
 							]
 						}
 					},
@@ -1433,6 +1557,63 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "Get derived entity type employee by username",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/{{servletname}}/Persons('employee1')/Trippin.Employee",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"{{servletname}}",
+										"Persons('employee1')",
+										"Trippin.Employee"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get derived entity type employee set",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/{{servletname}}/Persons/Trippin.Employee",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"{{servletname}}",
+										"Persons",
+										"Trippin.Employee"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "navigation peers",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/{{servletname}}/Employees('employee3')/Peers",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"{{servletname}}",
+										"Employees('employee3')",
+										"Peers"
+									]
+								}
+							},
+							"response": []
 						}
 					]
 				}
@@ -1491,6 +1672,14 @@
 										"Managers"
 									]
 								}
+							},
+							"response": []
+						},
+						{
+							"name": "navigation reports to",
+							"request": {
+								"method": "GET",
+								"header": []
 							},
 							"response": []
 						}
@@ -1568,6 +1757,228 @@
 									"key": "@x",
 									"value": "1"
 								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "function getTripsforplanItem",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Actions",
+			"item": [
+				{
+					"name": "resetDataSource",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/{{servletname}}/ResetDataSource",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{servletname}}",
+								"ResetDataSource"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateLastName",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"LastName\" : \"friend\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/{{servletname}}/Persons('russellwhyte8')/Trippin.UpdateLastName",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{servletname}}",
+								"Persons('russellwhyte8')",
+								"Trippin.UpdateLastName"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ShareTrip",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"UserName\" : \"russellwhyte2\", \"TripId\" : 1}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/{{servletname}}/Persons('russellwhyte')/Trippin.ShareTrip",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{servletname}}",
+								"Persons('russellwhyte')",
+								"Trippin.ShareTrip"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "SINGLETON",
+			"item": [
+				{
+					"name": "Get me",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Patch Me",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"FirstName\" : \"bro\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/{{servletname}}/Me",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{servletname}}",
+								"Me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get me single property",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/{{servletname}}/Me/FirstName",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{servletname}}",
+								"Me",
+								"FirstName"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get me collection of complex",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/{{servletname}}/Me/AddressInfo",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{servletname}}",
+								"Me",
+								"AddressInfo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "navigation friends",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/{{servletname}}/Me/Friends",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{servletname}}",
+								"Me",
+								"Friends"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "navigation best friend",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/{{servletname}}/Me/BestFriend",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{servletname}}",
+								"Me",
+								"BestFriend"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "navigation trips",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/{{servletname}}/Me/Trips",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{servletname}}",
+								"Me",
+								"Trips"
 							]
 						}
 					},
