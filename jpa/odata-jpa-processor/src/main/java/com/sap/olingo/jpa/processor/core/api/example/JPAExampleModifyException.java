@@ -15,7 +15,8 @@ public class JPAExampleModifyException extends ODataJPAProcessException { // NOS
     ENTITY_ALREADY_EXISTS,
     MODIFY_NOT_ALLOWED,
     WILDCARD_RANGE_NOT_SUPPORTED,
-    ENTITY_NOT_FOUND_WITH_ETAG;
+    ENTITY_NOT_FOUND_WITH_ETAG,
+    PRIMARY_KEY_NULL;
 
     @Override
     public String getKey() {

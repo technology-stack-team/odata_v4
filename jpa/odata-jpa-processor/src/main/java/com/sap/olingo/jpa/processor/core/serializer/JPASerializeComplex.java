@@ -19,6 +19,10 @@ import org.apache.olingo.server.api.serializer.ComplexSerializerOptions;
 import org.apache.olingo.server.api.serializer.ODataSerializer;
 import org.apache.olingo.server.api.serializer.SerializerException;
 import org.apache.olingo.server.api.serializer.SerializerResult;
+
+import com.sap.olingo.jpa.processor.core.api.JPAODataSessionContextAccess;
+import com.sap.olingo.jpa.processor.core.exception.ODataJPASerializerException;
+import com.sap.olingo.jpa.processor.core.query.Util;
 import org.apache.olingo.server.api.uri.UriHelper;
 import org.apache.olingo.server.api.uri.UriInfo;
 import org.apache.olingo.server.api.uri.UriResource;
@@ -27,10 +31,7 @@ import org.apache.olingo.server.api.uri.UriResourceEntitySet;
 import org.apache.olingo.server.api.uri.UriResourceKind;
 import org.apache.olingo.server.api.uri.UriResourceNavigation;
 import org.apache.olingo.server.api.uri.UriResourceProperty;
-
-import com.sap.olingo.jpa.processor.core.api.JPAODataSessionContextAccess;
-import com.sap.olingo.jpa.processor.core.exception.ODataJPASerializerException;
-import com.sap.olingo.jpa.processor.core.query.Util;
+import org.apache.olingo.server.api.uri.UriResourceSingleton;
 
 public final class JPASerializeComplex implements JPAOperationSerializer {
   private final ServiceMetadata serviceMetadata;
@@ -118,7 +119,9 @@ public final class JPASerializeComplex implements JPAOperationSerializer {
       if (hop.getKind().equals(UriResourceKind.entitySet)
           && ((UriResourceEntitySet) hop).getEntitySet() == targetEdmBindingTarget
           || hop.getKind().equals(UriResourceKind.navigationProperty)
-              && ((UriResourceNavigation) hop).getType() == targetEdmBindingTarget.getEntityType())
+              && ((UriResourceNavigation) hop).getType() == targetEdmBindingTarget.getEntityType()
+          || hop.getKind().equals(UriResourceKind.singleton)
+              && ((UriResourceSingleton)hop).getSingleton() == targetEdmBindingTarget)
         found = true;
       if (found && hop.getKind().equals(UriResourceKind.complexProperty)) {
         uriProperty = (UriResourceProperty) hop;

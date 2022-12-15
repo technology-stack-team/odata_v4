@@ -19,6 +19,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.metamodel.EntityType;
 import javax.persistence.metamodel.SingularAttribute;
 
+import com.sap.olingo.jpa.metadata.core.edm.mapper.impl.IntermediateEntityType;
 import org.apache.olingo.commons.api.http.HttpMethod;
 import org.apache.olingo.commons.api.http.HttpStatusCode;
 
@@ -41,7 +42,12 @@ import com.sap.olingo.jpa.processor.core.processor.JPAModifyUtil;
 import com.sap.olingo.jpa.processor.core.processor.JPARequestEntity;
 import com.sap.olingo.jpa.processor.core.processor.JPARequestLink;
 
-import static com.sap.olingo.jpa.processor.core.api.example.JPAExampleModifyException.MessageKeys.*;
+import static com.sap.olingo.jpa.processor.core.api.example.JPAExampleModifyException.MessageKeys.ENTITY_ALREADY_EXISTS;
+import static com.sap.olingo.jpa.processor.core.api.example.JPAExampleModifyException.MessageKeys.ENTITY_NOT_FOUND;
+import static com.sap.olingo.jpa.processor.core.api.example.JPAExampleModifyException.MessageKeys.ENTITY_NOT_FOUND_WITH_ETAG;
+import static com.sap.olingo.jpa.processor.core.api.example.JPAExampleModifyException.MessageKeys.MODIFY_NOT_ALLOWED;
+import static com.sap.olingo.jpa.processor.core.api.example.JPAExampleModifyException.MessageKeys.PRIMARY_KEY_NULL;
+import static com.sap.olingo.jpa.processor.core.api.example.JPAExampleModifyException.MessageKeys.WILDCARD_RANGE_NOT_SUPPORTED;
 
 /**
  * Example implementation at a CUD handler. The main purpose is rapid prototyping.<p/>
@@ -106,8 +112,21 @@ public class JPAExampleCUDRequestHandler extends JPAAbstractCUDRequestHandler {
       final HttpMethod method) throws ODataJPAProcessException {
 
     if (method == HttpMethod.PATCH || method == HttpMethod.DELETE) {
-      final Object instance = em.find(requestEntity.getEntityType().getTypeClass(), requestEntity.getModifyUtil()
-          .createPrimaryKey(requestEntity.getEntityType(), requestEntity.getKeys(), requestEntity.getEntityType()));
+      Object primaryKey= null;
+      if(((IntermediateEntityType<?>)requestEntity.getEntityType()).asSingleton()) {
+        try {
+          Object singletonInstance = requestEntity.getEntityType().getTypeClass().getConstructor().newInstance();
+          primaryKey = singletonInstance.getClass().getMethod("get" + requestEntity.getEntityType().getKey().get(0).getExternalName()).invoke(singletonInstance);
+        } catch (Exception e) {
+
+        }
+      } else {
+          primaryKey =  requestEntity.getModifyUtil()
+                .createPrimaryKey(requestEntity.getEntityType(), requestEntity.getKeys(), requestEntity.getEntityType());
+      }
+      if(primaryKey == null)
+          throw new JPAExampleModifyException(PRIMARY_KEY_NULL, HttpStatusCode.NOT_FOUND);
+      Object instance = em.find(requestEntity.getEntityType().getTypeClass(), primaryKey);
       if (instance == null) throw new JPAExampleModifyException(ENTITY_NOT_FOUND, HttpStatusCode.NOT_FOUND);
       validateETag(requestEntity, instance);
       requestEntity.getModifyUtil().setAttributesDeep(requestEntity.getData(), instance, requestEntity.getEntityType());

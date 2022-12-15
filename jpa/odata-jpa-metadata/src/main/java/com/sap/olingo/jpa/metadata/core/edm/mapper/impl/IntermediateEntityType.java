@@ -55,7 +55,7 @@ import com.sap.olingo.jpa.metadata.core.edm.mapper.extension.IntermediateEntityT
  * @author Oliver Grande
  *
  */
-final class IntermediateEntityType<T> extends IntermediateStructuredType<T> implements JPAEntityType,
+public final class IntermediateEntityType<T> extends IntermediateStructuredType<T> implements JPAEntityType,
     IntermediateEntityTypeAccess {
   private Optional<JPAPath> etagPath;
   private Optional<Optional<JPAQueryExtension<EdmQueryExtensionProvider>>> extensionQueryProvider;
@@ -337,7 +337,7 @@ final class IntermediateEntityType<T> extends IntermediateStructuredType<T> impl
     return asEntitySet;
   }
 
-  boolean asSingleton() {
+  public boolean asSingleton() {
     return asSingleton;
   }
 

@@ -66,7 +66,7 @@ public class Trip {
   @Temporal(TemporalType.TIME)
   private Date endTime;
 
-  @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST})
+  @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST})
   @JoinTable(
           name="\"TripPlanItem\"",
           joinColumns = @JoinColumn( name="\"TripId\""),

@@ -26,6 +26,7 @@ import org.apache.olingo.commons.api.data.EntityCollection;
 import org.apache.olingo.commons.api.data.Link;
 import org.apache.olingo.commons.api.data.Property;
 import org.apache.olingo.commons.api.edm.EdmEntitySet;
+import org.apache.olingo.commons.api.edm.EdmSingleton;
 import org.apache.olingo.commons.api.ex.ODataException;
 import org.apache.olingo.commons.api.format.ContentType;
 import org.apache.olingo.commons.api.http.HttpHeader;
@@ -40,12 +41,6 @@ import org.apache.olingo.server.api.ServiceMetadata;
 import org.apache.olingo.server.api.prefer.Preferences;
 import org.apache.olingo.server.api.prefer.Preferences.Return;
 import org.apache.olingo.server.api.serializer.SerializerException;
-import org.apache.olingo.server.api.uri.UriParameter;
-import org.apache.olingo.server.api.uri.UriResource;
-import org.apache.olingo.server.api.uri.UriResourceComplexProperty;
-import org.apache.olingo.server.api.uri.UriResourceEntitySet;
-import org.apache.olingo.server.api.uri.UriResourceProperty;
-import org.apache.olingo.server.api.uri.UriResourceValue;
 
 import com.sap.olingo.jpa.metadata.core.edm.mapper.api.JPAAssociationPath;
 import com.sap.olingo.jpa.metadata.core.edm.mapper.api.JPAAttribute;
@@ -69,6 +64,12 @@ import com.sap.olingo.jpa.processor.core.modify.JPAUpdateResult;
 import com.sap.olingo.jpa.processor.core.query.EdmBindingTargetInfo;
 import com.sap.olingo.jpa.processor.core.query.ExpressionUtil;
 import com.sap.olingo.jpa.processor.core.query.Util;
+import org.apache.olingo.server.api.uri.UriParameter;
+import org.apache.olingo.server.api.uri.UriResource;
+import org.apache.olingo.server.api.uri.UriResourceComplexProperty;
+import org.apache.olingo.server.api.uri.UriResourceEntitySet;
+import org.apache.olingo.server.api.uri.UriResourceProperty;
+import org.apache.olingo.server.api.uri.UriResourceValue;
 
 public final class JPACUDRequestProcessor extends JPAAbstractRequestProcessor {
 
@@ -702,12 +703,19 @@ public final class JPACUDRequestProcessor extends JPAAbstractRequestProcessor {
         final Object linkedResult = getLinkedResult(updateResult.getModifiedEntity(), path, Optional.empty());
         updatedEntity = convertEntity(linkedEntity.getEntityType(), linkedResult, request.getAllHeaders());
       } else {
-        updatedEntity = convertEntity(requestEntity.getEntityType(), updateResult.getModifiedEntity(), request
-            .getAllHeaders());
+        if(edmEntitySetInfo.getTargetEdmBindingTarget() instanceof EdmSingleton) {
+          response.setStatusCode(successStatusCode);
+          response.setHeader(HttpHeader.CONTENT_TYPE, responseFormat.toContentTypeString());
+          // dont do anything
+        } else {
+          updatedEntity = convertEntity(requestEntity.getEntityType(), updateResult.getModifiedEntity(), request
+                  .getAllHeaders());
+          final EntityCollection entities = new EntityCollection();
+          entities.getEntities().add(updatedEntity);
+          createSuccessResponse(response, responseFormat, serializer.serialize(request, entities));
+        }
       }
-      final EntityCollection entities = new EntityCollection();
-      entities.getEntities().add(updatedEntity);
-      createSuccessResponse(response, responseFormat, serializer.serialize(request, entities));
+
     }
   }
 

@@ -230,13 +230,13 @@ public final class Util {
   }
 
   public static EdmBindingTargetInfo determineModifyEntitySetAndKeys(@Nonnull final List<UriResource> resources) {
-    EdmEntitySet targetEdmEntitySet = null;
+    EdmBindingTarget targetBinding = null;
     List<UriParameter> targetKeyPredicates = new ArrayList<>();
     StringBuilder naviPropertyName = new StringBuilder();
 
     for (final UriResource resourceItem : resources) {
       if (resourceItem.getKind() == UriResourceKind.entitySet) {
-        targetEdmEntitySet = ((UriResourceEntitySet) resourceItem).getEntitySet();
+        targetBinding = ((UriResourceEntitySet) resourceItem).getEntitySet();
         targetKeyPredicates = ((UriResourceEntitySet) resourceItem).getKeyPredicates();
       }
       if (resourceItem.getKind() == UriResourceKind.complexProperty) {
@@ -248,15 +248,18 @@ public final class Util {
         final List<UriParameter> keyPredicates = ((UriResourceNavigation) resourceItem).getKeyPredicates();
         if (!keyPredicates.isEmpty()) {
           targetKeyPredicates = keyPredicates;
-          final EdmBindingTarget edmBindingTarget = targetEdmEntitySet.getRelatedBindingTarget(naviPropertyName
+          final EdmBindingTarget edmBindingTarget = targetBinding.getRelatedBindingTarget(naviPropertyName
               .toString());
           if (edmBindingTarget instanceof EdmEntitySet)
-            targetEdmEntitySet = (EdmEntitySet) edmBindingTarget;
+            targetBinding = (EdmEntitySet) edmBindingTarget;
           naviPropertyName = new StringBuilder();
         }
       }
+      if(resourceItem.getKind() == UriResourceKind.singleton) {
+        targetBinding = ((UriResourceSingleton) resourceItem).getSingleton();
+      }
     }
-    return new EdmBindingTargetResult(targetEdmEntitySet, targetKeyPredicates, naviPropertyName.toString());
+    return new EdmBindingTargetResult(targetBinding, targetKeyPredicates, naviPropertyName.toString());
   }
 
   /**
@@ -342,7 +345,9 @@ public final class Util {
     if (resources != null) {
       for (int i = resources.size() - 1; i >= 0; i--) {
         final UriResource resourceItem = resources.get(i);
-        if (resourceItem instanceof UriResourceEntitySet || resourceItem instanceof UriResourceNavigation)
+        if (resourceItem instanceof UriResourceEntitySet
+                || resourceItem instanceof UriResourceNavigation
+                || resourceItem instanceof  UriResourceSingleton)
           return i == resources.size() ? -1 : i + 1;
       }
     }
