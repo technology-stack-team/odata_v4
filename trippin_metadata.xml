@@ -27,8 +27,22 @@
 				<NavigationProperty Name="Friends" Type="Collection(Trippin.Person)" />
                 <NavigationProperty Name="BestFriend" Type="Trippin.Person" />
                 <NavigationProperty Name="Trips" Type="Collection(Trippin.Trip)" Partner="Travellers"/>
-				
+				<NavigationProperty Name="Attachments" Type="Collection(Trippin.Document)" Partner="Person"/>
             </EntityType>
+            
+            <EntityType Name="Document" HasStream="true">
+                <Key>
+                    <PropertyRef Name="DocId" />
+                </Key>
+                <Property Name="DocId" Type="Edm.String" Nullable="false" />
+                <Property Name="DocName" Type="Edm.String" />
+                <Property Name="DocFileType" Type="Edm.String" />
+                <Property Name="DocLocation" Type="Edm.String" />
+                <Property Name="DocSize" Type="Edm.String" />
+                <NavigationProperty Name="PlanItem" Type="Trippin.PlanItem" Partner="Ticket"/>
+                <NavigationProperty Name="Person" Type="Trippin.Person" Partner="Attachments"/>
+            </EntityType>
+            
             <EntityType Name="Airline">
                 <Key>
                     <PropertyRef Name="AirlineCode" />
@@ -95,6 +109,7 @@
                 <Property Name="StartsAt" Type="Edm.DateTimeOffset" Nullable="false" />
                 <Property Name="EndsAt" Type="Edm.DateTimeOffset" Nullable="false" />
                 <Property Name="Duration" Type="Edm.Duration" Nullable="false" />
+                <NavigationProperty Name="Ticket" Type="Trippin.Document" Partner="PlanItem"/>
             </EntityType>
             <EntityType Name="Event" BaseType="Trippin.PlanItem">
                 <Property Name="OccursAt" Type="Trippin.EventLocation" />
