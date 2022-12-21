@@ -7,9 +7,8 @@ import javax.persistence.Embeddable;
 
 @Embeddable
 @Data
-public class EventLocation extends Location {
+public class EventLocation {
     public EventLocation() {
-        super();
     }
 
     @Column(name = "\"BuildingInfo\"")

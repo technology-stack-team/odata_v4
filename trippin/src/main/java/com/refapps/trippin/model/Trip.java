@@ -67,10 +67,7 @@ public class Trip {
   private Date endTime;
 
   @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST})
-  @JoinTable(
-          name="\"TripPlanItem\"",
-          joinColumns = @JoinColumn( name="\"TripId\""),
-          inverseJoinColumns = @JoinColumn( name="\"PlanItemId\""), schema = "\"Trippin\"")
+  @JoinColumn(name = "\"TripId\"", insertable = false, updatable = false)
   private List<PlanItem> planItems = new ArrayList<>();
 
   @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.MERGE})

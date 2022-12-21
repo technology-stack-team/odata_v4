@@ -1,6 +1,5 @@
 package com.refapps.trippin.model;
 
-
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
@@ -11,5 +10,4 @@ public class PlanItem extends BasePlanItem{
         super();
         type = "1";
     }
-
 }

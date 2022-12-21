@@ -43,5 +43,6 @@ public abstract class BasePlanItem {
 
     @Column(name = "\"Type\"", length = 1, insertable = false, updatable = false, nullable = false)
     protected String type;
-
+    @Column(name = "\"TripId\"")
+    private Integer tripId;
 }

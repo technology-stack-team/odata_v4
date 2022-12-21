@@ -7,7 +7,7 @@ import javax.persistence.Embeddable;
 
 @Embeddable
 @Data
-public class AirportLocation extends Location {
+public class AirportLocation {
     public AirportLocation() {
         super();
     }
