@@ -1071,33 +1071,6 @@
 								}
 							},
 							"response": []
-						},
-						{
-							"name": "Deep insert Post",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"Name\": \"Trip in US\",\r\n    \"StartsAt\": \"2014-01-01T07:15:00Z\",\r\n    \"Description\": \"Trip from San Francisco to New York City\",\r\n    \"UserName\": \"russellwhyte2\",\r\n    \"EndsAt\": \"2014-02-01T07:15:00Z\",\r\n    \"Budget\": 123.45,\r\n    \"StartTime\": \"11:12:34\",\r\n    \"EndTime\": \"12:34:24\",\r\n    \"Tags\": [\r\n        \"florida\",\r\n        \"canada\"\r\n    ],\r\n    \"PlanItems\": [\r\n        {\r\n            \"ConfirmationCode\": \"201\",\r\n            \"StartsAt\": \"2014-01-01T12:45:00\",\r\n            \"EndsAt\": \"2014-02-01T12:50:00\",\r\n            \"Duration\": \"PT10S\"\r\n        }\r\n    ]\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{host}}/{{servletname}}/Trips",
-									"host": [
-										"{{host}}"
-									],
-									"path": [
-										"{{servletname}}",
-										"Trips"
-									]
-								}
-							},
-							"response": []
 						}
 					]
 				},
