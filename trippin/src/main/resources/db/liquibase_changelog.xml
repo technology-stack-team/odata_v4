@@ -92,6 +92,10 @@
         <addForeignKeyConstraint baseTableSchemaName="${schemaName}" baseTableName="ManagerDirectReport" baseColumnNames="DirectReport" constraintName="ManagerDirectReport_Person_fk" referencedTableName="Person"
                                  referencedColumnNames="UserName" referencedTableSchemaName="${schemaName}"/>
     </changeSet>
+    <changeSet id="v1-01-09" author="rahul-jain">
+        <addForeignKeyConstraint baseTableSchemaName="${schemaName}" baseTableName="Person" baseColumnNames="Friend" constraintName="BestFriend_Person_fk" referencedTableName="Person"
+                                 referencedTableSchemaName="${schemaName}" referencedColumnNames="UserName"/>
+    </changeSet>
     <changeSet id="v1-02-01" author="rahul-jain">
         <createTable  schemaName="${schemaName}" tableName="Trip">
             <column name="TripId" type="SERIAL" autoIncrement="true">
