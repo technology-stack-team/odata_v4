@@ -340,4 +340,13 @@
         </createTable>
         <addPrimaryKey tableName="CompositeKeyEntity" columnNames="Code,CodeID,DivisonCode" schemaName="${schemaName}"/>
     </changeSet>
+    <changeSet id="v2-05-01" author="rahul-jain">
+        <createTable tableName="Advertisement" schemaName="${schemaName}">
+            <column name="Id" type="SERIAL" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="Image" type="BINARY"/>
+            <column name="MimeType" type="VARCHAR(250)"/>
+        </createTable>
+    </changeSet>
 </databaseChangeLog>
