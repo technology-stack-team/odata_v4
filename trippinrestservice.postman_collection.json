@@ -1767,6 +1767,24 @@
 					"response": []
 				},
 				{
+					"name": "addadvertisement",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/{{servletname}}/ResetDataSource",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{servletname}}",
+								"ResetDataSource"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "UpdateLastName",
 					"request": {
 						"method": "POST",
@@ -1991,6 +2009,66 @@
 							"path": [
 								"{{servletname}}",
 								"CompositeKeyEntities(Code='xxx',CodeID=123,DivisonCode='12456')"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "MediaEntityType",
+			"item": [
+				{
+					"name": "Read Entity set",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/{{servletname}}/Advertisements",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{servletname}}",
+								"Advertisements"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get entity by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/{{servletname}}/Advertisements(1)",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{servletname}}",
+								"Advertisements(1)"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get content media",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/{{servletname}}/Advertisements(1)/$value",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{servletname}}",
+								"Advertisements(1)",
+								"$value"
 							]
 						}
 					},
