@@ -1767,24 +1767,6 @@
 					"response": []
 				},
 				{
-					"name": "addadvertisement",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"url": {
-							"raw": "{{host}}/{{servletname}}/ResetDataSource",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"{{servletname}}",
-								"ResetDataSource"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "UpdateLastName",
 					"request": {
 						"method": "POST",
@@ -2025,13 +2007,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/{{servletname}}/Advertisements",
+							"raw": "{{host}}/{{servletname}}/Documents",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"{{servletname}}",
-								"Advertisements"
+								"Documents"
 							]
 						}
 					},
@@ -2043,13 +2025,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/{{servletname}}/Advertisements(1)",
+							"raw": "{{host}}/{{servletname}}/Documents('piechart')/$value",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"{{servletname}}",
-								"Advertisements(1)"
+								"Documents('piechart')",
+								"$value"
 							]
 						}
 					},
@@ -2061,13 +2044,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/{{servletname}}/Advertisements(1)/$value",
+							"raw": "{{host}}/{{servletname}}/Documents('abc')/$value",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"{{servletname}}",
-								"Advertisements(1)",
+								"Documents('abc')",
 								"$value"
 							]
 						}
@@ -2077,7 +2060,104 @@
 				{
 					"name": "Post media entity",
 					"request": {
-						"method": "GET",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "image/svg+xml",
+								"type": "text"
+							},
+							{
+								"key": "DocFileSize",
+								"value": "28",
+								"type": "text"
+							},
+							{
+								"key": "DocFileType",
+								"value": "image/svg+xml",
+								"type": "text"
+							},
+							{
+								"key": "DocSize",
+								"value": "2kb",
+								"type": "text"
+							},
+							{
+								"key": "DocName",
+								"value": "piechart",
+								"type": "text"
+							},
+							{
+								"key": "DocLocation",
+								"value": "computer",
+								"type": "text"
+							},
+							{
+								"key": "DocId",
+								"value": "piechart2",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n        <svg xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\" viewBox=\"0 0 100 100\">\r\n            <g stroke=\"darkmagenta\" stroke-width=\"16\" fill=\"crimson\">\r\n                <circle cx=\"50\" cy=\"50\" r=\"42\"/>\r\n            </g>\r\n    \t</svg>",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/{{servletname}}/Documents",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{servletname}}",
+								"Documents"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updating media content of media entity",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "content-type",
+								"value": "image/svg+xml",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n        <svg xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\" viewBox=\"0 0 100 100\">\r\n            <g stroke=\"darkmagenta\" stroke-width=\"16\" fill=\"crimson\">\r\n                <circle cx=\"25\" cy=\"25\" r=\"42\"/>\r\n            </g>\r\n    \t</svg>",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/{{servletname}}/Documents('piechart')/$value",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{servletname}}",
+								"Documents('piechart')",
+								"$value"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updating other properties of media entity",
+					"request": {
+						"method": "PATCH",
 						"header": []
 					},
 					"response": []
