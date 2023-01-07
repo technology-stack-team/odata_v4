@@ -1999,6 +1999,130 @@
 			]
 		},
 		{
+			"name": "MediaEntityType",
+			"item": [
+				{
+					"name": "Read Entity set",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/{{servletname}}/Documents",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{servletname}}",
+								"Documents"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get entity by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/{{servletname}}/Documents('piechart')/$value",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{servletname}}",
+								"Documents('piechart')",
+								"$value"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get content media",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/{{servletname}}/Documents('abc')/$value",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{servletname}}",
+								"Documents('abc')",
+								"$value"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post media entity",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "image/svg+xml",
+								"type": "text"
+							},
+							{
+								"key": "DocFileSize",
+								"value": "28",
+								"type": "text"
+							},
+							{
+								"key": "DocFileType",
+								"value": "image/svg+xml",
+								"type": "text"
+							},
+							{
+								"key": "DocSize",
+								"value": "2kb",
+								"type": "text"
+							},
+							{
+								"key": "DocName",
+								"value": "piechart",
+								"type": "text"
+							},
+							{
+								"key": "DocLocation",
+								"value": "computer",
+								"type": "text"
+							},
+							{
+								"key": "DocId",
+								"value": "piechart",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n        <svg xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\" viewBox=\"0 0 100 100\">\r\n            <g stroke=\"darkmagenta\" stroke-width=\"16\" fill=\"crimson\">\r\n                <circle cx=\"50\" cy=\"50\" r=\"42\"/>\r\n            </g>\r\n    \t</svg>",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/{{servletname}}/Documents",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{servletname}}",
+								"Documents"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "metadata request",
 			"request": {
 				"method": "GET",

@@ -1,8 +1,11 @@
 package com.sap.olingo.jpa.processor.core.api;
 
+import javax.persistence.Entity;
 import javax.persistence.OptimisticLockException;
 import javax.persistence.RollbackException;
 
+import com.sap.olingo.jpa.processor.core.query.Util;
+import org.apache.olingo.commons.api.edm.EdmEntitySet;
 import org.apache.olingo.commons.api.ex.ODataException;
 import org.apache.olingo.commons.api.format.ContentType;
 import org.apache.olingo.commons.api.http.HttpStatusCode;
@@ -29,6 +32,8 @@ import com.sap.olingo.jpa.processor.core.processor.JPAActionRequestProcessor;
 import com.sap.olingo.jpa.processor.core.processor.JPACUDRequestProcessor;
 import com.sap.olingo.jpa.processor.core.processor.JPAProcessorFactory;
 import com.sap.olingo.jpa.processor.core.processor.JPARequestProcessor;
+import org.apache.olingo.server.api.uri.UriResource;
+import org.apache.olingo.server.api.uri.UriResourceEntitySet;
 
 public final class JPAODataRequestProcessor
     implements PrimitiveValueProcessor, PrimitiveCollectionProcessor, ComplexProcessor, ComplexCollectionProcessor,
@@ -96,9 +101,16 @@ public final class JPAODataRequestProcessor
   public void createMediaEntity(final ODataRequest request, final ODataResponse response, final UriInfo uriInfo,
       final ContentType requestFormat, final ContentType responseFormat)
       throws ODataApplicationException, ODataLibraryException {
-
-    throw new ODataJPAProcessorException(ODataJPAProcessorException.MessageKeys.NOT_SUPPORTED_CREATE,
-        HttpStatusCode.NOT_IMPLEMENTED);
+    try {
+      final JPACUDRequestProcessor p = factory.createCUDRequestProcessor(uriInfo, responseFormat, requestContext,
+              request.getAllHeaders());
+      p.createMediaEntity(request, response, requestFormat, responseFormat);
+    } catch (ODataApplicationException | ODataLibraryException e) {
+      throw e;
+    } catch (final ODataException e) {
+      throw new ODataApplicationException(e.getLocalizedMessage(),
+              HttpStatusCode.INTERNAL_SERVER_ERROR.getStatusCode(), null, e);
+    }
   }
 
   @Override
