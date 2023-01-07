@@ -4,6 +4,7 @@ import static com.sap.olingo.jpa.processor.core.exception.ODataJPAProcessorExcep
 import static com.sap.olingo.jpa.processor.core.exception.ODataJPAProcessorException.MessageKeys.ENUMERATION_UNKNOWN;
 import static com.sap.olingo.jpa.processor.core.exception.ODataJPAProcessorException.MessageKeys.PARAMETER_NULL;
 import static org.apache.olingo.commons.api.data.ValueType.ENUM;
+import static org.apache.olingo.commons.api.data.ValueType.PRIMITIVE;
 import static org.apache.olingo.commons.api.http.HttpStatusCode.BAD_REQUEST;
 
 import java.io.InputStream;
@@ -17,6 +18,9 @@ import java.util.Map;
 
 import javax.persistence.AttributeConverter;
 
+import com.sap.olingo.jpa.metadata.core.edm.mapper.impl.IntermediateEntityType;
+import com.sap.olingo.jpa.metadata.core.edm.mapper.impl.IntermediateProperty;
+import com.sap.olingo.jpa.metadata.core.edm.mapper.impl.IntermediateSimpleProperty;
 import org.apache.olingo.commons.api.data.ComplexValue;
 import org.apache.olingo.commons.api.data.Entity;
 import org.apache.olingo.commons.api.data.Parameter;
@@ -432,4 +436,22 @@ public class JPAConversionHelper {
     return null;
   }
 
+  public Entity createMediaEntity(Map<String, List<String>> allHeaders, String toContentTypeString, byte[] mediaContent, IntermediateEntityType et) {
+    Entity entity = new Entity();
+    Map<String, IntermediateProperty> declaredPropertiesMap = et.getDeclaredPropertiesList();
+    for (String declaredPropertyName: declaredPropertiesMap.keySet()) {
+      IntermediateSimpleProperty intermediateSimpleProperty = (IntermediateSimpleProperty) declaredPropertiesMap.get(declaredPropertyName);
+      if(declaredPropertyName.equals(et.getStreamProperty().getInternalName())
+              || declaredPropertyName.equals(et.getStreamProperty().getStreamInfo().contentTypeAttribute()))
+          continue;
+      if(allHeaders.get(declaredPropertyName.toLowerCase()) != null
+               && !allHeaders.get(declaredPropertyName.toLowerCase()).isEmpty()) {
+         entity.addProperty(new Property(null, intermediateSimpleProperty.getExternalName(),  PRIMITIVE, allHeaders.get(declaredPropertyName.toLowerCase()).get(0)));
+       }
+    }
+    entity.addProperty(new Property(null, declaredPropertiesMap.get(et.getStreamProperty().getStreamInfo().contentTypeAttribute()).getExternalName(),
+            PRIMITIVE, toContentTypeString));
+    entity.addProperty(new Property(null, declaredPropertiesMap.get(et.getStreamProperty().getInternalName()).getExternalName(), PRIMITIVE, mediaContent));
+    return entity;
+  }
 }

@@ -65,7 +65,7 @@ import com.sap.olingo.jpa.metadata.core.edm.mapper.extension.IntermediatePropert
  * @author Oliver Grande
  *
  */
-abstract class IntermediateProperty extends IntermediateModelElement implements IntermediatePropertyAccess,
+public abstract class IntermediateProperty extends IntermediateModelElement implements IntermediatePropertyAccess,
     JPAAttribute {
 
   private static final int UPPER_LIMIT_PRECISION_TEMP = 12;

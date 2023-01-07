@@ -38,7 +38,7 @@ import com.sap.olingo.jpa.metadata.core.edm.mapper.exception.ODataJPAModelExcept
  * @author Oliver Grande
  *
  */
-class IntermediateSimpleProperty extends IntermediateProperty {
+public class IntermediateSimpleProperty extends IntermediateProperty {
 
   private static final Log LOGGER = LogFactory.getLog(IntermediateSimpleProperty.class);
   private EdmMediaStream streamInfo;
@@ -47,6 +47,9 @@ class IntermediateSimpleProperty extends IntermediateProperty {
       final IntermediateSchema schema) throws ODataJPAModelException {
 
     super(nameBuilder, jpaAttribute, schema);
+  }
+  public EdmMediaStream getStreamInfo() {
+    return streamInfo;
   }
 
   @Override

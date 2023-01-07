@@ -340,4 +340,16 @@
         </createTable>
         <addPrimaryKey tableName="CompositeKeyEntity" columnNames="Code,CodeID,DivisonCode" schemaName="${schemaName}"/>
     </changeSet>
+    <changeSet id="v2-05-01" author="rahul-jain">
+        <createTable tableName="Document" schemaName="${schemaName}">
+            <column name="DocId" type="VARCHAR(250)">
+                <constraints primaryKey="true"  nullable="false"/>
+            </column>
+            <column name="DocFileType" type="VARCHAR(100)"/>
+            <column name="Content" type="BINARY"/>
+            <column name="DocSize" type="VARCHAR(100)"/>
+            <column name="DocName" type="VARCHAR(100)"/>
+            <column name="DocLocation" type="VARCHAR(100)"/>
+        </createTable>
+    </changeSet>
 </databaseChangeLog>

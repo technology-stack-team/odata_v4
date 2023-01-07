@@ -21,6 +21,13 @@ import java.util.Optional;
 
 import javax.persistence.EntityManager;
 
+import com.sap.olingo.jpa.metadata.core.edm.mapper.impl.IntermediateEntityType;
+import com.sap.olingo.jpa.processor.core.exception.ODataJPAFilterException;
+import com.sap.olingo.jpa.processor.core.exception.ODataJPAInvocationTargetException;
+import com.sap.olingo.jpa.processor.core.exception.ODataJPAProcessException;
+import com.sap.olingo.jpa.processor.core.exception.ODataJPAProcessorException;
+import com.sap.olingo.jpa.processor.core.exception.ODataJPASerializerException;
+import com.sap.olingo.jpa.processor.core.exception.ODataJPATransactionException;
 import org.apache.olingo.commons.api.data.Entity;
 import org.apache.olingo.commons.api.data.EntityCollection;
 import org.apache.olingo.commons.api.data.Link;
@@ -38,6 +45,7 @@ import org.apache.olingo.server.api.ODataLibraryException;
 import org.apache.olingo.server.api.ODataRequest;
 import org.apache.olingo.server.api.ODataResponse;
 import org.apache.olingo.server.api.ServiceMetadata;
+import org.apache.olingo.server.api.deserializer.DeserializerException;
 import org.apache.olingo.server.api.prefer.Preferences;
 import org.apache.olingo.server.api.prefer.Preferences.Return;
 import org.apache.olingo.server.api.serializer.SerializerException;
@@ -53,11 +61,6 @@ import com.sap.olingo.jpa.processor.core.api.JPACUDRequestHandler;
 import com.sap.olingo.jpa.processor.core.api.JPAODataRequestContextAccess;
 import com.sap.olingo.jpa.processor.core.api.JPAODataTransactionFactory.JPAODataTransaction;
 import com.sap.olingo.jpa.processor.core.converter.JPATupleChildConverter;
-import com.sap.olingo.jpa.processor.core.exception.ODataJPAInvocationTargetException;
-import com.sap.olingo.jpa.processor.core.exception.ODataJPAProcessException;
-import com.sap.olingo.jpa.processor.core.exception.ODataJPAProcessorException;
-import com.sap.olingo.jpa.processor.core.exception.ODataJPASerializerException;
-import com.sap.olingo.jpa.processor.core.exception.ODataJPATransactionException;
 import com.sap.olingo.jpa.processor.core.modify.JPAConversionHelper;
 import com.sap.olingo.jpa.processor.core.modify.JPACreateResultFactory;
 import com.sap.olingo.jpa.processor.core.modify.JPAUpdateResult;
@@ -124,6 +127,54 @@ public final class JPACUDRequestProcessor extends JPAAbstractRequestProcessor {
       ownTransaction.commit();
     debugger.stopRuntimeMeasurement(handle);
     response.setStatusCode(HttpStatusCode.NO_CONTENT.getStatusCode());
+  }
+
+
+  public void createMediaEntity(ODataRequest request, ODataResponse response, ContentType requestFormat, ContentType responseFormat) throws DeserializerException, ODataJPAProcessException, ODataJPAModelException, SerializerException {
+    final int handle = debugger.startRuntimeMeasurement(this, DEBUG_CREATE_ENTITY);
+    final JPACUDRequestHandler handler = requestContext.getCUDRequestHandler();
+    final EdmBindingTargetInfo edmEntitySetInfo = Util.determineModifyEntitySetAndKeys(uriInfo.getUriResourceParts());
+    final byte[] mediaContent = odata.createFixedFormatDeserializer().binary(request.getBody());
+    final JPAEntityType et = sd.getEntity(edmEntitySetInfo
+            .getName());
+    Entity odataEntity = helper.createMediaEntity(request.getAllHeaders(), requestFormat.toContentTypeString(), mediaContent, (IntermediateEntityType)et);
+    final JPARequestEntity requestEntity = createRequestEntity(edmEntitySetInfo, odataEntity, request.getAllHeaders());
+
+    // Create entity
+    Object result = null;
+    JPAODataTransaction ownTransaction = null;
+    final boolean foreignTransaction = requestContext.getTransactionFactory().hasActiveTransaction();
+    if (!foreignTransaction)
+      ownTransaction = requestContext.getTransactionFactory().createTransaction();
+    try {
+      final int createHandle = debugger.startRuntimeMeasurement(handler, DEBUG_CREATE_ENTITY);
+      result = handler.createEntity(requestEntity, em);
+      if (!foreignTransaction)
+        handler.validateChanges(em);
+      debugger.stopRuntimeMeasurement(createHandle);
+    } catch (final ODataJPAProcessException e) {
+      checkForRollback(ownTransaction, foreignTransaction);
+      debugger.stopRuntimeMeasurement(handle);
+      throw e;
+    } catch (final Exception e) {
+      checkForRollback(ownTransaction, foreignTransaction);
+      debugger.stopRuntimeMeasurement(handle);
+      throw new ODataJPAProcessorException(e, INTERNAL_SERVER_ERROR);
+    }
+
+    if (result != null && result.getClass() != requestEntity.getEntityType().getTypeClass()
+            && !(result instanceof Map<?, ?>)) {
+      checkForRollback(ownTransaction, foreignTransaction);
+      debugger.stopRuntimeMeasurement(handle);
+      throw new ODataJPAProcessorException(WRONG_RETURN_TYPE, INTERNAL_SERVER_ERROR, result.getClass().toString(),
+              requestEntity.getEntityType().getTypeClass().toString());
+    }
+
+    if (!foreignTransaction)
+      ownTransaction.commit();
+
+    createCreateResponse(request, response, responseFormat, requestEntity, edmEntitySetInfo, result);
+    debugger.stopRuntimeMeasurement(handle);
   }
 
   public void createEntity(final ODataRequest request, final ODataResponse response, final ContentType requestFormat,

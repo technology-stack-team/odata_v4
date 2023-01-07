@@ -89,6 +89,14 @@ abstract class IntermediateStructuredType<T> extends IntermediateModelElement im
     determineIgnore();
   }
 
+  public Map<String, IntermediateProperty> getDeclaredPropertiesList() {
+    return declaredPropertiesList;
+  }
+
+  public Map<String, IntermediateNavigationProperty> getDeclaredNaviPropertiesList() {
+    return declaredNaviPropertiesList;
+  }
+
   @Override
   public JPAAssociationAttribute getAssociation(final String internalName) throws ODataJPAModelException {
     for (final JPAAttribute attribute : this.getAssociations()) {
@@ -422,7 +430,7 @@ abstract class IntermediateStructuredType<T> extends IntermediateModelElement im
     return null;
   }
 
-  protected IntermediateSimpleProperty getStreamProperty() {
+  public IntermediateSimpleProperty getStreamProperty() {
 
     if (streamProperty
         .orElseGet(this::determineStreamProperties)
