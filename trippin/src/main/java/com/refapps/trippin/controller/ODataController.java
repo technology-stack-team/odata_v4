@@ -27,7 +27,6 @@ public class ODataController {
   @RequestMapping(value = "**", method = { RequestMethod.GET, RequestMethod.PATCH, // NOSONAR
       RequestMethod.POST, RequestMethod.DELETE, RequestMethod.PUT})
   public void crud(final HttpServletRequest req, final HttpServletResponse resp) throws ODataException {
-
     new JPAODataRequestHandler(serviceContext, requestContext).process(req, resp);
   }
 }
