@@ -395,9 +395,18 @@ public final class JPAODataRequestProcessor
   public void updateMediaEntity(final ODataRequest request, final ODataResponse response, final UriInfo uriInfo,
       final ContentType requestFormat, final ContentType responseFormat)
       throws ODataApplicationException, ODataLibraryException {
-
-    throw new ODataJPAProcessorException(ODataJPAProcessorException.MessageKeys.NOT_SUPPORTED_UPDATE,
-        HttpStatusCode.NOT_IMPLEMENTED);
+    try {
+      final JPACUDRequestProcessor p = factory.createCUDRequestProcessor(uriInfo, responseFormat, requestContext,
+              request.getAllHeaders());
+      p.updateMediaEntity(request, response, requestFormat, responseFormat);
+    } catch (ODataApplicationException | ODataLibraryException e) {
+      if (e.getCause() instanceof RollbackException)
+        handleRollbackException((RollbackException) e.getCause());
+      throw e;
+    } catch (final ODataException e) {
+      throw new ODataApplicationException(e.getLocalizedMessage(),
+              HttpStatusCode.INTERNAL_SERVER_ERROR.getStatusCode(), null, e);
+    }
   }
 
   @Override

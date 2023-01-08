@@ -2094,7 +2094,7 @@
 							},
 							{
 								"key": "DocId",
-								"value": "piechart",
+								"value": "piechart2",
 								"type": "text"
 							}
 						],
@@ -2117,6 +2117,48 @@
 								"Documents"
 							]
 						}
+					},
+					"response": []
+				},
+				{
+					"name": "updating media content of media entity",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "content-type",
+								"value": "image/svg+xml",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n        <svg xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\" viewBox=\"0 0 100 100\">\r\n            <g stroke=\"darkmagenta\" stroke-width=\"16\" fill=\"crimson\">\r\n                <circle cx=\"25\" cy=\"25\" r=\"42\"/>\r\n            </g>\r\n    \t</svg>",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/{{servletname}}/Documents('piechart')/$value",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{servletname}}",
+								"Documents('piechart')",
+								"$value"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updating other properties of media entity",
+					"request": {
+						"method": "PATCH",
+						"header": []
 					},
 					"response": []
 				}
