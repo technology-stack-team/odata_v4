@@ -162,6 +162,9 @@ public class Person extends AbstractPerson {
   @OneToOne(fetch = FetchType.LAZY, cascade = {})
   private Person bestFriend;
 
+  @OneToMany(mappedBy = "person", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    private List<Document> attachments;
+
 
   @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST})
   @JoinTable(
