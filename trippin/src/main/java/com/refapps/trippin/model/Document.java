@@ -5,7 +5,10 @@ import lombok.Data;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -35,4 +38,12 @@ public class Document {
 
     @OneToOne(mappedBy = "ticket")
     private PlanItem planItem;
+
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "\"PersonId\"", insertable = false, updatable = false)
+    private Person person;
+
+    @Column(name = "\"PersonId\"")
+    private String personId;
 }

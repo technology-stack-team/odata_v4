@@ -855,21 +855,11 @@ public final class JPACUDRequestProcessor extends JPAAbstractRequestProcessor {
         final Object linkedResult = getLinkedResult(updateResult.getModifiedEntity(), path, Optional.empty());
         updatedEntity = convertEntity(linkedEntity.getEntityType(), linkedResult, request.getAllHeaders());
       } else {
-        if(edmEntitySetInfo.getTargetEdmBindingTarget() instanceof EdmSingleton) {
           response.setStatusCode(successStatusCode);
           response.setHeader(HttpHeader.CONTENT_TYPE, responseFormat.toContentTypeString());
-          // dont do anything
-        } else {
-          updatedEntity = convertEntity(requestEntity.getEntityType(), updateResult.getModifiedEntity(), request
-                  .getAllHeaders());
-          final EntityCollection entities = new EntityCollection();
-          entities.getEntities().add(updatedEntity);
-          createSuccessResponse(response, responseFormat, serializer.serialize(request, entities));
         }
       }
-
     }
-  }
 
   private Property findProperty(final String name, final List<Property> properties) {
 
