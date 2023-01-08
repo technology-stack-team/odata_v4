@@ -122,10 +122,25 @@ final class JPAAssociationPathImpl implements JPAAssociationPath {
         result.add(new JPAOnConditionItemImpl(
             sourceType.getPathByDBField(column.getName()),
             targetType.getPathByDBField(column.getReferencedColumnName())));
-      else
+      else if(cardinality == PersistentAttributeType.ONE_TO_MANY) {
         result.add(new JPAOnConditionItemImpl(
-            sourceType.getPathByDBField(column.getReferencedColumnName()),
-            targetType.getPathByDBField(column.getName())));
+                sourceType.getPathByDBField(column.getReferencedColumnName()),
+                targetType.getPathByDBField(column.getName())));
+      } else {
+        try {
+          result.add(new JPAOnConditionItemImpl(
+                  sourceType.getPathByDBField(column.getName()),
+                  targetType.getPathByDBField(column.getReferencedColumnName())));
+        } catch (Exception e) {
+          try {
+            result.add(new JPAOnConditionItemImpl(
+                    sourceType.getPathByDBField(column.getReferencedColumnName()),
+                    targetType.getPathByDBField(column.getName())));
+          } catch (Exception ex) {
+
+          }
+        }
+      }
     }
     return result;
   }
