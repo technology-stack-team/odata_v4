@@ -78,6 +78,8 @@ public final class JPACUDRequestProcessor extends JPAAbstractRequestProcessor {
 
   private static final String DEBUG_CREATE_ENTITY = "createEntity";
   private static final String DEBUG_UPDATE_ENTITY = "updateEntity";
+  private static final String DEBUG_UPDATE_MEDIA_ENTITY = "updateMediaEntity";
+  private static final String DEBUG_DELETE_MEDIA_ENTITY = "deleteMediaEntity";
   private final ServiceMetadata serviceMetadata;
   private final JPAConversionHelper helper;
 
@@ -225,6 +227,52 @@ public final class JPACUDRequestProcessor extends JPAAbstractRequestProcessor {
     debugger.stopRuntimeMeasurement(handle);
   }
 
+
+  public void deleteMediaEntity(ODataRequest request, ODataResponse response) throws ODataJPAProcessException, ODataJPAModelException {
+    final int handle = debugger.startRuntimeMeasurement(this, DEBUG_DELETE_MEDIA_ENTITY);
+    final JPACUDRequestHandler handler = requestContext.getCUDRequestHandler();
+    final EdmBindingTargetInfo edmEntitySetInfo = Util.determineModifyEntitySetAndKeys(uriInfo.getUriResourceParts());
+    final JPAEntityType et = sd.getEntity(edmEntitySetInfo
+            .getName());
+    Entity odataEntity = helper.deleteMediaEntity((IntermediateEntityType)et);
+    final JPARequestEntity requestEntity = createRequestEntity(edmEntitySetInfo, odataEntity, request.getAllHeaders());
+    JPAUpdateResult updateResult = null;
+    JPAODataTransaction ownTransaction = null;
+    final boolean foreignTransaction = requestContext.getTransactionFactory().hasActiveTransaction();
+    if (!foreignTransaction)
+      ownTransaction = requestContext.getTransactionFactory().createTransaction();
+    try {
+      updateResult = handler.updateEntity(requestEntity, em, HttpMethod.PATCH);
+      if (!foreignTransaction)
+        handler.validateChanges(em);
+    } catch (final ODataJPAProcessException e) {
+      checkForRollback(ownTransaction, foreignTransaction);
+      throw e;
+    } catch (final Throwable e) {
+      checkForRollback(ownTransaction, foreignTransaction);
+      throw new ODataJPAProcessorException(e, INTERNAL_SERVER_ERROR);
+    } finally {
+      debugger.stopRuntimeMeasurement(handle);
+    }
+    if (updateResult == null) {
+      checkForRollback(ownTransaction, foreignTransaction);
+      debugger.stopRuntimeMeasurement(handle);
+      throw new ODataJPAProcessorException(RETURN_NULL, INTERNAL_SERVER_ERROR);
+    }
+    if (updateResult.getModifiedEntity() != null && !requestEntity.getEntityType().getTypeClass().isInstance(
+            updateResult.getModifiedEntity())) {
+      checkForRollback(ownTransaction, foreignTransaction);
+      debugger.stopRuntimeMeasurement(handle);
+      throw new ODataJPAProcessorException(WRONG_RETURN_TYPE, INTERNAL_SERVER_ERROR,
+              updateResult.getModifiedEntity().getClass().toString(), requestEntity.getEntityType().getTypeClass()
+              .toString());
+    }
+    if (!foreignTransaction)
+      ownTransaction.commit();
+
+    response.setStatusCode(NO_CONTENT.getStatusCode());
+    debugger.stopRuntimeMeasurement(handle);
+  }
   /*
    * 4.4 Addressing References between Entities
    * DELETE http://host/service/Categories(1)/Products/$ref?$id=../../Products(0)
@@ -287,7 +335,7 @@ public final class JPACUDRequestProcessor extends JPAAbstractRequestProcessor {
   }
 
   public void updateMediaEntity(ODataRequest request, ODataResponse response, ContentType requestFormat, ContentType responseFormat) throws DeserializerException, ODataJPAModelException, ODataJPAProcessException, SerializerException {
-    final int handle = debugger.startRuntimeMeasurement(this, DEBUG_UPDATE_ENTITY);
+    final int handle = debugger.startRuntimeMeasurement(this, DEBUG_UPDATE_MEDIA_ENTITY);
     final JPACUDRequestHandler handler = requestContext.getCUDRequestHandler();
     final EdmBindingTargetInfo edmEntitySetInfo = Util.determineModifyEntitySetAndKeys(uriInfo.getUriResourceParts());
     final byte[] mediaContent = odata.createFixedFormatDeserializer().binary(request.getBody());

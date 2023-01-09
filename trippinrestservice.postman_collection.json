@@ -2161,6 +2161,43 @@
 						"header": []
 					},
 					"response": []
+				},
+				{
+					"name": "Delete media entity",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/{{servletname}}/Documents('piechart')",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{servletname}}",
+								"Documents('piechart')"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete media entity content",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/{{servletname}}/Documents('piechart2')/$value",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{servletname}}",
+								"Documents('piechart2')",
+								"$value"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},

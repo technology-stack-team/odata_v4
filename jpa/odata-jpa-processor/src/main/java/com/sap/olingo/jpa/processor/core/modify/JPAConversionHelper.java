@@ -454,4 +454,13 @@ public class JPAConversionHelper {
     entity.addProperty(new Property(null, declaredPropertiesMap.get(et.getStreamProperty().getInternalName()).getExternalName(), PRIMITIVE, mediaContent));
     return entity;
   }
+
+  public Entity deleteMediaEntity(IntermediateEntityType et) {
+    Entity entity = new Entity();
+    Map<String, IntermediateProperty> declaredPropertiesMap = et.getDeclaredPropertiesList();
+    entity.addProperty(new Property(null, declaredPropertiesMap.get(et.getStreamProperty().getStreamInfo().contentTypeAttribute()).getExternalName(),
+            PRIMITIVE, null));
+    entity.addProperty(new Property(null, declaredPropertiesMap.get(et.getStreamProperty().getInternalName()).getExternalName(), PRIMITIVE, null));
+    return entity;
+  }
 }

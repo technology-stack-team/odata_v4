@@ -190,16 +190,19 @@ public final class JPAODataRequestProcessor
   @Override
   public void deleteMediaEntity(final ODataRequest request, final ODataResponse response, final UriInfo uriInfo)
       throws ODataApplicationException, ODataLibraryException {
-    // Set NULL: ../$value
-    // https://docs.oasis-open.org/odata/odata/v4.0/errata03/os/complete/part1-protocol/odata-v4.0-errata03-os-part1-protocol-complete.html#_Toc453752305
-    // 11.4.8.2 Deleting Stream Values:
-    // A successful DELETE request to the edit URL of a stream property
-    // attempts to set the property to null and results
-    // in an error if the property is non-nullable. Attempting to request a
-    // stream property whose value is null results
-    // in 204 No Content.
-    throw new ODataJPAProcessorException(ODataJPAProcessorException.MessageKeys.NOT_SUPPORTED_DELETE,
-        HttpStatusCode.NOT_IMPLEMENTED);
+    try {
+      final JPACUDRequestProcessor p = this.factory.createCUDRequestProcessor(uriInfo, requestContext, request
+              .getAllHeaders());
+      p.deleteMediaEntity(request, response);
+    } catch (ODataApplicationException | ODataLibraryException e) {
+      if (e.getCause() instanceof RollbackException)
+        handleRollbackException((RollbackException) e.getCause());
+      throw e;
+    } catch (final ODataException e) {
+      throw new ODataApplicationException(e.getLocalizedMessage(),
+              HttpStatusCode.INTERNAL_SERVER_ERROR.getStatusCode(), null, e);
+    }
+
   }
 
   @Override
