@@ -56,7 +56,7 @@ final class JPASerializeValue extends JPASerializePrimitiveAbstract {
       final List<EdmKeyPropertyRef> p = edmEt.getKeyPropertyRefs();
       Property property = null;
       for (final Property item : result.getEntities().get(0).getProperties()) {
-        if (!isKey(p, item)) {
+        if (!isKey(p, item) && !et.getMediaContentType().equals(item.getValue())) {
           property = item;
           break;
         }

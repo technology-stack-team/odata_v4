@@ -5,9 +5,11 @@ import lombok.Data;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity(name = "Document")
@@ -34,4 +36,14 @@ public class Document {
     @Column(name = "\"DocSize\"")
     private String docSize;
 
+    @OneToOne(mappedBy = "ticket")
+    private PlanItem planItem;
+
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "\"PersonId\"", insertable = false, updatable = false)
+    private Person person;
+
+    @Column(name = "\"PersonId\"")
+    private String personId;
 }

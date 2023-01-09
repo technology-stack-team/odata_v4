@@ -1285,7 +1285,7 @@
 					"response": []
 				},
 				{
-					"name": "Post Request",
+					"name": "navigating to ticket from planitem",
 					"request": {
 						"method": "GET",
 						"header": []
@@ -2158,7 +2158,102 @@
 					"name": "updating other properties of media entity",
 					"request": {
 						"method": "PATCH",
-						"header": []
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"DocName\": \"piecharthuman2\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/{{servletname}}/Documents('piechart2')",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{servletname}}",
+								"Documents('piechart2')"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete media entity",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/{{servletname}}/Documents('piechart')",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{servletname}}",
+								"Documents('piechart')"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete media entity content",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/{{servletname}}/Documents('piechart2')/$value",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{servletname}}",
+								"Documents('piechart2')",
+								"$value"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "navigating to planitem from document",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/{{servletname}}/Documents('piechart2')/PlanItem",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{servletname}}",
+								"Documents('piechart2')",
+								"PlanItem"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "navigation to person from document",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/{{servletname}}/Documents('piechart4')/Person/Attachments",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{servletname}}",
+								"Documents('piechart4')",
+								"Person",
+								"Attachments"
+							]
+						}
 					},
 					"response": []
 				},

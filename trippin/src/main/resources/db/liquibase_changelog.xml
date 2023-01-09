@@ -352,4 +352,19 @@
             <column name="DocLocation" type="VARCHAR(100)"/>
         </createTable>
     </changeSet>
+    <changeSet id="v2-05-02" author="rahul-jain">
+        <addColumn tableName="BasePlanItem" schemaName="${schemaName}">
+            <column name="DocumentId" type="VARCHAR(250)"/>
+        </addColumn>
+        <addForeignKeyConstraint baseTableName="BasePlanItem" baseTableSchemaName="${schemaName}" baseColumnNames="DocumentId" constraintName="PlanItem_Ticket_fk"
+                                  referencedTableSchemaName="${schemaName}" referencedTableName="Document"
+                                 referencedColumnNames="DocId"/>
+    </changeSet>
+    <changeSet id="v2-05-03" author="rahul-jain">
+        <addColumn tableName="Document" schemaName="${schemaName}">
+            <column name="PersonId" type="VARCHAR(250)"/>
+        </addColumn>
+        <addForeignKeyConstraint baseTableName="Document" baseTableSchemaName="${schemaName}" baseColumnNames="PersonId" constraintName="Attachments_Person_pk" referencedTableName="Person"
+                                 referencedTableSchemaName="${schemaName}" referencedColumnNames="UserName"/>
+    </changeSet>
 </databaseChangeLog>
