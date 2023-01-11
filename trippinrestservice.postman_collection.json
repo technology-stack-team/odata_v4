@@ -1288,7 +1288,18 @@
 					"name": "navigating to ticket from planitem",
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": "{{host}}/{{servletname}}/PlanItems(3)/Ticket",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{servletname}}",
+								"PlanItems(3)",
+								"Ticket"
+							]
+						}
 					},
 					"response": []
 				}

@@ -36,8 +36,11 @@ public class Document {
     @Column(name = "\"DocSize\"")
     private String docSize;
 
-    @OneToOne(mappedBy = "ticket")
-    private PlanItem planItem;
+    /*
+     uncommeting the below lines will make a bidirectional relationship.
+     */
+    //    @OneToOne(mappedBy = "ticket")
+    //    private PlanItem planItem;
 
 
     @ManyToOne(fetch = FetchType.LAZY)
