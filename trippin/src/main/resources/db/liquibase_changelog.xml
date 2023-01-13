@@ -367,4 +367,9 @@
         <addForeignKeyConstraint baseTableName="Document" baseTableSchemaName="${schemaName}" baseColumnNames="PersonId" constraintName="Attachments_Person_pk" referencedTableName="Person"
                                  referencedTableSchemaName="${schemaName}" referencedColumnNames="UserName"/>
     </changeSet>
+    <changeSet id="v2-05-04" author="rahul-jain">
+        <addColumn tableName="Trip" schemaName="${schemaName}">
+            <column name="ShareId" type="VARCHAR(50)"></column>
+        </addColumn>
+    </changeSet>
 </databaseChangeLog>
