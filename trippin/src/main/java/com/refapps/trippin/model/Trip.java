@@ -70,10 +70,6 @@ public class Trip {
   @JoinColumn(name = "\"TripId\"", insertable = false, updatable = false)
   private List<PlanItem> planItems = new ArrayList<>();
 
-  @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.MERGE})
-  @JoinTable(
-          name="\"PersonTrip\"",
-          joinColumns = @JoinColumn( name="\"TripId\""),
-          inverseJoinColumns = @JoinColumn( name="\"UserName\""), schema = "\"Trippin\"")
-  private List<Person> travellers = new ArrayList<>();
+  @ManyToMany(mappedBy = "trips")
+  private List<Person> travellers;
 }

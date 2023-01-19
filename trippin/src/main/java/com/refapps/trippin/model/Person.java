@@ -86,7 +86,7 @@ public class Person extends AbstractPerson {
           joinColumns = @JoinColumn(name = "\"UserName\""))
   private List<String> emails = new ArrayList<>();
 
-  @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.MERGE})
+  @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.MERGE})
   @JoinTable(
           name="\"PersonTrip\"",
           joinColumns = @JoinColumn( name="\"UserName\""),
