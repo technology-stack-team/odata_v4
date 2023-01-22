@@ -18,6 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import javax.persistence.AttributeConverter;
@@ -280,6 +281,8 @@ public abstract class IntermediateProperty extends IntermediateModelElement impl
       mapping.setInternalName(this.getExternalName());
       if(dbType.isAssignableFrom(Duration.class)) {
          mapping.setMappedJavaClass(Long.class);
+      } else if(entityType.isAssignableFrom(UUID.class)) {
+         mapping.setMappedJavaClass(UUID.class);
       } else {
         mapping.setMappedJavaClass(dbType);
       }

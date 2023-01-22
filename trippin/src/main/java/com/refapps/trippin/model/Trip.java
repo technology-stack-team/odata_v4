@@ -1,10 +1,12 @@
 package com.refapps.trippin.model;
 
+import com.refapps.trippin.converter.UUIDToStringConverter;
 import lombok.Data;
 
 import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,7 +15,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -21,6 +22,7 @@ import javax.persistence.TemporalType;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 @Entity(name = "Trip")
 @Table(schema = "\"Trippin\"", name = "\"Trip\"")
@@ -31,9 +33,9 @@ public class Trip {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer tripId;
 
-//  @Column(name = "ShareId")
-//  @Convert(converter = UUIDToByteConverter.class)
-//  private UUID shareId;
+  @Column(name = "\"ShareId\"")
+  @Convert(converter = UUIDToStringConverter.class)
+  private UUID shareId;
 
   @Column(name = "\"Name\"")
   private String name;
