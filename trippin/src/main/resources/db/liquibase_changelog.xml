@@ -45,12 +45,8 @@
             <column name="Budget" type="BIGINT">
             </column>
         </createTable>
-    </changeSet>
-    <changeSet id="v1-01-02" author="rahul-jain">
         <addForeignKeyConstraint baseTableName="Person" baseTableSchemaName="${schemaName}" baseColumnNames="Friend" constraintName="BestFriend_fk" referencedTableName="Person"
                                  referencedColumnNames="UserName" referencedTableSchemaName="${schemaName}"/>
-    </changeSet>
-    <changeSet id="v1-01-03" author="rahul-jain">
         <createTable tableName="EmployeePeer" schemaName="${schemaName}">
             <column name="Id" type="SERIAL" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
@@ -62,16 +58,10 @@
                 <constraints nullable="false" checkConstraint="UserName != Peer"/>
             </column>
         </createTable>
-    </changeSet>
-    <changeSet id="v1-01-04" author="rahul-jain">
         <addForeignKeyConstraint baseTableSchemaName="${schemaName}" baseTableName="EmployeePeer" baseColumnNames="UserName" constraintName="EmployeePeer_Manager_fk" referencedTableName="Person"
                                  referencedColumnNames="UserName" referencedTableSchemaName="${schemaName}"/>
-    </changeSet>
-    <changeSet id="v1-01-05" author="rahul-jain">
         <addForeignKeyConstraint baseTableSchemaName="${schemaName}" baseTableName="EmployeePeer" baseColumnNames="Peer" constraintName="EmployeePeer_Person_fk" referencedTableName="Person"
                                  referencedColumnNames="UserName" referencedTableSchemaName="${schemaName}"/>
-    </changeSet>
-    <changeSet id="v1-01-06" author="rahul-jain">
         <createTable tableName="ManagerDirectReport" schemaName="${schemaName}">
             <column name="Id" type="SERIAL" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
@@ -83,20 +73,12 @@
                 <constraints nullable="false" checkConstraint="UserName != Peer"/>
             </column>
         </createTable>
-    </changeSet>
-    <changeSet id="v1-01-07" author="rahul-jain">
         <addForeignKeyConstraint baseTableSchemaName="${schemaName}" baseTableName="ManagerDirectReport" baseColumnNames="UserName" constraintName="ManagerDirectReport_Manager_fk" referencedTableName="Person"
                                  referencedColumnNames="UserName" referencedTableSchemaName="${schemaName}"/>
-    </changeSet>
-    <changeSet id="v1-01-08" author="rahul-jain">
         <addForeignKeyConstraint baseTableSchemaName="${schemaName}" baseTableName="ManagerDirectReport" baseColumnNames="DirectReport" constraintName="ManagerDirectReport_Person_fk" referencedTableName="Person"
                                  referencedColumnNames="UserName" referencedTableSchemaName="${schemaName}"/>
-    </changeSet>
-    <changeSet id="v1-01-09" author="rahul-jain">
         <addForeignKeyConstraint baseTableSchemaName="${schemaName}" baseTableName="Person" baseColumnNames="Friend" constraintName="BestFriend_Person_fk" referencedTableName="Person"
                                  referencedTableSchemaName="${schemaName}" referencedColumnNames="UserName"/>
-    </changeSet>
-    <changeSet id="v1-02-01" author="rahul-jain">
         <createTable  schemaName="${schemaName}" tableName="Trip">
             <column name="TripId" type="SERIAL" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
@@ -115,8 +97,6 @@
             <column name="StartTime" type="TIME"/>
             <column name="EndTime" type="TIME"/>
         </createTable>
-    </changeSet>
-    <changeSet id="v1-02-02" author="rahul-jain">
         <createTable schemaName="${schemaName}"  tableName="PersonTrip">
             <column name="Id" type="SERIAL" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
@@ -128,20 +108,11 @@
                 <constraints nullable="false"/>
             </column>
         </createTable>
-    </changeSet>
-    <changeSet id="v1-02-03" author="rahul-jain">
         <addForeignKeyConstraint baseTableSchemaName="${schemaName}" baseTableName="PersonTrip" baseColumnNames="UserName" constraintName="Person_PersonTrip_fk" referencedTableName="Person"
                                  referencedColumnNames="UserName" referencedTableSchemaName="${schemaName}"/>
-    </changeSet>
-    <changeSet id="v1-02-04" author="rahul-jain">
         <addForeignKeyConstraint baseTableSchemaName="${schemaName}" baseTableName="PersonTrip" baseColumnNames="TripId" constraintName="Trip_PersonTrip_fk" referencedTableName="Trip"
                                  referencedColumnNames="TripId" referencedTableSchemaName="${schemaName}"/>
-    </changeSet>
-    <changeSet id="v1-02-05" author="rahul-jain">
        <addUniqueConstraint tableName="PersonTrip" schemaName="${schemaName}" columnNames="UserName,TripId" />
-    </changeSet>
-
-    <changeSet id="v1-03-01" author="rahul-jain">
         <createTable schemaName="${schemaName}"  tableName="PersonEmail">
             <column name="Id" type="SERIAL" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
@@ -153,12 +124,8 @@
                 <constraints nullable="false"/>
             </column>
         </createTable>
-    </changeSet>
-    <changeSet id="v1-03-02" author="rahul-jain">
         <addForeignKeyConstraint baseTableSchemaName="${schemaName}" baseTableName="PersonEmail" baseColumnNames="UserName" constraintName="Person_PersonEmail_fk" referencedTableName="Person"
                                  referencedColumnNames="UserName" referencedTableSchemaName="${schemaName}"/>
-    </changeSet>
-    <changeSet id="v1-04-01" author="rahuljain">
         <createTable schemaName="${schemaName}"  tableName="PersonAddressInfo">
             <column name="Id" type="SERIAL" autoIncrement="true">
                 <constraints  primaryKey="true" primaryKeyName="PersonAddressInfo_pk"/>
@@ -172,12 +139,8 @@
             <column name="CountryRegion" type="VARCHAR(100)"/>
             <column name="Region" type="VARCHAR(200)"/>
         </createTable>
-    </changeSet>
-    <changeSet id="v1-04-02" author="rahul-jain">
         <addForeignKeyConstraint baseTableSchemaName="${schemaName}" baseTableName="PersonAddressInfo" baseColumnNames="UserName" constraintName="Person_PersonAddressInfo_fk" referencedTableName="Person"
                                  referencedColumnNames="UserName" referencedTableSchemaName="${schemaName}"/>
-    </changeSet>
-    <changeSet id="v1-05-01" author="rahul-jain">
         <createTable schemaName="${schemaName}"  tableName="PersonFeature">
             <column name="Id" type="SERIAL" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
@@ -189,15 +152,9 @@
                 <constraints nullable="false"/>
             </column>
         </createTable>
-    </changeSet>
-    <changeSet id="v1-05-02" author="rahul-jain">
         <addForeignKeyConstraint baseTableSchemaName="${schemaName}" baseTableName="PersonFeature" baseColumnNames="UserName" constraintName="Person_PersonFeature_fk" referencedTableName="Person"
                                  referencedColumnNames="UserName" referencedTableSchemaName="${schemaName}"/>
-    </changeSet>
-    <changeSet id="v1-05-03" author="rahul-jain">
         <addUniqueConstraint tableName="PersonFeature" columnNames="UserName,Features" schemaName="${schemaName}"/>
-    </changeSet>
-    <changeSet id="v1-06-01" author="rahul-jain">
         <createTable schemaName="${schemaName}"  tableName="PersonFriend">
             <column name="Id" type="SERIAL" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
@@ -209,22 +166,14 @@
                 <constraints nullable="false" checkConstraint="UserName != Friend"/>
             </column>
         </createTable>
-    </changeSet>
-    <changeSet id="v1-06-02" author="rahul-jain">
         <addForeignKeyConstraint baseTableSchemaName="${schemaName}" baseTableName="PersonFriend" baseColumnNames="UserName" constraintName="Person_PersonFriend_fk" referencedTableName="Person"
                                  referencedColumnNames="UserName" referencedTableSchemaName="${schemaName}"/>
-    </changeSet>
-    <changeSet id="v1-06-03" author="rahul-jain">
         <addForeignKeyConstraint baseTableSchemaName="${schemaName}" baseTableName="PersonFriend" baseColumnNames="Friend" constraintName="Person_PersonFriend_fk2" referencedTableName="Person"
                                  referencedColumnNames="UserName" referencedTableSchemaName="${schemaName}"/>
-    </changeSet>
-    <changeSet id="v1-06-04" author="rahul-jain">
         <createIndex tableName="PersonFriend" indexName="UserName_Friend_unique" schemaName="${schemaName}" unique="true">
             <column name="UserName"></column>
             <column name="Friend"></column>
         </createIndex>
-    </changeSet>
-    <changeSet id="v1-07-04" author="rahul-jain">
         <createTable schemaName="${schemaName}"  tableName="Airport">
             <column name="IcaoCode" type="VARCHAR(250)">
                 <constraints primaryKey="true" nullable="false" primaryKeyName="airport_icao_pk"/>
@@ -246,16 +195,12 @@
             <column name="Region" type="VARCHAR(200)"/>
 
         </createTable>
-    </changeSet>
-    <changeSet id="v1-09-01" author="rahul-jain">
         <createTable tableName="Airline" schemaName="${schemaName}">
             <column name="AirlineCode" type="VARCHAR(250)">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
             <column name="Name" type="VARCHAR(250)"/>
         </createTable>
-    </changeSet>
-    <changeSet id="v1-08-01" author="rahuljain">
         <createTable tableName="BasePlanItem" schemaName="${schemaName}">
             <column name="PlanItemId" type="SERIAL" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
@@ -286,25 +231,15 @@
             <column name="FlightFrom" type="VARCHAR(250)"/>
             <column name="FlightTo" type="VARCHAR(250)"/>
         </createTable>
-    </changeSet>
-    <changeSet id="v1-08-02" author="rahul-jain">
         <addForeignKeyConstraint baseTableName="BasePlanItem" baseColumnNames="FlightAirline" baseTableSchemaName="${schemaName}" constraintName="Flight_Airline_fk" referencedTableName="Airline"
                                  referencedColumnNames="AirlineCode" referencedTableSchemaName="${schemaName}"/>
-    </changeSet>
-    <changeSet id="v1-08-03" author="rahul-jain">
         <addForeignKeyConstraint baseTableName="BasePlanItem" baseColumnNames="FlightTo" baseTableSchemaName="${schemaName}" constraintName="Flight_Airport_To_fk" referencedTableName="Airport"
                                  referencedColumnNames="IcaoCode" referencedTableSchemaName="${schemaName}"/>
-    </changeSet>
-    <changeSet id="v1-08-04" author="rahul-jain">
         <addForeignKeyConstraint baseTableName="BasePlanItem" baseColumnNames="FlightFrom" baseTableSchemaName="${schemaName}" constraintName="Flight_Airport_From_fk" referencedTableName="Airport"
                                  referencedColumnNames="IcaoCode" referencedTableSchemaName="${schemaName}"/>
-    </changeSet>
-    <changeSet id="v1-08-05" author="rahul-jain">
         <addColumn tableName="BasePlanItem" schemaName="${schemaName}">
             <column name="TripId" type="INTEGER"/>
         </addColumn>
-    </changeSet>
-    <changeSet id="v2-01-01" author="rahul-jain">
         <createTable tableName="TripTag" schemaName="${schemaName}">
             <column name="Id" type="SERIAL" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
@@ -312,12 +247,8 @@
             <column name="TripId" type="INTEGER"/>
             <column name="Tag" type="VARCHAR(250)"/>
         </createTable>
-    </changeSet>
-    <changeSet id="v2-01-02" author="rahul-jain">
         <addForeignKeyConstraint baseTableName="TripTag" baseTableSchemaName="${schemaName}" baseColumnNames="TripId" constraintName="Trip_TripTag_fk" referencedTableName="Trip"
                                  referencedColumnNames="TripId" referencedTableSchemaName="${schemaName}"/>
-    </changeSet>
-    <changeSet id="v2-03-01" author="rahul-jain">
         <createProcedure catalogName="PERSON_WITH_MOST_FRIENDS"
                          dbms="postgresql"
                          encoding="utf8"
@@ -325,8 +256,6 @@
                          procedureName="PERSON_WITH_MOST_FRIENDS"
                          relativeToChangelogFile="true"
                          schemaName="${schemaName}"></createProcedure>
-    </changeSet>
-    <changeSet id="v2-04-01" author="rahul-jain">
         <createTable tableName="CompositeKeyEntity" schemaName="${schemaName}">
             <column name="Code" type="VARCHAR(100)">
                 <constraints nullable="false"/>
@@ -339,8 +268,6 @@
             </column>
         </createTable>
         <addPrimaryKey tableName="CompositeKeyEntity" columnNames="Code,CodeID,DivisonCode" schemaName="${schemaName}"/>
-    </changeSet>
-    <changeSet id="v2-05-01" author="rahul-jain">
         <createTable tableName="Document" schemaName="${schemaName}">
             <column name="DocId" type="VARCHAR(250)">
                 <constraints primaryKey="true"  nullable="false"/>
@@ -351,25 +278,16 @@
             <column name="DocName" type="VARCHAR(100)"/>
             <column name="DocLocation" type="VARCHAR(100)"/>
         </createTable>
-    </changeSet>
-    <changeSet id="v2-05-02" author="rahul-jain">
         <addColumn tableName="BasePlanItem" schemaName="${schemaName}">
             <column name="DocumentId" type="VARCHAR(250)"/>
         </addColumn>
         <addForeignKeyConstraint baseTableName="BasePlanItem" baseTableSchemaName="${schemaName}" baseColumnNames="DocumentId" constraintName="PlanItem_Ticket_fk"
                                   referencedTableSchemaName="${schemaName}" referencedTableName="Document"
                                  referencedColumnNames="DocId"/>
-    </changeSet>
-    <changeSet id="v2-05-03" author="rahul-jain">
         <addColumn tableName="Document" schemaName="${schemaName}">
             <column name="PersonId" type="VARCHAR(250)"/>
         </addColumn>
         <addForeignKeyConstraint baseTableName="Document" baseTableSchemaName="${schemaName}" baseColumnNames="PersonId" constraintName="Attachments_Person_pk" referencedTableName="Person"
                                  referencedTableSchemaName="${schemaName}" referencedColumnNames="UserName"/>
-    </changeSet>
-    <changeSet id="v2-05-04" author="rahul-jain">
-        <addColumn tableName="Trip" schemaName="${schemaName}">
-            <column name="ShareId" type="VARCHAR(50)"></column>
-        </addColumn>
     </changeSet>
 </databaseChangeLog>
