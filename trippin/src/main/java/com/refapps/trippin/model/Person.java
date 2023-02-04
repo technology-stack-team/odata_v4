@@ -42,7 +42,7 @@ import javax.persistence.TemporalType;
 @DiscriminatorValue(value = "1")
 @EdmFunction(
         name = "GetPersonWithMostFriends",
-        functionName = "Trippin\".\"personWithMostFriends",
+        functionName = "trippin.personWithMostFriends",
         isBound = false,
         hasFunctionImport = true,
         returnType = @EdmFunction.ReturnType(isCollection = false, type = Person.class)

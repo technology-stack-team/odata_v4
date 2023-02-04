@@ -248,7 +248,7 @@
         <addForeignKeyConstraint baseTableName="TripTag" baseTableSchemaName="${schemaName}" baseColumnNames="TripId" constraintName="Trip_TripTag_fk" referencedTableName="Trip"
                                  referencedColumnNames="TripId" referencedTableSchemaName="${schemaName}"/>
         <createProcedure catalogName="PERSON_WITH_MOST_FRIENDS"
-                         dbms="postgresql"
+                         dbms="mysql"
                          encoding="utf8"
                          path="db/functions.sql"
                          procedureName="PERSON_WITH_MOST_FRIENDS"
