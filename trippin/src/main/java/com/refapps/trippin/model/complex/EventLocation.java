@@ -11,6 +11,6 @@ public class EventLocation {
     public EventLocation() {
     }
 
-    @Column(name = "\"BuildingInfo\"")
+    @Column(name = "BuildingInfo")
     private String buildingInfo;
 }

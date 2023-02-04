@@ -42,15 +42,15 @@ import javax.persistence.TemporalType;
 @DiscriminatorValue(value = "1")
 @EdmFunction(
         name = "GetPersonWithMostFriends",
-        functionName = "\"Trippin\".\"personWithMostFriends\"",
+        functionName = "Trippin\".\"personWithMostFriends",
         isBound = false,
         hasFunctionImport = true,
         returnType = @EdmFunction.ReturnType(isCollection = false, type = Person.class)
        /* parameter = {
-                @EdmParameter(name = "CodePublisher", parameterName = "\"Publisher\"",
+                @EdmParameter(name = "CodePublisher", parameterName = "Publisher",
                         type = String.class, maxLength = 10),
-                @EdmParameter(name = "CodeID", parameterName = "\"ID\"", type = String.class, maxLength = 10),
-                @EdmParameter(name = "DivisionCode", parameterName = "\"Division\"", type = String.class,
+                @EdmParameter(name = "CodeID", parameterName = "ID", type = String.class, maxLength = 10),
+                @EdmParameter(name = "DivisionCode", parameterName = "Division", type = String.class,
                         maxLength = 10) }*/)
 
 public class Person extends AbstractPerson {
@@ -59,38 +59,38 @@ public class Person extends AbstractPerson {
     dType = "1";
   }
 
-  @Column(name = "\"FirstName\"", nullable = false)
+  @Column(name = "FirstName", nullable = false)
   private String firstName;
 
-  @Column(name = "\"LastName\"", length = 26)
+  @Column(name = "LastName", length = 26)
   private String lastName;
 
-  @Column(name = "\"MiddleName\"")
+  @Column(name = "MiddleName")
   private String middleName;
-  @Column(name = "\"Income\"",  precision = 30, scale = 5)
+  @Column(name = "Income",  precision = 30, scale = 5)
   private BigDecimal income;
-  @Column(name = "\"DateOfBirth\"")
+  @Column(name = "DateOfBirth")
   @Temporal(value = TemporalType.DATE)
   private Date dateOfBirth;
-  @Column(name = "\"Photo\"", length = 64000)
+  @Column(name = "Photo", length = 64000)
   private byte[] photo;
-  @Column(name = "\"Gender\"", nullable = false)
+  @Column(name = "Gender", nullable = false)
   @Enumerated(value = EnumType.ORDINAL)
   @Convert(converter = GenderConverter.class)
   private PersonGender gender;
-  @Column(name = "\"Age\"")
+  @Column(name = "Age")
   private Short age;
-  @Column(name = "\"Emails\"")
+  @Column(name = "Emails")
   @ElementCollection(fetch = FetchType.LAZY)
-  @CollectionTable(schema = "\"Trippin\"", name = "\"PersonEmail\"",
-          joinColumns = @JoinColumn(name = "\"UserName\""))
+  @CollectionTable(schema = "Trippin", name = "PersonEmail",
+          joinColumns = @JoinColumn(name = "UserName"))
   private List<String> emails = new ArrayList<>();
 
   @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.MERGE})
   @JoinTable(
-          name="\"PersonTrip\"",
-          joinColumns = @JoinColumn( name="\"UserName\""),
-          inverseJoinColumns = @JoinColumn(name = "\"TripId\""),schema = "\"Trippin\"")
+          name="PersonTrip",
+          joinColumns = @JoinColumn( name="UserName"),
+          inverseJoinColumns = @JoinColumn(name = "TripId"),schema = "Trippin")
   private List<Trip> trips = new ArrayList<>();
 
   @Override
@@ -131,34 +131,34 @@ public class Person extends AbstractPerson {
   }
 
   @ElementCollection(fetch = FetchType.LAZY)
-  @CollectionTable(schema = "\"Trippin\"", name = "\"PersonAddressInfo\"",
-          joinColumns = @JoinColumn(name = "\"UserName\"", updatable = true, insertable = true))
+  @CollectionTable(schema = "Trippin", name = "PersonAddressInfo",
+          joinColumns = @JoinColumn(name = "UserName", updatable = true, insertable = true))
   private List<Location> addressInfo = new ArrayList<>();
 
   @Embedded
-  @Column(name = "\"HomeAddress\"")
+  @Column(name = "HomeAddress")
   @AttributeOverrides({
-          @AttributeOverride(name = "city.name", column = @Column(name = "\"HomeAddress_CityName\"")),
-          @AttributeOverride(name = "city.region", column = @Column(name = "\"HomeAddress_CityRegion\"")),
-          @AttributeOverride(name = "city.countryRegion", column = @Column(name = "\"HomeAddress_CityCountryRegion\"")),
-          @AttributeOverride(name = "address", column = @Column(name = "\"HomeAddress_Address\"")),
-          @AttributeOverride(name = "code", column = @Column(name = "\"HomeAddress_Code\""))
+          @AttributeOverride(name = "city.name", column = @Column(name = "HomeAddress_CityName")),
+          @AttributeOverride(name = "city.region", column = @Column(name = "HomeAddress_CityRegion")),
+          @AttributeOverride(name = "city.countryRegion", column = @Column(name = "HomeAddress_CityCountryRegion")),
+          @AttributeOverride(name = "address", column = @Column(name = "HomeAddress_Address")),
+          @AttributeOverride(name = "code", column = @Column(name = "HomeAddress_Code"))
   })
   private Location homeAddress;
 
-  @Column(name = "\"FavoriteFeature\"", nullable = false)
+  @Column(name = "FavoriteFeature", nullable = false)
   @Enumerated(value = EnumType.ORDINAL)
   @Convert(converter = FeaturesConverter.class)
   private Feature favoriteFeature;
 
-  @Column(name = "\"Features\"")
+  @Column(name = "Features")
   @ElementCollection(fetch = FetchType.LAZY)
-  @CollectionTable(schema = "\"Trippin\"", name = "\"PersonFeature\"",
-          joinColumns = @JoinColumn(name = "\"UserName\""))
+  @CollectionTable(schema = "Trippin", name = "PersonFeature",
+          joinColumns = @JoinColumn(name = "UserName"))
   @Convert(converter = FeaturesConverter.class)
   List<Feature> features = new ArrayList<>();
 
-  @JoinColumn(name = "\"Friend\"", insertable = false, updatable = false, referencedColumnName = "\"UserName\"")
+  @JoinColumn(name = "Friend", insertable = false, updatable = false, referencedColumnName = "UserName")
   @OneToOne(fetch = FetchType.LAZY, cascade = {})
   private Person bestFriend;
 
@@ -168,12 +168,12 @@ public class Person extends AbstractPerson {
 
   @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST})
   @JoinTable(
-          name="\"PersonFriend\"",
-          joinColumns = @JoinColumn( name="\"UserName\""),
-          inverseJoinColumns = @JoinColumn( name="\"Friend\""), schema = "\"Trippin\"")
+          name="PersonFriend",
+          joinColumns = @JoinColumn( name="UserName"),
+          inverseJoinColumns = @JoinColumn( name="Friend"), schema = "Trippin")
   private List<Person> friends = new ArrayList<>();
 
-  @Column(name = "\"Friend\"")
+  @Column(name = "Friend")
   private String friend;
 
   @Override

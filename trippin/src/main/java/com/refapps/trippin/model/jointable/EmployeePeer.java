@@ -10,17 +10,17 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity(name = "EmployeePeer")
-@Table(schema = "\"Trippin\"", name = "\"EmployeePeer\"")
+@Table(schema = "Trippin", name = "EmployeePeer")
 @Data
 public class EmployeePeer {
     @Id
-    @Column(name = "\"Id\"")
+    @Column(name = "Id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "\"UserName\"")
+    @Column(name = "UserName")
     private String userName;
 
-    @Column(name = "\"Peer\"")
+    @Column(name = "Peer")
     private String peer;
 }

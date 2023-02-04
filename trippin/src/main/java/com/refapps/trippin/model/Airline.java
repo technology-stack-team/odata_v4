@@ -8,14 +8,14 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity(name = "Airline")
-@Table(name = "\"Airline\"",  schema =  "\"Trippin\"")
+@Table(name = "Airline",  schema =  "Trippin")
 @Data
 public class Airline {
     @Id
-    @Column(name = "\"AirlineCode\"")
+    @Column(name = "AirlineCode")
     private String airlineCode;
 
-    @Column(name = "\"Name\"")
+    @Column(name = "Name")
     private String name;
 
 

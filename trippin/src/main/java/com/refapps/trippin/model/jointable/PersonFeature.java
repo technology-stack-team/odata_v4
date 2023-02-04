@@ -15,20 +15,20 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity(name = "PersonFeature")
-@Table(schema = "\"Trippin\"", name = "\"PersonFeature\"")
+@Table(schema = "Trippin", name = "PersonFeature")
 @Data
 public class PersonFeature {
 
     @Id
-    @Column(name = "\"Id\"")
+    @Column(name = "Id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 //    @SequenceGenerator(name = "PersonFeature.Id", sequenceName = "PersonFeature.Id", allocationSize = 1)
     private Integer id;
 
-    @Column(name = "\"UserName\"")
+    @Column(name = "UserName")
     private String userName;
 
-    @Column(name = "\"Features\"")
+    @Column(name = "Features")
     @Enumerated(value = EnumType.ORDINAL)
     @Convert(converter = FeaturesConverter.class)
     private Feature feature;

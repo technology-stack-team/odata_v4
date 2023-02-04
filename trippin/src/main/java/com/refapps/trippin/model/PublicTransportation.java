@@ -10,6 +10,6 @@ import javax.persistence.Entity;
 @Data
 @DiscriminatorValue(value = "3")
 public class PublicTransportation extends PlanItem{
-    @Column(name = "\"SeatNo\"")
+    @Column(name = "SeatNo")
     private String seatNo;
 }

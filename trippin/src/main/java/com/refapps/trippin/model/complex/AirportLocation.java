@@ -11,6 +11,6 @@ public class AirportLocation {
     public AirportLocation() {
         super();
     }
-    @Column(name = "\"Loc\"")
+    @Column(name = "Loc")
     private String loc;
 }

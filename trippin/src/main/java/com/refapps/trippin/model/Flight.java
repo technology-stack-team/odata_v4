@@ -13,27 +13,27 @@ import javax.persistence.ManyToOne;
 @Data
 @DiscriminatorValue(value = "4")
 public class Flight extends PublicTransportation {
-    @Column(name = "\"FlightNumber\"")
+    @Column(name = "FlightNumber")
     private String flightNumber;
-    @JoinColumn(name = "\"FlightAirline\"", insertable = false, updatable = false, referencedColumnName = "\"AirlineCode\"")
+    @JoinColumn(name = "FlightAirline", insertable = false, updatable = false, referencedColumnName = "AirlineCode")
     @ManyToOne(fetch = FetchType.LAZY, cascade = {})
     private Airline airline;
 
-    @JoinColumn(name = "\"FlightFrom\"", insertable = false, updatable = false, referencedColumnName = "\"IcaoCode\"")
+    @JoinColumn(name = "FlightFrom", insertable = false, updatable = false, referencedColumnName = "IcaoCode")
     @ManyToOne(fetch = FetchType.LAZY, cascade = {})
     private Airport from;
 
-    @JoinColumn(name = "\"FlightTo\"", insertable = false, updatable = false, referencedColumnName = "\"IcaoCode\"")
+    @JoinColumn(name = "FlightTo", insertable = false, updatable = false, referencedColumnName = "IcaoCode")
     @ManyToOne(fetch = FetchType.LAZY, cascade = {})
     private Airport to;
 
-    @Column(name = "\"FlightAirline\"")
+    @Column(name = "FlightAirline")
     private String flightAirline;
 
-    @Column(name = "\"FlightFrom\"")
+    @Column(name = "FlightFrom")
     private String flightFrom;
 
-    @Column(name = "\"FlightTo\"")
+    @Column(name = "FlightTo")
     private String flightTo;
 
 }

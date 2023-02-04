@@ -16,6 +16,6 @@ public class AirportRepository extends SimpleJpaRepository<Airport, String> {
     }
     @Override
     public List<Airport> findAll() {
-        return em.createNativeQuery("Select * from \"Trippin\".\"Airport\"", Airport.class).getResultList();
+        return em.createNativeQuery("Select * from Trippin.Airport", Airport.class).getResultList();
     }
 }

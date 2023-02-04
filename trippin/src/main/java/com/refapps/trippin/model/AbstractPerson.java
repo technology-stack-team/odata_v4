@@ -10,16 +10,16 @@ import javax.persistence.Inheritance;
 import javax.persistence.Table;
 
 @Entity(name = "AbstractPerson")
-@Table(name = "\"Person\"", schema =  "\"Trippin\"")
+@Table(name = "Person", schema =  "Trippin")
 @Data
 @Inheritance
-@DiscriminatorColumn(name = "\"DType\"")
+@DiscriminatorColumn(name = "DType")
 public abstract class AbstractPerson {
 
     @Id
-    @Column(name = "\"UserName\"")
+    @Column(name = "UserName")
     protected String userName;
 
-    @Column(name = "\"DType\"", length = 1, insertable = false, updatable = false, nullable = false)
+    @Column(name = "DType", length = 1, insertable = false, updatable = false, nullable = false)
     protected String dType;
 }

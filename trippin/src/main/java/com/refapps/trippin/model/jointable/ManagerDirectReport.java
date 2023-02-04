@@ -10,17 +10,17 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity(name = "ManagerDirectReport")
-@Table(schema = "\"Trippin\"", name = "\"ManagerDirectReport\"")
+@Table(schema = "Trippin", name = "ManagerDirectReport")
 @Data
 public class ManagerDirectReport {
     @Id
-    @Column(name = "\"Id\"")
+    @Column(name = "Id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "\"UserName\"")
+    @Column(name = "UserName")
     private String userName;
 
-    @Column(name = "\"DirectReport\"")
+    @Column(name = "DirectReport")
     private String directReport;
 }

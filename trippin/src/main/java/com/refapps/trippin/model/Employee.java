@@ -17,13 +17,13 @@ import java.util.List;
 @Data
 @DiscriminatorValue(value = "2")
 public class Employee extends Person {
-    @Column(name = "\"Cost\"", nullable = false)
+    @Column(name = "Cost", nullable = false)
     private Long cost;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.MERGE})
     @JoinTable(
-            name="\"EmployeePeer\"",
-            joinColumns = @JoinColumn( name="\"UserName\""),
-            inverseJoinColumns = @JoinColumn( name="\"Peer\""), schema = "\"Trippin\"")
+            name="EmployeePeer",
+            joinColumns = @JoinColumn( name="UserName"),
+            inverseJoinColumns = @JoinColumn( name="Peer"), schema = "Trippin")
     private List<Person> peers = new ArrayList<>();
 }

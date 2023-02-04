@@ -18,31 +18,31 @@ import java.time.Duration;
 import java.util.Date;
 
 @Entity(name = "BasePlanItem")
-@Table(name = "\"BasePlanItem\"", schema =  "\"Trippin\"")
+@Table(name = "BasePlanItem", schema =  "Trippin")
 @Data
 @Inheritance
-@DiscriminatorColumn(name = "\"Type\"")
+@DiscriminatorColumn(name = "Type")
 public abstract class BasePlanItem {
     public BasePlanItem() {}
 
     @Id
-    @Column(name = "\"PlanItemId\"")
+    @Column(name = "PlanItemId")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer planItemId;
-    @Column(name = "\"ConfirmationCode\"")
+    @Column(name = "ConfirmationCode")
     private String confirmationCode;
-    @Column(name = "\"StartsAt\"", nullable = false)
+    @Column(name = "StartsAt", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date startsAt;
-    @Column(name = "\"EndsAt\"", nullable = false)
+    @Column(name = "EndsAt", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date endsAt;
     @Convert(converter = DurationConverter.class)
-    @Column(name = "\"Duration\"", nullable = false)
+    @Column(name = "Duration", nullable = false)
     private Duration duration;
 
-    @Column(name = "\"Type\"", length = 1, insertable = false, updatable = false, nullable = false)
+    @Column(name = "Type", length = 1, insertable = false, updatable = false, nullable = false)
     protected String type;
-    @Column(name = "\"TripId\"")
+    @Column(name = "TripId")
     private Integer tripId;
 }

@@ -8,10 +8,10 @@ import javax.persistence.Embeddable;
 @Embeddable
 @Data
 public class City {
-    @Column(name = "\"LocationName\"")
+    @Column(name = "LocationName")
     private String name;
-    @Column(name = "\"CountryRegion\"")
+    @Column(name = "CountryRegion")
     private String countryRegion;
-    @Column(name = "\"Region\"")
+    @Column(name = "Region")
     private String region;
 }

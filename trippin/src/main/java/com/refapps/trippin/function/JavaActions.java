@@ -25,7 +25,7 @@ public class JavaActions implements ODataAction {
     public void resetDataSource() {
         EntityTransaction entityTransaction = entityManager.getTransaction();
         entityTransaction.begin();
-        entityManager.createNativeQuery("DELETE FROM \"Trippin\".\"Airport\"").executeUpdate();
+        entityManager.createNativeQuery("DELETE FROM Trippin.Airport").executeUpdate();
         entityTransaction.commit();
     }
 

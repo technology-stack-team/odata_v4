@@ -19,10 +19,10 @@ public class PlanItem extends BasePlanItem{
     }
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "\"DocumentId\"", referencedColumnName = "\"DocId\"", insertable = false, updatable = false)
+    @JoinColumn(name = "DocumentId", referencedColumnName = "DocId", insertable = false, updatable = false)
     private Document ticket;
 
-    @Column(name =  "\"DocumentId\"")
+    @Column(name =  "DocumentId")
     private String documentId;
 
 }

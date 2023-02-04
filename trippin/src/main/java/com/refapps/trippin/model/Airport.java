@@ -11,29 +11,29 @@ import javax.persistence.Table;
 import javax.persistence.Version;
 
 @Entity(name = "Airport")
-@Table(name = "\"Airport\"",  schema =  "\"Trippin\"")
+@Table(name = "Airport",  schema =  "Trippin")
 @Data
 public class Airport {
     @Id
-    @Column(name = "\"IcaoCode\"", nullable = false)
+    @Column(name = "IcaoCode", nullable = false)
     private String icaoCode;
 
     @Version
-    @Column(name = "\"ETag\"", nullable = false)
+    @Column(name = "ETag", nullable = false)
     protected long eTag;
 
-    @Column(name = "\"Name\"")
+    @Column(name = "Name")
     private String name;
-    @Column(name = "\"IataCode\"")
+    @Column(name = "IataCode")
     private String iataCode;
     @Embedded
-    @Column(name =  "\"Location\"")
+    @Column(name =  "Location")
     private AirportLocation airportLocation;
-    @Column(name = "\"latitude\"")
+    @Column(name = "latitude")
     private Double latitude;
-    @Column(name = "\"longitude\"")
+    @Column(name = "longitude")
     private Double longitude;
-    @Column(name = "\"IsInsideCity\"")
+    @Column(name = "IsInsideCity")
     private Boolean isInsideCity;
 
 }

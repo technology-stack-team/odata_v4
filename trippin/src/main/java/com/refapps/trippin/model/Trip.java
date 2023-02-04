@@ -14,7 +14,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -25,51 +25,51 @@ import java.util.List;
 import java.util.UUID;
 
 @Entity(name = "Trip")
-@Table(schema = "\"Trippin\"", name = "\"Trip\"")
+@Table(schema = "Trippin", name = "Trip")
 @Data
 public class Trip {
   @Id
-  @Column(name = "\"TripId\"")
+  @Column(name = "TripId")
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer tripId;
 
-  @Column(name = "\"ShareId\"")
+  @Column(name = "ShareId")
   @Convert(converter = UUIDToStringConverter.class)
   private UUID shareId;
 
-  @Column(name = "\"Name\"")
+  @Column(name = "Name")
   private String name;
 
-  @Column(name = "\"Budget\"")
+  @Column(name = "Budget")
   private Float budget;
 
-  @Column(name = "\"Description\"")
+  @Column(name = "Description")
   private String description;
 
-  @Column(name = "\"Tag\"")
+  @Column(name = "Tag")
   @ElementCollection(fetch = FetchType.LAZY)
-  @CollectionTable(schema = "\"Trippin\"", name = "\"TripTag\"",
-          joinColumns = @JoinColumn(name = "\"TripId\""))
+  @CollectionTable(schema = "Trippin", name = "TripTag",
+          joinColumns = @JoinColumn(name = "TripId"))
   private List<String> tags = new ArrayList<>();
 
-  @Column(name = "\"StartsAt\"")
+  @Column(name = "StartsAt")
   @Temporal(TemporalType.TIMESTAMP)
   private Date startsAt;
 
-  @Column(name = "\"EndsAt\"")
+  @Column(name = "EndsAt")
   @Temporal(TemporalType.TIMESTAMP)
   private Date endsAt;
 
-  @Column(name = "\"StartTime\"")
+  @Column(name = "StartTime")
   @Temporal(TemporalType.TIME)
   private Date startTime;
 
-  @Column(name = "\"EndTime\"")
+  @Column(name = "EndTime")
   @Temporal(TemporalType.TIME)
   private Date endTime;
 
   @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST})
-  @JoinColumn(name = "\"TripId\"", insertable = false, updatable = false)
+  @JoinColumn(name = "TripId", insertable = false, updatable = false)
   private List<PlanItem> planItems = new ArrayList<>();
 
   @ManyToMany(mappedBy = "trips")

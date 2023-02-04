@@ -86,9 +86,7 @@
 <!--            <column name="UserName" type="VARCHAR(250)">-->
 <!--                <constraints nullable="false"/>-->
 <!--            </column>-->
-            <!--        <column name="ShareId" type="VARCHAR(100)" >-->
-            <!--            <constraints nullable="false"/>-->
-            <!--        </column>-->
+            <column name="ShareId" type="VARCHAR(100)"/>
             <column name="Name" type="VARCHAR(250)"/>
             <column name="Budget" type="FLOAT"/>
             <column name="Description" type="VARCHAR(2500)"/>

@@ -12,9 +12,9 @@ import javax.persistence.Entity;
 @Data
 @DiscriminatorValue(value = "2")
 public class Event extends PlanItem {
-    @Column(name = "\"Description\"")
+    @Column(name = "Description")
     private String description;
-    @Column(name = "\"OccursAt\"")
+    @Column(name = "OccursAt")
     @Embedded
     private EventLocation eventLocation;
 }

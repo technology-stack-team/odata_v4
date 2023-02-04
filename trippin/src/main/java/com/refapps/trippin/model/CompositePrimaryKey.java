@@ -15,15 +15,15 @@ import java.util.Objects;
 public class CompositePrimaryKey   implements Serializable, Comparable<CompositePrimaryKey>{
 
     @Id
-    @Column(name = "\"Code\"", length = 10)
+    @Column(name = "Code", length = 10)
     private String code;
 
     @Id
-    @Column(name = "\"CodeID\"", length = 10)
+    @Column(name = "CodeID", length = 10)
     private Integer codeID;
 
     @Id
-    @Column(name = "\"DivisonCode\"", length = 10)
+    @Column(name = "DivisonCode", length = 10)
     private String divisonCode;
 
 
