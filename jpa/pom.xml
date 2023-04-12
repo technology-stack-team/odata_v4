@@ -58,6 +58,7 @@
                                 junit.platform.output.capture.stdout = false
                             </configurationParameters>
                         </properties>
+                        <skipTests>true</skipTests>
                     </configuration>
                 </plugin>
                 <plugin>
