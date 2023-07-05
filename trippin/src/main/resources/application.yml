@@ -29,7 +29,3 @@ eclipselink:
        auto:
             create:
                    delete: false
-
-jwt:
-  secret: replicacia
-
