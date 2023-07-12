@@ -548,10 +548,62 @@ class ControllerTest {
             .body("Trips.size()", is(1));
   }
 
+    @Test
+    public void testLinkPlanItemWithTrip() throws IOException {
+
+        given()
+                .contentType("application/json")
+                .body(getPayload("TripInstance2.json"))
+        .when()
+                .post("/TripPinRESTierService/Trips")
+        .then()
+                .statusCode(HttpStatusCode.CREATED.getStatusCode())
+                .body("TripId",is(1));
+
+        given()
+                .contentType("application/json")
+                .body(getPayload("PlanItemInstance.json"))
+        .when()
+                .post("/TripPinRESTierService/PlanItems")
+        .then()
+                .statusCode(HttpStatusCode.CREATED.getStatusCode())
+                .body("PlanItemId",is(1));
+
+        given()
+                .contentType("application/json").body("{\n" + " \"TripId\":1,\n" + "    \"PlanItemId\" : 1\n" + "}")
+        .when()
+                .post("/TripPinRESTierService/LinkTripWithPlanItem")
+        .then()
+                .statusCode(HttpStatusCode.OK.getStatusCode())
+                .body("value", is(true));
+
+        //Trip does not exist
+        given()
+                .contentType("application/json")
+                .body("{\n" + " \"TripId\":2,\n" + "    \"PlanItemId\" : 1\n" + "}")
+        .when()
+                .post("/TripPinRESTierService/LinkTripWithPlanItem")
+        .then()
+                .statusCode(HttpStatusCode.OK.getStatusCode())
+                .body("value", is(false));
+
+        //PlanItem does not exist
+        given()
+                .contentType("application/json")
+                .body("{\n" + " \"TripId\":1,\n" + "    \"PlanItemId\" : 10\n" + "}")
+        .when()
+                .post("/TripPinRESTierService/LinkTripWithPlanItem")
+        .then()
+                .statusCode(HttpStatusCode.OK.getStatusCode())
+                .body("value", is(false));
+    }
+
+
+
 
   @AfterEach
   void  teardown() {
-    jdbcTemplate.execute("DELETE FROM Trippin.TripTag");
+/*    jdbcTemplate.execute("DELETE FROM Trippin.TripTag");
     jdbcTemplate.execute("DELETE FROM Trippin.TripPlanItem");
     jdbcTemplate.execute("DELETE FROM Trippin.Trip");
     jdbcTemplate.execute("DELETE FROM Trippin.PersonEmail");
@@ -563,6 +615,6 @@ class ControllerTest {
     jdbcTemplate.execute("DELETE FROM Trippin.Airline");
     jdbcTemplate.execute("DELETE FROM Trippin.Airport");
 
-    RestAssuredMockMvc.reset();
+    RestAssuredMockMvc.reset();*/
   }
 }
