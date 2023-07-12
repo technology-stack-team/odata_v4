@@ -603,8 +603,9 @@ class ControllerTest {
 
   @AfterEach
   void  teardown() {
-/*    jdbcTemplate.execute("DELETE FROM Trippin.TripTag");
+    jdbcTemplate.execute("DELETE FROM Trippin.TripTag");
     jdbcTemplate.execute("DELETE FROM Trippin.TripPlanItem");
+    jdbcTemplate.execute("DELETE FROM Trippin.BasePlanItem");
     jdbcTemplate.execute("DELETE FROM Trippin.Trip");
     jdbcTemplate.execute("DELETE FROM Trippin.PersonEmail");
     jdbcTemplate.execute("DELETE FROM Trippin.PersonAddressInfo");
@@ -615,6 +616,6 @@ class ControllerTest {
     jdbcTemplate.execute("DELETE FROM Trippin.Airline");
     jdbcTemplate.execute("DELETE FROM Trippin.Airport");
 
-    RestAssuredMockMvc.reset();*/
+    RestAssuredMockMvc.reset();
   }
 }
