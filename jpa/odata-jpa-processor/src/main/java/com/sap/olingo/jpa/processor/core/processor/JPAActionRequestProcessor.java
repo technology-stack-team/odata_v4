@@ -117,9 +117,14 @@ public class JPAActionRequestProcessor extends JPAOperationRequestProcessor {
 //      final Map<String, Object> jpaAttributes = helper.convertUriKeys(odata, sd.getEntity(entitySet.getEntityType()),
 //          entitySet.getKeyPredicates());
       if (c != null) {
+        Object entityKey;
         String primaryKey =  entitySet.getKeyPredicates().get(0).getText();
-        primaryKey = primaryKey.replaceAll("'", "");
-        final Object param = em.find(parameter.getType(), primaryKey);
+        // Handle int primary key for entity
+        if(primaryKey.matches("\\d+"))
+            entityKey = Integer.parseInt(primaryKey);
+        else
+            entityKey = primaryKey.replaceAll("'", "");
+        final Object param = em.find(parameter.getType(), entityKey);
 //        util.setAttributesDeep(jpaAttributes, param, sd.getEntity(entitySet.getEntityType()));
         return param;
       }
