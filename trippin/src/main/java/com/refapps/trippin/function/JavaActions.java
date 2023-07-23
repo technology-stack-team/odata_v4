@@ -1,20 +1,26 @@
 package com.refapps.trippin.function;
 
+import java.util.List;
+
 import com.refapps.trippin.model.Person;
+import com.refapps.trippin.model.PlanItem;
 import com.refapps.trippin.model.Trip;
 import com.refapps.trippin.model.jointable.PersonTrip;
 import com.sap.olingo.jpa.metadata.core.edm.annotation.EdmAction;
 import com.sap.olingo.jpa.metadata.core.edm.annotation.EdmParameter;
 import com.sap.olingo.jpa.metadata.core.edm.mapper.extension.ODataAction;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
-import javax.transaction.Transactional;
 
 @Component
 public class JavaActions implements ODataAction {
+    private static final Log LOGGER = LogFactory.getLog(JavaActions.class);
     private final EntityManager entityManager;
 
     public JavaActions(EntityManager entityManager) {
@@ -58,6 +64,35 @@ public class JavaActions implements ODataAction {
                     }
                 }
             }
+        }
+    }
+
+    @EdmAction(name="LinkTripWithPlanItem", isBound = false)
+    public boolean linkTripWithPlanItem(@EdmParameter(name = "TripId")final int tripId, @EdmParameter(name = "PlanItemId") int planItemId) {
+        try {
+            // Find trip object by tripId
+            Trip trip = entityManager.find(Trip.class, tripId);
+            if (trip == null) {
+                LOGGER.warn("Trip with TripId not found.");
+                return false;
+            }
+            // Get plan items by plan Id
+            List<PlanItem> planItems = trip.getPlanItems();
+            PlanItem planItem = entityManager.find(PlanItem.class, planItemId);
+            if (planItem == null) {
+                LOGGER.warn("PlanItem with planItemId not found.");
+                return false;
+            }
+            //Associate trip with plan
+            planItems.add(planItem);
+            trip.setPlanItems(planItems);
+            entityManager.getTransaction().begin();
+            entityManager.merge(trip);
+            entityManager.getTransaction().commit();
+            return true;
+        } catch (Exception e) {
+            LOGGER.error("Error in LinkTripWithPlanItem", e);
+            return false;
         }
     }
 }

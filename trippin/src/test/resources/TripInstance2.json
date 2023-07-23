@@ -1,0 +1,14 @@
+ {
+	"Name": "Trip in India",
+	"Description": "Trip from Delhi to Chennai",
+	"StartsAt": "2013-01-01T01:45:00Z",
+	"ShareId": "237e9877-e79b-12d4-a765-321741963040",
+	"StartTime": "11:12:34",
+	"EndTime": "12:34:24",
+	"EndsAt": "2013-02-01T01:45:00Z",
+	"Tags": [
+		"canada",
+		"florida"
+	],
+	"Budget": null
+}

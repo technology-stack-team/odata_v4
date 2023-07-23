@@ -176,6 +176,11 @@
                 <Parameter Name="userName" Type="Edm.String" Nullable="false" Unicode="false" />
                 <Parameter Name="tripId" Type="Edm.Int32" Nullable="false" />
             </Action>
+            <Action Name="LinkTripWithPlanItem" IsBound="false">
+                <Parameter Name="TripId" Type="Edm.Int32" Nullable="false" />
+                <Parameter Name="PlanItemId" Type="Edm.Int32" Nullable="false" />
+                <ReturnType Type="Edm.Boolean" Nullable="false" />
+            </Action>
             <EntityContainer Name="Container">
                 <EntitySet Name="People" EntityType="Trippin.Person">
                     <NavigationPropertyBinding Path="BestFriend" Target="People" />
@@ -200,6 +205,7 @@
                 <FunctionImport Name="GetPersonWithMostFriends" Function="Trippin.GetPersonWithMostFriends" EntitySet="People" />
                 <FunctionImport Name="GetNearestAirport" Function="Trippin.GetNearestAirport" EntitySet="Airports" />
                 <ActionImport Name="ResetDataSource" Action="Trippin.ResetDataSource" />
+                <ActionImport Name="LinkTripWithPlanItem" Action="Trippin.LinkTripWithPlanItem" />
             </EntityContainer>
         </Schema>
     </edmx:DataServices>

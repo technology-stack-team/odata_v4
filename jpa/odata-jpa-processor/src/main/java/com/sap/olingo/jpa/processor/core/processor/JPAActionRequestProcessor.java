@@ -11,6 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.persistence.metamodel.EntityType;
+import javax.persistence.metamodel.Metamodel;
+import javax.persistence.metamodel.SingularAttribute;
+
 import org.apache.olingo.commons.api.data.Annotatable;
 import org.apache.olingo.commons.api.edm.EdmType;
 import org.apache.olingo.commons.api.ex.ODataException;
@@ -25,6 +29,7 @@ import org.apache.olingo.server.api.uri.UriResource;
 import org.apache.olingo.server.api.uri.UriResourceAction;
 import org.apache.olingo.server.api.uri.UriResourceEntitySet;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sap.olingo.jpa.metadata.core.edm.mapper.api.JPAAction;
 import com.sap.olingo.jpa.metadata.core.edm.mapper.api.JPAParameter;
 import com.sap.olingo.jpa.metadata.core.edm.mapper.exception.ODataJPAModelException;
@@ -119,7 +124,8 @@ public class JPAActionRequestProcessor extends JPAOperationRequestProcessor {
       if (c != null) {
         String primaryKey =  entitySet.getKeyPredicates().get(0).getText();
         primaryKey = primaryKey.replaceAll("'", "");
-        final Object param = em.find(parameter.getType(), primaryKey);
+        // Before making call to find the entiry, first cast the primay key from request to data type of id of the entity
+        final Object param = em.find(parameter.getType(), changeKeyToEntityIdDataType(parameter, primaryKey));
 //        util.setAttributesDeep(jpaAttributes, param, sd.getEntity(entitySet.getEntityType()));
         return param;
       }
@@ -145,6 +151,22 @@ public class JPAActionRequestProcessor extends JPAOperationRequestProcessor {
     else
       instance = c.newInstance();
     return instance;
+  }
+
+  /* Cast key param from request to data type of id property of Entity.
+    I would handle case like
+      Integer primary key
+      String primary key
+      Long/BigInt primary key
+      Primary id defined in base parent class.
+   */
+  protected Object changeKeyToEntityIdDataType(final JPAParameter parameter, String key) {
+    Metamodel metamodel = em.getMetamodel();
+    EntityType<?> entityType = metamodel.entity(parameter.getType());
+    SingularAttribute<?, ?> primaryKeyFromEntity = entityType.getId(entityType.getIdType().getJavaType());
+    Class<?> primaryKeyClassType = primaryKeyFromEntity.getJavaType();
+    ObjectMapper mapper = new ObjectMapper();
+    return mapper.convertValue(key, primaryKeyClassType);
   }
 
 }

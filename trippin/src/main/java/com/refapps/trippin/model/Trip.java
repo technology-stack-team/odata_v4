@@ -70,7 +70,7 @@ public class Trip {
   private Date endTime;
 
   @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST})
-  @JoinColumn(name = "\"TripId\"", insertable = false, updatable = false)
+  @JoinColumn(name = "\"TripId\"")
   private List<PlanItem> planItems = new ArrayList<>();
 
   @ManyToMany(mappedBy = "trips")

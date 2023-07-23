@@ -13,9 +13,19 @@ odata:
 server:
   port: 8080
 spring:
+  datasource:
+           driver-class-name: org.postgresql.Driver
+           url: jdbc:postgresql://52.87.29.53:5432/postgres
+           password: password
+           username: postgres
   liquibase:
     change-log: classpath:db/liquibase_changelog.xml
     enabled: true
   servlet:
     multipart:
       enabled: false
+eclipselink:
+   ddl:
+       auto:
+            create:
+                   delete: false
